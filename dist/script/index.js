@@ -20,7 +20,23 @@ if (choices) {
         ${currentChoice.choiceCont} 
         </a><br>`;
         choiceContainer.innerHTML += choice;
+        // If <input id="playerName"> is present in paragraph:
+        paragraphContainer.addEventListener("keyup", function (e) {
+            // e.target was the clicked element
+            if (e.target && e.target.matches("input#playerName")) {
+                console.log("Anchor element clicked!");
+                getName();
+            }
+        });
+        paragraphContainer.addEventListener("click", function (e) {
+            if (e.target && e.target.matches("div#pronouns")) {
+                console.log(e.target);
+                showPronounDialogue(e.target);
+                e.target.addEventListener('click', getPronouns);
+            }
+        });
     }
+    //add event listener to dynamically created HTML elements
     for (var i = 0; i < choices.length; i++) {
         let currentChoice = choices[i];
         let nextid = currentChoice.nextid;
@@ -30,7 +46,6 @@ if (choices) {
     }
 }
 const nameInput = document.querySelector("#playerName");
-//console.log(nameInput);
 if (nameInput) {
     nameInput.addEventListener('keyup', getName);
 }

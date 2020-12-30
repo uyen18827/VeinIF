@@ -20,6 +20,8 @@ export function getParagraph(player?: Player) {
         name: "p2",
         content: `You are walking into the woods and there's no one around. Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise. After all, there's no reason for anyone to be out at this hour. <br>Or is it?<br>
         Tell us a bit about yourself: 
+        <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName">
+        <div id="pronouns">And your pronouns? <br></div>
         `,
         choices: [
           { choiceCont: "Ooooh! Next!!!!!", nextid: 2 },
@@ -44,7 +46,7 @@ export function getParagraph(player?: Player) {
       {
         id: 3,
         name: "bruh",
-        content: `You found a key lying on the ground.<br> Just a heads-up. The next paragraph uses update style "append".`,
+        content: `You found a key lying on the ground.<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
         choices: [
           { choiceCont: "Move along", nextid: 4, style: "append" }
         ],

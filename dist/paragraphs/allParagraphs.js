@@ -40,7 +40,7 @@ export function getParagraph(player) {
         {
             id: 3,
             name: "bruh",
-            content: `You found a key lying on the ground.<br> Just a heads-up. The next paragraph uses update style "append".`,
+            content: `You found a key lying on the ground.<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
             choices: [
                 { choiceCont: "Move along", nextid: 4, style: "append" }
             ],
