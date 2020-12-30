@@ -15,6 +15,8 @@ export function getParagraph(player) {
             name: "p2",
             content: `You are walking into the woods and there's no one around. Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise. After all, there's no reason for anyone to be out at this hour. <br>Or is it?<br>
         Tell us a bit about yourself: 
+        <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName">
+        <div id="pronouns">And your pronouns? <br></div>
         `,
             choices: [
                 { choiceCont: "Ooooh! Next!!!!!", nextid: 2 },

@@ -1,7 +1,7 @@
 export interface Paragraphs {
     id: number;
     name?: string;
-    content?: string;
+    content: string;
     choices?: Array<Choices>
     preId?: number;
     //item picked up during this scene. Optional.
