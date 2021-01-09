@@ -1,20 +1,34 @@
 import { Items } from "../model/item";
 
-let inventory: Array<Items> = [];
+export let inventory: Array<Items> = [];
 
 function addToInventory(item: Items){
     inventory.push(item);
 }
 
-function getItems() {
+export function getInventory() {
     return inventory;
 }
 
-function clearInventory(){
+export function clearInventory(){
     inventory.length = 0;
     return inventory;
 }
 
 function scourAdd(item: Items){
     
+}
+
+export function getItem(item: Items){
+    const inInventory = inventory.find(element => element.itemName == item.itemName);
+    if (!inInventory){
+        console.log(`${item.itemName} has been added to inventory`);
+        addToInventory(item);
+        console.log(inventory);
+    }
+    else { 
+        inInventory.itemQty +=1;
+        console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
+        console.log(inventory);
+    }
 }
