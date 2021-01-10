@@ -27,21 +27,27 @@ function showChoices(choices, choiceContainer) {
         }
     }
 }
+/**
+ * Show items present in a paragraph. Upon clicking on the item, it'll be added to inventory
+ * @param items
+ * @param itemContainer
+ */
 function showItems(items, itemContainer) {
     if (items) {
         for (var i = 0; i < items.length; i++) {
-            var currentItem = items[i];
-            let item = `<a href="#" class="items">You found a ${currentItem.itemName}</a>`;
+            let currentItem = items[i];
+            let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
             itemContainer.innerHTML += item;
         }
         for (var i = 0; i < items.length; i++) {
-            let itemHTML = itemContainer.querySelectorAll(".items");
-            itemHTML.forEach((element) => {
-                element.addEventListener("click", function () {
-                    getItem(items[0]);
-                    console.log(items[0].itemName);
-                });
+            let currentItem = items[i];
+            let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
+            itemHTML.addEventListener("click", function () {
+                getItem(currentItem);
+                console.log(currentItem.itemName);
             });
+            console.log(`item Name: ${currentItem.itemName}`);
+            console.log(`item code: ${currentItem.itemCode}`);
         }
     }
 }

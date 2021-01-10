@@ -8,7 +8,7 @@ var currentParagraph: string | undefined;
  * @param choices should takes the value of allParagraphs[nextid].choices
  * @param choiceContainer document.getElementById("choices");
  */
-function showChoices(choices: any, choiceContainer: any){
+function showChoices(choices: any, choiceContainer: any) {
     if (choices) {
         for (var i = 0; i < choices.length; i++) {
             var currentChoice = choices[i];
@@ -28,22 +28,27 @@ function showChoices(choices: any, choiceContainer: any){
         }
     }
 }
-function showItems(items: any, itemContainer: any){
-    if(items){
-        for(var i=0; i< items.length; i++)
-        {
-            var currentItem = items[i];
-            let item = `<a href="#" class="items">You found a ${currentItem.itemName}</a>`;
+/**
+ * Show items present in a paragraph. Upon clicking on the item, it'll be added to inventory
+ * @param items 
+ * @param itemContainer 
+ */
+function showItems(items: any, itemContainer: any) {
+    if (items) {
+        for (var i = 0; i < items.length; i++) {
+            let currentItem = items[i];
+            let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
             itemContainer.innerHTML += item;
         }
-        for (var i=0; i< items.length; i++){
-            let itemHTML = itemContainer.querySelectorAll(".items");
-            itemHTML.forEach((element: { addEventListener: (arg0: string, arg1: () => any) => void; }) => {
-                element.addEventListener("click", function(){
-                    getItem(items[0]);
-                    console.log(items[0].itemName);
-                })
-            });
+        for (var i = 0; i < items.length; i++) {
+            let currentItem = items[i];
+            let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
+            itemHTML.addEventListener("click", function () {
+                getItem(currentItem);
+                console.log(currentItem.itemName);
+            })
+            console.log(`item Name: ${currentItem.itemName}`);
+            console.log(`item code: ${currentItem.itemCode}`);
         }
     }
 }
