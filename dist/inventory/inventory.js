@@ -12,7 +12,7 @@ export function clearInventory() {
 function scourAdd(item) {
 }
 export function getItem(item) {
-    const inInventory = inventory.find(element => element.itemName == item.itemName);
+    const inInventory = inventory.find(element => element.itemName == item.itemName && element.description == item.description);
     if (!inInventory) {
         console.log(`${item.itemName} has been added to inventory`);
         addToInventory(item);
