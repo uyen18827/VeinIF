@@ -5,7 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "lite-server"
+    "server" : "lite-server",
+    "tsc:w": "tsc -w",
+    "dev": "concurrently \"npm:tsc:w\" \"npm:server\""
   },
   "keywords": [
     "interactive fiction"
@@ -13,7 +15,8 @@
   "author": "Uyen Nguyen",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^14.14.14",
+    "@types/node": "^14.14.20",
+    "concurrently": "^5.3.0",
     "lite-server": "^2.6.1"
-  }  
+  }
 }
