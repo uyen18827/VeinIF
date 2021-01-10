@@ -23,7 +23,8 @@ export function getParagraph(player) {
                 { choiceCont: `I'm scared. Let's go back to the first one!`, nextid: 0 }
             ],
             item: [
-                { itemName: 'sword', itemQty: 1, description: "An old, rusty sword you found on the ground." },
+                { itemName: 'sword', itemQty: 1, description: "An old, rusty sword you found on the ground.", itemCode: "sword" },
+                { itemName: 'great sword', itemQty: 1, description: "An old, rusty great sword you found on the ground.", itemCode: "great_sword" },
             ],
             variable: "valor:1",
             preId: 0
@@ -44,7 +45,7 @@ export function getParagraph(player) {
             choices: [
                 { choiceCont: "Move along", nextid: 4, style: "append" }
             ],
-            item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for." }],
+            item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1" }],
             preId: 2
         },
         {
@@ -52,7 +53,10 @@ export function getParagraph(player) {
             name: "bruh",
             content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA`,
             choices: [
-                { choiceCont: "Let's go back from the beginning", nextid: 0, precondition: "key = 1" },
+                {
+                    choiceCont: "Let's go back from the beginning", nextid: 0,
+                    precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1" } }
+                },
                 { choiceCont: "Or go on?", nextid: 5 }
             ],
             preId: 3

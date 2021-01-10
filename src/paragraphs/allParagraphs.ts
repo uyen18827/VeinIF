@@ -27,7 +27,8 @@ export function getParagraph(player?: Player) {
           { choiceCont: "Ooooh! Next!!!!!", nextid: 2 },
           { choiceCont: `I'm scared. Let's go back to the first one!`, nextid: 0 }],
         item: [
-          { itemName: 'sword', itemQty: 1, description: "An old, rusty sword you found on the ground." },
+          { itemName: 'sword', itemQty: 1, description: "An old, rusty sword you found on the ground.", itemCode: "sword" },
+          { itemName: 'great sword', itemQty: 1, description: "An old, rusty great sword you found on the ground.", itemCode:"great_sword" },
         ],
         variable: "valor:1",
         preId: 0
@@ -50,7 +51,7 @@ export function getParagraph(player?: Player) {
         choices: [
           { choiceCont: "Move along", nextid: 4, style: "append" }
         ],
-        item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for." }],
+        item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1" }],
         preId: 2
       },
 
@@ -59,19 +60,22 @@ export function getParagraph(player?: Player) {
         name: "bruh",
         content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA`,
         choices: [
-          { choiceCont: "Let's go back from the beginning", nextid: 0, precondition: "key = 1" },
-          {choiceCont: "Or go on?", nextid: 5}
+          {
+            choiceCont: "Let's go back from the beginning", nextid: 0,
+            precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1" } }
+          },
+          { choiceCont: "Or go on?", nextid: 5 }
         ],
         preId: 3
       },
 
       {
-        id:5,
+        id: 5,
         name: "oh? you're still here?",
         content: ``,
         choices: [
-          {choiceCont:"This is truly the end. There's nothing else. Let's just go back", nextid: 0},
-          {choiceCont:"Trust me on this one my friend.", nextid: 0}
+          { choiceCont: "This is truly the end. There's nothing else. Let's just go back", nextid: 0 },
+          { choiceCont: "Trust me on this one my friend.", nextid: 0 }
         ]
       }
     ]
