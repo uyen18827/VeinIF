@@ -1,3 +1,6 @@
+import { Items } from "./item";
+import { Stat } from "./player";
+
 export interface Paragraphs {
     id: number;
     name?: string;
@@ -9,14 +12,16 @@ export interface Paragraphs {
     //variable will be used 
     variable?: any;
 }
-export interface Items {
-    itemName: string,
-    description: string;
-    itemImg?: string,
-    itemQty: number,
-}
 
 export interface Choices {
-    choiceCont: string, nextid: number; precondition?: string; style?: string;
+    choiceCont: string,
+    nextid: number;
+    precondition?: Precondition;
+    style?: string;
 }
 
+interface Precondition {
+    stat?: Stat,
+    item?: Items,
+}
+const precondition: Precondition = { stat: { statName: "intellect", value: 1 } }
