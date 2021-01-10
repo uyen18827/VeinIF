@@ -1,4 +1,5 @@
 import { getItem } from "../inventory/inventory.js";
+import { Items } from "../model/item.js";
 import { Paragraphs } from "../model/paragraph.js";
 import { player } from "../player/playerInfo.js";
 import { getParagraph } from "./allParagraphs.js";
@@ -24,7 +25,9 @@ function showChoices(choices: any, choiceContainer: any) {
             let nextid: number = currentChoice.nextid;
             let style = choices[i].style;
             let choiceHTML = choiceContainer.querySelector(`#n${nextid}`);
-            choiceHTML.addEventListener('click', function () { updateParagraph(nextid, style) });
+            choiceHTML.addEventListener('click', function () {
+                updateParagraph(nextid, style);
+            });
         }
     }
 }
@@ -51,6 +54,9 @@ function showItems(items: any, itemContainer: any) {
             console.log(`item code: ${currentItem.itemCode}`);
         }
     }
+}
+function pickedUp(item: Items) {
+    //TODO: grey out link where object picked up.
 }
 /**Get nextid, then show the paragraph with that id.
   * @param {number} nextid next paragraph's id.

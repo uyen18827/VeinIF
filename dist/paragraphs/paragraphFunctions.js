@@ -23,7 +23,9 @@ function showChoices(choices, choiceContainer) {
             let nextid = currentChoice.nextid;
             let style = choices[i].style;
             let choiceHTML = choiceContainer.querySelector(`#n${nextid}`);
-            choiceHTML.addEventListener('click', function () { updateParagraph(nextid, style); });
+            choiceHTML.addEventListener('click', function () {
+                updateParagraph(nextid, style);
+            });
         }
     }
 }
@@ -50,6 +52,9 @@ function showItems(items, itemContainer) {
             console.log(`item code: ${currentItem.itemCode}`);
         }
     }
+}
+function pickedUp(item) {
+    //TODO: grey out link where object picked up.
 }
 /**Get nextid, then show the paragraph with that id.
   * @param {number} nextid next paragraph's id.
