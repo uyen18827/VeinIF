@@ -9,8 +9,6 @@ export function clearInventory() {
     inventory.length = 0;
     return inventory;
 }
-function scourAdd(item) {
-}
 export function getItem(item) {
     const inInventory = inventory.find(element => element.itemName == item.itemName && element.description == item.description);
     if (!inInventory) {

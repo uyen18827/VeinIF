@@ -15,10 +15,6 @@ export function clearInventory(){
     return inventory;
 }
 
-function scourAdd(item: Items){
-    
-}
-
 export function getItem(item: Items){
     const inInventory = inventory.find(element => element.itemName == item.itemName && element.description == item.description ); 
     if (!inInventory){
