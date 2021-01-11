@@ -49,7 +49,9 @@ function showItems(items: any, itemContainer: any) {
             itemHTML.addEventListener("click", function () {
                 getItem(currentItem);
                 console.log(currentItem.itemName);
-            })
+                let message = `You picked up ${currentItem.itemName} [Added to Inventory]`;
+                itemHTML.innerHTML = message;
+            },{once: true})
             console.log(`item Name: ${currentItem.itemName}`);
             console.log(`item code: ${currentItem.itemCode}`);
         }
