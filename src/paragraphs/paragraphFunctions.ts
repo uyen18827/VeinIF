@@ -49,16 +49,14 @@ function showItems(items: any, itemContainer: any) {
             itemHTML.addEventListener("click", function () {
                 getItem(currentItem);
                 console.log(currentItem.itemName);
-                let message = `You picked up ${currentItem.itemName} [Added to Inventory]`;
+                let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
                 itemHTML.innerHTML = message;
+                itemHTML.style.color = "#6A6C6E";
             },{once: true})
             console.log(`item Name: ${currentItem.itemName}`);
             console.log(`item code: ${currentItem.itemCode}`);
         }
     }
-}
-function pickedUp(item: Items) {
-    //TODO: grey out link where object picked up.
 }
 /**Get nextid, then show the paragraph with that id.
   * @param {number} nextid next paragraph's id.
