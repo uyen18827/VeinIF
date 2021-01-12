@@ -47,7 +47,7 @@ export function showPronounDialogue(pronounsContainer) {
     }
 }
 /**
- * Get Pronouns value from radio button
+ * Get Pronouns value from clicked radio button
  */
 export function getPronouns() {
     var selectedPronoun = document.querySelector('input[name="pronouns"]:checked')?.value;
