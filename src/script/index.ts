@@ -29,15 +29,7 @@ if (choices) {
         paragraphContainer.addEventListener("keyup", function (e: any) {
             // e.target was the clicked element
             if (e.target && e.target.matches("input#playerName")) {
-                console.log("Anchor element clicked!");
                 getName();
-            }
-        });
-        paragraphContainer.addEventListener("click", function (e: any) {
-            if (e.target && e.target.matches("div#pronouns")) {
-                console.log(e.target);
-                showPronounDialogue(e.target);
-                e.target.addEventListener('click', getPronouns);
             }
         });
     }
@@ -68,7 +60,7 @@ if (button) {
 }
 
 ///////////////////////////////////////////////////
-const pronounsContainer: HTMLElement | any = document.getElementById("pronouns");
+let pronounsContainer: HTMLElement | any = document.getElementById("pronouns");
 /**
  * Check if pronounsContainer exits, then show pronouns.
  */
