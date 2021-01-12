@@ -2,6 +2,7 @@ import { getItem } from "../inventory/inventory.js";
 import { Items } from "../model/item.js";
 import { Paragraphs } from "../model/paragraph.js";
 import { player } from "../player/playerInfo.js";
+import { getPronouns, showPronounDialogue } from "../player/pronouns.js";
 import { getParagraph } from "./allParagraphs.js";
 var currentParagraph: string | undefined;
 /**
@@ -52,7 +53,7 @@ function showItems(items: any, itemContainer: any) {
                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
                 itemHTML.innerHTML = message;
                 itemHTML.style.color = "#6A6C6E";
-            },{once: true})
+            }, { once: true })
             console.log(`item Name: ${currentItem.itemName}`);
             console.log(`item code: ${currentItem.itemCode}`);
         }
@@ -92,6 +93,14 @@ export function updateParagraph(nextid: number, style?: string) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
+            let pronounsContainer: HTMLElement | any = document.getElementById("pronouns");
+            /**
+             * Check if pronounsContainer exits, then show pronouns.
+             */
+            if (pronounsContainer) {
+                showPronounDialogue(pronounsContainer);
+                pronounsContainer.addEventListener('click', getPronouns);
+            }
             break;
     }
 }

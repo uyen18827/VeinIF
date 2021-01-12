@@ -1,5 +1,6 @@
 import { getItem } from "../inventory/inventory.js";
 import { player } from "../player/playerInfo.js";
+import { getPronouns, showPronounDialogue } from "../player/pronouns.js";
 import { getParagraph } from "./allParagraphs.js";
 var currentParagraph;
 /**
@@ -90,6 +91,14 @@ export function updateParagraph(nextid, style) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
+            let pronounsContainer = document.getElementById("pronouns");
+            /**
+             * Check if pronounsContainer exits, then show pronouns.
+             */
+            if (pronounsContainer) {
+                showPronounDialogue(pronounsContainer);
+                pronounsContainer.addEventListener('click', getPronouns);
+            }
             break;
     }
 }
