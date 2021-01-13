@@ -1,3 +1,4 @@
+import { capitalise } from "../tools/formatting.js";
 export let inventory = [];
 function addToInventory(item) {
     inventory.push(item);
@@ -10,11 +11,14 @@ export function clearInventory() {
     return inventory;
 }
 export function getItem(item) {
-    const inInventory = inventory.find(element => element.itemName == item.itemName && element.description == item.description);
+    const inInventory = inventory.find(element => element.itemCode == item.itemCode);
+    let inventoryTab = document.querySelector("#inventory-tab");
+    let inventoryTabContent = document.querySelector("#inventory-tabContent");
     if (!inInventory) {
         console.log(`${item.itemName} has been added to inventory`);
         addToInventory(item);
         console.log(inventory);
+        appendItemHTML(inventoryTab, inventoryTabContent, item);
     }
     else {
         inInventory.itemQty += 1;
@@ -22,3 +26,22 @@ export function getItem(item) {
         console.log(inventory);
     }
 }
+export function appendItemHTML(inventoryTab, inventoryTabContent, item) {
+    let tab = `<li class="nav-item" role="presentation">
+        <a class="nav-link" 
+        id="pills-${item.itemCode}-tab" 
+        data-bs-toggle="pill" 
+        href="#pills-${item.itemCode}" 
+        role="tab" 
+        aria-controls="pills-${item.itemCode}" aria-selected="false">${capitalise(item.itemName)}</a>
+        </li>`;
+    inventoryTab.innerHTML += tab;
+    let tabContent = `<div class="tab-pane fade" 
+    id="pills-${item.itemCode}" 
+    role="tabpanel" 
+    aria-labelledby="pills-${item.itemCode}-tab">
+    ${item.description}
+    </div>`;
+    inventoryTabContent.innerHTML += tabContent;
+}
+//TODO: Shows item quantity on screen.
