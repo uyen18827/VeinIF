@@ -2,6 +2,7 @@ import { getName } from "../player/playerInfo.js";
 import { getParagraph } from "../paragraphs/allParagraphs.js";
 import { getPronouns, showPronounDialogue } from "../player/pronouns.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
+import { newSave } from "./save.js";
 ///////////////////Initialize game///////////////////
 let allParagraphs = getParagraph();
 let currentParagraph = allParagraphs[0].content;
@@ -37,6 +38,7 @@ if (choices) {
         choiceHTML.addEventListener('click', function () { updateParagraph(nextid, style); });
     }
 }
+// Add event listener to HTML element input with id = "playerName"
 const nameInput = document.querySelector("#playerName");
 if (nameInput) {
     nameInput.addEventListener('keyup', getName);
@@ -58,3 +60,18 @@ if (pronounsContainer) {
     showPronounDialogue(pronounsContainer);
     pronounsContainer.addEventListener('click', getPronouns);
 }
+// Add event listener to all Save buttons
+const saveButton = document.querySelectorAll(".save");
+saveButton.forEach(element => {
+    let slotNumber = element.id;
+    element.addEventListener('click', function () {
+        newSave(slotNumber, allParagraphs[0].id);
+    });
+});
+// Add event listener to all Load buttons
+const loadButton = document.querySelectorAll(".load");
+loadButton.forEach(element => {
+    let slotNumber = element.id;
+    element.addEventListener('click', function () {
+    });
+});

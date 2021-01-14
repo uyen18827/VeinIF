@@ -3,6 +3,7 @@ import { getParagraph } from "../paragraphs/allParagraphs.js"
 import { getPronouns, showPronounDialogue } from "../player/pronouns.js"
 import { Paragraphs } from "../model/paragraph.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
+import { newSave } from "./save.js";
 
 ///////////////////Initialize game///////////////////
 let allParagraphs: Paragraphs[] = getParagraph();
@@ -43,6 +44,7 @@ if (choices) {
     }
 }
 
+// Add event listener to HTML element input with id = "playerName"
 const nameInput = document.querySelector("#playerName");
 if (nameInput) {
     nameInput.addEventListener('keyup', getName);
@@ -68,3 +70,22 @@ if (pronounsContainer) {
     showPronounDialogue(pronounsContainer);
     pronounsContainer.addEventListener('click', getPronouns);
 }
+
+// Add event listener to all Save buttons
+const saveButton = document.querySelectorAll(".save");
+saveButton.forEach(element => {
+    let slotNumber = element.id;
+    element.addEventListener('click', function () {
+        newSave(slotNumber, allParagraphs[0].id)
+    }
+    );
+});
+
+// Add event listener to all Load buttons
+const loadButton = document.querySelectorAll(".load");
+loadButton.forEach(element =>{
+    let slotNumber = element.id;
+    element.addEventListener('click', function(){
+        
+    })
+})
