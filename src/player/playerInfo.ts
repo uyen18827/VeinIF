@@ -13,6 +13,9 @@ export const player: Player = {
         is: "" //he's, she's, they're
     },
 }
+export function getPlayer(){
+    return player;
+}
 
 export function setName(inputName: string) {
     player.playerName = inputName;
