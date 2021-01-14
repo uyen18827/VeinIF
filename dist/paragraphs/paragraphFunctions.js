@@ -1,5 +1,5 @@
 import { getItem } from "../inventory/inventory.js";
-import { player } from "../player/playerInfo.js";
+import { getPlayer } from "../player/playerInfo.js";
 import { getPronouns, showPronounDialogue } from "../player/pronouns.js";
 import { getParagraph } from "./allParagraphs.js";
 var currentParagraph;
@@ -69,7 +69,7 @@ export function updateParagraph(nextid, style) {
     let choices;
     let items = null;
     itemContainer.innerHTML = null;
-    allParagraphs = getParagraph(player);
+    allParagraphs = getParagraph(getPlayer());
     switch (style) {
         case "append":
             currentParagraph = currentParagraph + " " + allParagraphs[nextid].content;
@@ -80,6 +80,7 @@ export function updateParagraph(nextid, style) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
+            setCurrentParagraphID(nextid);
             break;
         default:
             paragraphContainer.innerHTML = null;
@@ -99,8 +100,17 @@ export function updateParagraph(nextid, style) {
                 showPronounDialogue(pronounsContainer);
                 pronounsContainer.addEventListener('click', getPronouns);
             }
+            setCurrentParagraphID(nextid);
             break;
     }
 }
 //TODO: known problems: when there's two options that redirect the user to the same paragraph,
 //only the first option will work.
+let currentPid = 0;
+function setCurrentParagraphID(pid) {
+    currentPid = pid;
+    console.log(`current pid = ${pid}`);
+}
+export function getCurrentParagraphID() {
+    return currentPid;
+}
