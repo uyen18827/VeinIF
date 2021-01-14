@@ -1,7 +1,7 @@
 import { inventory } from "../inventory/inventory";
 const stat = [
-    { statName: "intellect", value: 10 },
-    { statName: "endurance", value: 4 }
+    { statName: "Intellect", value: 10 },
+    { statName: "Endurance", value: 4 }
 ];
 function checkCondition(condition) {
     if (condition.itemName) {

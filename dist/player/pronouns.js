@@ -57,7 +57,7 @@ export function getPronouns() {
     }
     ;
     console.log(selectedPronoun);
-    // console.log(found);
+    console.log(player);
 }
 /**
  * Save player's selected pronoun

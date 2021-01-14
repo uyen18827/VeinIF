@@ -56,7 +56,7 @@ export function getPronouns() {
     var found = pronouns.find(element => element.Category == selectedPronoun);
     if (found) { setPronouns(found) };
     console.log(selectedPronoun);
-    // console.log(found);
+    console.log(player);
 }
 /**
  * Save player's selected pronoun

@@ -24,8 +24,8 @@ export interface Stat {
 }
 
 const stat: Stat[] = [
-    { statName: "intellect", value: 10 },
-    { statName: "endurance", value: 4 }
+    { statName: "Intellect", value: 10 },
+    { statName: "Endurance", value: 4 }
 ]
 
 function checkCondition(condition: any) {
