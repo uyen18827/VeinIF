@@ -19,7 +19,7 @@
                 <div class="card" style="width: 100%;">
                     <div class="card-body">
                         <h5 class="card-title">Player Information</h5>
-                        <h6 class="card-subtitle mb-2 text-muted" id="yourName">Name: </h6>
+                        <h6 class="card-subtitle mb-2 text-muted yourName">Name: </h6>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
                         <ul class="nav nav-pills mb-3" id="inventory-tab" role="tablist">
@@ -40,7 +40,7 @@
                 <div id="choices"></div>
                 <div id="items"></div>
                 <!-- <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName"> -->
-                <p id="yourName"></p>
+                <!-- <p class="yourName"></p> -->
                 <!-- <div id="pronouns">
                 </div> -->
                 <!-- <button id="coolbutton">BUTTON!</button> // a button that logs "thing" into the console-->
@@ -90,8 +90,8 @@
                             Placeholder for save description
                         </div>
                         <div class="col-5" style="text-align: center">
-                            <button class="save btn-sm" id="save1">Save</button>
-                            <button class="load btn-sm" id="load1">Load</button>
+                            <button class="save btn-sm" value="slot1" id="save1">Save</button>
+                            <button class="load btn-sm" value="slot1" id="load1">Load</button>
                         </div>
                     </div>
                     <hr>
@@ -102,8 +102,8 @@
                             Placeholder for save description
                         </div>
                         <div class="col-5" style="text-align: center">
-                            <button class="save btn-sm" id="save2">Save</button>
-                            <button class="load btn-sm" id="load2">Load</button>
+                            <button class="save btn-sm" value="slot2" id="save2">Save</button>
+                            <button class="load btn-sm" value="slot2" id="load2">Load</button>
                         </div>
                     </div>
                     <hr>
@@ -113,8 +113,8 @@
                             Placeholder for save description
                         </div>
                         <div class="col-5" style="text-align: center">
-                            <button class="save btn-sm" id="save3">Save</button>
-                            <button class="load btn-sm" id="load3">Load</button>
+                            <button class="save btn-sm" value="slot3" id="save3">Save</button>
+                            <button class="load btn-sm" value="slot3" id="load3">Load</button>
                         </div>
                     </div>
                     <div id="saveMessage"></div>

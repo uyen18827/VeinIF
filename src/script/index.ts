@@ -3,7 +3,7 @@ import { getParagraph } from "../paragraphs/allParagraphs.js"
 import { getPronouns, showPronounDialogue } from "../player/pronouns.js"
 import { Paragraphs } from "../model/paragraph.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { newSave } from "./saveScript.js";
+import { load, newSave } from "./saveScript.js";
 
 ///////////////////Initialize game///////////////////
 let allParagraphs: Paragraphs[] = getParagraph();
@@ -74,18 +74,18 @@ if (pronounsContainer) {
 // Add event listener to all Save buttons
 const saveButton = document.querySelectorAll(".save");
 saveButton.forEach(element => {
-    let slotNumber = element.id;
+    let slotNumber = element.getAttribute("value");
     element.addEventListener('click', function () {
-        newSave(slotNumber, allParagraphs[0].id)
+        newSave(slotNumber!)
     }
     );
 });
 
 // Add event listener to all Load buttons
 const loadButton = document.querySelectorAll(".load");
-loadButton.forEach(element =>{
-    let slotNumber = element.id;
-    element.addEventListener('click', function(){
-        
+loadButton.forEach(element => {
+    let slotNumber = element.getAttribute("value");
+    element.addEventListener('click', function () {
+        load(slotNumber!);
     })
 })
