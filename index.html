@@ -18,18 +18,19 @@
             <div class="col-lg-2">
                 <div class="card" style="width: 100%;">
                     <div class="card-body">
-                      <h5 class="card-title">Player Information</h5>
-                      <h6 class="card-subtitle mb-2 text-muted" id="yourName">Name: </h6>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <ul class="nav nav-pills mb-3" id="inventory-tab" role="tablist">
-                      </ul>
+                        <h5 class="card-title">Player Information</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="yourName">Name: </h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <ul class="nav nav-pills mb-3" id="inventory-tab" role="tablist">
+                        </ul>
 
-                      <div class="tab-content" id="inventory-tabContent">
-                      </div>
-                      <!-- <a href="#" class="card-link">Card link</a>
+                        <div class="tab-content" id="inventory-tabContent">
+                        </div>
+                        <!-- <a href="#" class="card-link">Card link</a>
                       <a href="#" class="card-link">Another link</a> -->
                     </div>
-                  </div>
+                </div>
             </div>
 
             <div class="col-lg-8 col-sm-12">
@@ -51,7 +52,7 @@
     </div>
     <!-- STICKY BOTTOM NAVIGATION BAR -->
     <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+        <div class="container-fluid" style="text-align: center;">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -59,12 +60,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#saveModal">Save</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -73,6 +74,58 @@
             </div>
         </div>
     </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="saveModalLabel">Save Game</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <small>Slot 1</small><br>
+                    <div class="row">
+                        <div class="col-7">
+                            Placeholder for save description
+                        </div>
+                        <div class="col-5" style="text-align: center">
+                            <button class="save btn-sm" id="save1">Save</button>
+                            <button class="load btn-sm" id="load1">Load</button>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <small>Slot 2</small><br>
+                    <div class="row">
+                        <div class="col-7">
+                            Placeholder for save description
+                        </div>
+                        <div class="col-5" style="text-align: center">
+                            <button class="save btn-sm" id="save2">Save</button>
+                            <button class="load btn-sm" id="load2">Load</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <small>Slot 3</small><br>
+                    <div class="row">
+                        <div class="col-7" >
+                            Placeholder for save description
+                        </div>
+                        <div class="col-5" style="text-align: center">
+                            <button class="save btn-sm" id="save3">Save</button>
+                            <button class="load btn-sm" id="load3">Load</button>
+                        </div>
+                    </div>
+                    <div id="saveMessage"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="dist/script/index.js" type="module"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
