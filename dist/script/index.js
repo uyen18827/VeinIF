@@ -2,7 +2,7 @@ import { getName } from "../player/playerInfo.js";
 import { getParagraph } from "../paragraphs/allParagraphs.js";
 import { getPronouns, showPronounDialogue } from "../player/pronouns.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { newSave } from "./save.js";
+import { newSave } from "./saveScript.js";
 ///////////////////Initialize game///////////////////
 let allParagraphs = getParagraph();
 let currentParagraph = allParagraphs[0].content;
