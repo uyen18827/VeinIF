@@ -14,18 +14,34 @@ export const player = {
 export function getPlayer() {
     return player;
 }
+export function setPlayer(newPlayer) {
+    player.id = newPlayer.id;
+    player.playerName = newPlayer.playerName;
+    player.pronouns = newPlayer.pronouns;
+}
 export function setName(inputName) {
     player.playerName = inputName;
 }
 export function getName() {
     var playerName = document.getElementById("playerName").value;
     console.log(`Player Name is: ${playerName}`);
-    const container = document.getElementById("yourName");
-    if (container) {
-        container.innerHTML = null;
-        let output = `Your name is: ${playerName} `;
-        container.innerHTML += output;
-    }
     setName(playerName);
+    showNameDiv(playerName);
     console.log(player);
+}
+/**
+ * Show player's name in a any element where class = "yourName"
+ * @param playerName
+ */
+export function showNameDiv(playerName) {
+    const container = document.querySelectorAll(".yourName");
+    if (container) {
+        container.forEach(element => {
+            element.innerHTML = `Name: ${playerName} `;
+        });
+        //old code: const container = document.getElementById("yourName");
+        // container.innerHTML = null;
+        // let output: string = `Your name is: ${playerName} `;
+        // container.innerHTML += output;
+    }
 }
