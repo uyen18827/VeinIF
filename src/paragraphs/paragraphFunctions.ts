@@ -58,12 +58,13 @@ function showItems(items: any, itemContainer: any) {
         }
     }
 }
+let p = new Paragraph(getPlayer());
 /**Get nextid, then show the paragraph with that id.
   * @param {number} nextid next paragraph's id.
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
 */
 export function updateParagraph(nextid: number, style?: string) {
-    let p = new Paragraph(getPlayer());
+    p.player = getPlayer();
     let allParagraphs = p.getParagraph(nextid);
     const choiceContainer: HTMLElement | any = document.getElementById("choices");
     const paragraphContainer: HTMLElement | any = document.getElementById("paragraph");
@@ -107,7 +108,6 @@ export function updateParagraph(nextid: number, style?: string) {
 }
 //TODO: known problems: when there's two options that redirect the user to the same paragraph,
 //only the first option will work.
-//TODO: new Paragraph object is created each time. Meaning that even if pickedUp is set to false, it will reset once the paragraph update. 
 let currentPid: number = 0;
 function setCurrentParagraphID(pid: Paragraphs["id"]) {
     currentPid = pid;
