@@ -2,6 +2,7 @@ import { getInventory } from "../inventory/inventory.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
+import { loadPronounsRadioBtn } from "../player/pronouns.js";
 
 /**
  * Save the game's state to LocalStorage
@@ -32,6 +33,7 @@ export function load(saveSlot: string) {
         setPlayer(retrievedSave.player);
         updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
         showNameDiv(retrievedSave.player.playerName);
+        loadPronounsRadioBtn(retrievedSave.player.pronouns);
     } else {
         console.log("LocalStorage is not supported in this browser! Please export the save file instead.")
     }

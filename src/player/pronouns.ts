@@ -68,3 +68,8 @@ export function getPronouns() {
 export function setPronouns(pronouns: Pronouns) {
     player.pronouns = pronouns;
 }
+
+export function loadPronounsRadioBtn(pronouns: Pronouns){
+    let savedPronouns: HTMLElement | any = document.getElementById(`${pronouns.subjectPro}`);
+    savedPronouns.checked = true;
+}
