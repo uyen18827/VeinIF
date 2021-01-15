@@ -1,6 +1,6 @@
 import { getItem } from "../inventory/inventory.js";
 import { getPlayer } from "../player/playerInfo.js";
-import { getPronouns, showPronounDialogue } from "../player/pronouns.js";
+import { showPronounDialogue } from "../player/pronouns.js";
 import { getParagraph } from "./allParagraphs.js";
 var currentParagraph;
 /**
@@ -80,6 +80,7 @@ export function updateParagraph(nextid, style) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
+            showPronounDialogue();
             setCurrentParagraphID(nextid);
             break;
         default:
@@ -92,14 +93,7 @@ export function updateParagraph(nextid, style) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
-            let pronounsContainer = document.getElementById("pronouns");
-            /**
-             * Check if pronounsContainer exits, then show pronouns.
-             */
-            if (pronounsContainer) {
-                showPronounDialogue(pronounsContainer);
-                pronounsContainer.addEventListener('click', getPronouns);
-            }
+            showPronounDialogue();
             setCurrentParagraphID(nextid);
             break;
     }

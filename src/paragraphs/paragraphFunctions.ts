@@ -81,6 +81,7 @@ export function updateParagraph(nextid: number, style?: string) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
+            showPronounDialogue();
             setCurrentParagraphID(nextid);
             break;
         default:
@@ -93,14 +94,7 @@ export function updateParagraph(nextid: number, style?: string) {
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
-            let pronounsContainer: HTMLElement | any = document.getElementById("pronouns");
-            /**
-             * Check if pronounsContainer exits, then show pronouns.
-             */
-            if (pronounsContainer) {
-                showPronounDialogue(pronounsContainer);
-                pronounsContainer.addEventListener('click', getPronouns);
-            }
+            showPronounDialogue();
             setCurrentParagraphID(nextid);
             break;
     }

@@ -33,17 +33,20 @@ export const pronouns = [
 ];
 /**
  * Show radio group with pronouns option for players to choose from.
- * Append radio buttons to pronounsContainer.
- * @param pronounsContainer
+ * Append radio buttons to HTML element with id = "pronouns".
  */
-export function showPronounDialogue(pronounsContainer) {
-    let pronounsLength = pronouns.length;
-    for (var i = 0; i < pronounsLength; i++) {
-        let pronounEntry = `
+export function showPronounDialogue() {
+    let pronounsContainer = document.getElementById("pronouns");
+    if (pronounsContainer) {
+        let pronounsLength = pronouns.length;
+        for (var i = 0; i < pronounsLength; i++) {
+            let pronounEntry = `
             <input type="radio" id="${pronouns[i].subjectPro}" name="pronouns" value="${pronouns[i].Category}">
             <label for="${pronouns[i].subjectPro}">${pronouns[i].Category}</label><br>`;
-        pronounsContainer.innerHTML += pronounEntry;
-        console.log(pronouns[i]);
+            pronounsContainer.innerHTML += pronounEntry;
+            console.log(pronouns[i]);
+        }
+        pronounsContainer.addEventListener('click', getPronouns);
     }
 }
 /**

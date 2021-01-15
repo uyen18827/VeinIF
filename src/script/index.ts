@@ -1,6 +1,6 @@
 import { getName } from "../player/playerInfo.js"
 import { getParagraph } from "../paragraphs/allParagraphs.js"
-import { getPronouns, showPronounDialogue } from "../player/pronouns.js"
+import { showPronounDialogue } from "../player/pronouns.js"
 import { Paragraphs } from "../model/paragraph.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { load, newSave } from "./saveScript.js";
@@ -62,14 +62,7 @@ if (button) {
 }
 
 ///////////////////////////////////////////////////
-let pronounsContainer: HTMLElement | any = document.getElementById("pronouns");
-/**
- * Check if pronounsContainer exits, then show pronouns.
- */
-if (pronounsContainer) {
-    showPronounDialogue(pronounsContainer);
-    pronounsContainer.addEventListener('click', getPronouns);
-}
+showPronounDialogue();
 
 // Add event listener to all Save buttons
 const saveButton = document.querySelectorAll(".save");
