@@ -1,5 +1,5 @@
 import { getItem } from "../inventory/inventory.js";
-import { getPlayer } from "../player/playerInfo.js";
+import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { getParagraph } from "./allParagraphs.js";
 var currentParagraph;
@@ -70,6 +70,12 @@ export function updateParagraph(nextid, style) {
     let items = null;
     itemContainer.innerHTML = null;
     allParagraphs = getParagraph(getPlayer());
+    document.addEventListener("keyup", function (e) {
+        // e.target was the clicked element
+        if (e.target && e.target.matches("input#playerName")) {
+            getName();
+        }
+    });
     switch (style) {
         case "append":
             currentParagraph = currentParagraph + " " + allParagraphs[nextid].content;
