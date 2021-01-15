@@ -26,6 +26,12 @@ export function getItem(item) {
         console.log(inventory);
     }
 }
+/**
+ * After picking up an item, the item's name and description will be viewable on Inventory's UI
+ * @param inventoryTab HTMLElement that will contain the item's name (Bootstrap's tab pills)
+ * @param inventoryTabContent HTMLElement that will contain the item's description (Bootstrap's tab-pane)
+ * @param item
+ */
 export function appendItemHTML(inventoryTab, inventoryTabContent, item) {
     let tab = `<li class="nav-item" role="presentation">
         <a class="nav-link" 

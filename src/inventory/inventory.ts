@@ -24,7 +24,7 @@ export function getItem(item: Items) {
         console.log(`${item.itemName} has been added to inventory`);
         addToInventory(item);
         console.log(inventory);
-        appendItemHTML(inventoryTab, inventoryTabContent, item); 
+        appendItemHTML(inventoryTab, inventoryTabContent, item);
     }
     else {
         inInventory.itemQty += 1;
@@ -33,6 +33,12 @@ export function getItem(item: Items) {
     }
 }
 
+/**
+ * After picking up an item, the item's name and description will be viewable on Inventory's UI
+ * @param inventoryTab HTMLElement that will contain the item's name (Bootstrap's tab pills)
+ * @param inventoryTabContent HTMLElement that will contain the item's description (Bootstrap's tab-pane)
+ * @param item 
+ */
 export function appendItemHTML(inventoryTab: HTMLElement | any, inventoryTabContent: HTMLElement | any, item: Items) {
     let tab: string = `<li class="nav-item" role="presentation">
         <a class="nav-link" 
@@ -43,7 +49,7 @@ export function appendItemHTML(inventoryTab: HTMLElement | any, inventoryTabCont
         aria-controls="pills-${item.itemCode}" aria-selected="false">${capitalise(item.itemName)}</a>
         </li>`;
     inventoryTab.innerHTML += tab;
-    
+
     let tabContent: string = `<div class="tab-pane fade" 
     id="pills-${item.itemCode}" 
     role="tabpanel" 

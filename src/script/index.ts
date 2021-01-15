@@ -1,7 +1,5 @@
 import { getName } from "../player/playerInfo.js"
-import { getParagraph } from "../paragraphs/allParagraphs.js"
 import { showPronounDialogue } from "../player/pronouns.js"
-import { Paragraphs } from "../model/paragraph.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { load, newSave } from "./saveScript.js";
 
