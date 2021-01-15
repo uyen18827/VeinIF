@@ -20,8 +20,18 @@ export interface Choices {
     style?: string;
 }
 
-interface Precondition {
+export interface Precondition {
     stat?: Stat,
     item?: Items,
 }
-const precondition: Precondition = { stat: { statName: "intellect", value: 1 } }
+const precondition: Precondition = {
+    stat: {
+        statName: "intellect",
+        value: 1
+    },
+    item: {
+        itemName: "key",
+        itemQty: 1,
+        itemCode: "key"
+    }
+}
