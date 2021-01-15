@@ -1,7 +1,7 @@
 import { getItem } from "../inventory/inventory.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
-import { getParagraph } from "./allParagraphs.js";
+import { Paragraph } from "./allParagraphs.js";
 var currentParagraph;
 /**
  * Show available choices in a paragraph
@@ -62,14 +62,14 @@ function showItems(items, itemContainer) {
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
 */
 export function updateParagraph(nextid, style) {
-    let allParagraphs = getParagraph();
+    let p = new Paragraph(getPlayer());
+    let allParagraphs = p.getParagraph(nextid);
     const choiceContainer = document.getElementById("choices");
     const paragraphContainer = document.getElementById("paragraph");
     const itemContainer = document.getElementById("items");
     let choices;
     let items = null;
     itemContainer.innerHTML = null;
-    allParagraphs = getParagraph(getPlayer());
     document.addEventListener("keyup", function (e) {
         // e.target was the clicked element
         if (e.target && e.target.matches("input#playerName")) {
@@ -78,11 +78,11 @@ export function updateParagraph(nextid, style) {
     });
     switch (style) {
         case "append":
-            currentParagraph = currentParagraph + " " + allParagraphs[nextid].content;
+            currentParagraph = currentParagraph + " " + allParagraphs.content;
             paragraphContainer.innerHTML = currentParagraph;
             choiceContainer.innerHTML = null;
-            choices = allParagraphs[nextid].choices;
-            items = allParagraphs[nextid].item;
+            choices = allParagraphs.choices;
+            items = allParagraphs.item;
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
@@ -92,10 +92,10 @@ export function updateParagraph(nextid, style) {
         default:
             paragraphContainer.innerHTML = null;
             choiceContainer.innerHTML = null;
-            currentParagraph = allParagraphs[nextid].content;
+            currentParagraph = allParagraphs.content;
             paragraphContainer.innerHTML = currentParagraph;
-            choices = allParagraphs[nextid].choices;
-            items = allParagraphs[nextid].item;
+            choices = allParagraphs.choices;
+            items = allParagraphs.item;
             console.log(items);
             showChoices(choices, choiceContainer);
             showItems(items, itemContainer);
@@ -106,6 +106,7 @@ export function updateParagraph(nextid, style) {
 }
 //TODO: known problems: when there's two options that redirect the user to the same paragraph,
 //only the first option will work.
+//TODO: new Paragraph object is created each time. Meaning that even if pickedUp is set to false, it will reset once the paragraph update. 
 let currentPid = 0;
 function setCurrentParagraphID(pid) {
     currentPid = pid;

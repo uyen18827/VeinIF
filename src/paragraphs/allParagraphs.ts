@@ -2,9 +2,13 @@ import { Paragraphs } from "../model/paragraph.js";
 import { capitalise } from "../tools/formatting.js";
 import { Player } from "../model/player.js";
 
-export function getParagraph(player?: Player) {
-  let paragraphs: Paragraphs[] =
-    [
+export class Paragraph {
+  player: Player;
+  paragraph: Paragraphs[];
+
+  constructor(player: Player) {
+    this.player = player;
+    this.paragraph = [
       //Array starts at 0
       {
         id: 0,
@@ -74,7 +78,7 @@ export function getParagraph(player?: Player) {
         choices: [
           {
             choiceCont: "Let's go back from the beginning", nextid: 0,
-            precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1", pickedUp: false } }
+            precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1" } }
           },
           { choiceCont: "Or go on?", nextid: 5 }
         ],
@@ -91,5 +95,11 @@ export function getParagraph(player?: Player) {
         ]
       }
     ]
-  return paragraphs;
+  }
+  getParagraph(id: number) {
+    return this.paragraph[id];
+  }
+  updatePlayer(p: Player) {
+    this.player = p;
+  };
 }
