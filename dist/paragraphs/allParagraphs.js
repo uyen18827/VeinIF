@@ -4,7 +4,7 @@ export function getParagraph(player) {
         //Array starts at 0
         {
             id: 0,
-            name: "p1",
+            name: "start",
             content: `This is the first paragraph. <u><b>Welcome to a game!<\/b><\/u> This game is a multi choice Interactive fiction. Different choices will lead to different outcomes. Rejoice! Enjoy your time playing here!`,
             choices: [
                 { choiceCont: "Alright then, lead me to the next paragraph", nextid: 1 },
@@ -12,7 +12,7 @@ export function getParagraph(player) {
         },
         {
             id: 1,
-            name: "p2",
+            name: "wood",
             content: `You are walking into the woods and there's no one around. Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise. After all, there's no reason for anyone to be out at this hour. <br>Or is it?<br>
         No time for pleasantries, but at the very least, could you tell us a bit about yourself?<br>
         <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName" value="${player?.playerName}">
@@ -23,15 +23,27 @@ export function getParagraph(player) {
                 { choiceCont: `I'm scared. Let's go back to the first one!`, nextid: 0 }
             ],
             item: [
-                { itemName: 'sword', itemQty: 1, description: "An old, rusty sword you found on the ground.", itemCode: "sword" },
-                { itemName: 'great sword', itemQty: 1, description: "An old, rusty great sword you found on the ground.", itemCode: "great_sword" },
+                {
+                    itemName: 'sword',
+                    itemQty: 1,
+                    description: "An old, rusty sword you found on the ground.",
+                    itemCode: "sword",
+                    pickedUp: false
+                },
+                {
+                    itemName: 'great sword',
+                    itemQty: 1,
+                    description: "An old, rusty great sword you found on the ground.",
+                    itemCode: "great_sword",
+                    pickedUp: false
+                },
             ],
             variable: "valor:1",
             preId: 0
         },
         {
             id: 2,
-            name: "p3",
+            name: "greeting",
             content: `This is the third paragraph. A guy whoops in and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here!" Oh well, this is the end. Bye ${player?.playerName}!`,
             choices: [
                 { choiceCont: "Last one!", nextid: 3 }
@@ -40,22 +52,22 @@ export function getParagraph(player) {
         },
         {
             id: 3,
-            name: "bruh",
+            name: "key on ground",
             content: `You found a key lying on the ground.<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
             choices: [
                 { choiceCont: "Move along", nextid: 4, style: "append" }
             ],
-            item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1" }],
+            item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", pickedUp: false }],
             preId: 2
         },
         {
             id: 4,
-            name: "bruh",
+            name: "surprise",
             content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA`,
             choices: [
                 {
                     choiceCont: "Let's go back from the beginning", nextid: 0,
-                    precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1" } }
+                    precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1", pickedUp: false } }
                 },
                 { choiceCont: "Or go on?", nextid: 5 }
             ],
