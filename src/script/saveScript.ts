@@ -24,7 +24,7 @@ export function newSave(saveSlot: string) {
         console.log("LocalStorage is not supported in this browser! Please export the save file instead.")
     }
 }
-//TODO: (DONE) make a function that gets the current paragraph's ID
+//TODO: Encrypt and decrypt save/load
 
 export function load(saveSlot: string) {
     if (typeof (Storage) !== "undefined") {
@@ -39,6 +39,31 @@ export function load(saveSlot: string) {
     }
 }
 
-export function exportSave(saveSlot: string, save: Save) {
-    //encrypt + export to text file
+/**
+ * Generate a random-looking string that save the game's progress.
+ * The string is encrypted to prevent player from altering their save.
+ */
+export function exportSave() {
+    let player = getPlayer();
+    let inventory = getInventory();
+    let pid = getCurrentParagraphID();
+    let save = JSON.stringify(new Save(player, inventory, pid));
+    let stringSave = JSON.stringify(save);
+    //encrypt stringSave + show it so that user can copy
+}
+
+// A textarea input will be provided for user to paste in the string
+//retrieved from exportSave()
+/**
+ * Parse the encrypted save string to load game.
+ * @param stringSave save game string generated from exportSave()
+ */
+export function loadStringSave(stringSave: string) {
+    //TODO: decrypt stringSave
+    //let retrievedSave = stringSave.decrypt()
+    // retrievedSave = JSON.parse(localStorage.getItem(saveSlot)!);
+    // setPlayer(retrievedSave.player);
+    // updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
+    // showNameDiv(retrievedSave.player.playerName);
+    // loadPronounsRadioBtn(retrievedSave.player.pronouns);
 }
