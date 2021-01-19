@@ -15,7 +15,8 @@
 <body>
     <div class="container">
         <div class="row mt-4">
-            <noscript>This webpage needs JavaScript to function properly. Please enable JavaScript in your browser</noscript>
+            <noscript>This webpage needs JavaScript to function properly. Please enable JavaScript in your
+                browser</noscript>
             <div class="col-lg-2">
                 <div class="card" style="width: 100%;">
                     <div class="card-body">
@@ -112,7 +113,7 @@
                     <hr>
                     <small>Slot 3</small><br>
                     <div class="row">
-                        <div class="col-7" >
+                        <div class="col-7">
                             Placeholder for save description
                         </div>
                         <div class="col-5" style="text-align: center">
@@ -124,9 +125,13 @@
                     <hr>
                     <p>Export Save?</p>
                     <div style="text-align: center">
-                        <button class="export btn-sm" id="export">Export new Save to File</button>
-                        <button class="import btn-sm" id="import">Import Save from File</button></div>
-                    <div id="saveMessage"></div>
+                        <button class="exportSave btn-sm" id="export">Export new Save Code</button>
+                        <button class="importSave btn-sm" id="import">Load from Save Code</button>
+                    </div>
+                    <small id="exportMessage">Click Export to get a new Save code or use existing Save Code to Load<br>
+                        Please makes sure that your save code is valid, or all data might be lost. Load is
+                        irreversible.</small>
+                    <textarea class="form-control" rows="3" id="saveOutput"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
