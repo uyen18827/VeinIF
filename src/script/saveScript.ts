@@ -39,6 +39,8 @@ export function load(saveSlot: string) {
     }
 }
 
+// TODO: export save from save slot. 
+// TODO: export append the textarea
 /**
  * Generate a random-looking string that save the game's progress.
  * The string is encrypted to prevent player from altering their save.
@@ -49,7 +51,16 @@ export function exportSave() {
     let pid = getCurrentParagraphID();
     let save = JSON.stringify(new Save(player, inventory, pid));
     let stringSave = JSON.stringify(save);
-    //encrypt stringSave + show it so that user can copy
+    let saveMessage = document.querySelector('#exportMessage');
+    saveMessage!.innerHTML = ``; //clear old message
+    saveMessage!.innerHTML += `Save created at ${new Date().toLocaleString()}.<br> 
+    Copy and keep the code bellow to load later`
+    let saveOutput = document.querySelector(`#saveOutput`);
+    saveOutput!.innerHTML = `` //clear old save
+    saveOutput!.innerHTML += `${stringSave}`;
+    (<HTMLInputElement>saveOutput).select();
+    document.execCommand('copy');
+    //TODO: encrypt stringSave 
 }
 
 // A textarea input will be provided for user to paste in the string
@@ -58,7 +69,15 @@ export function exportSave() {
  * Parse the encrypted save string to load game.
  * @param stringSave save game string generated from exportSave()
  */
-export function loadStringSave(stringSave: string) {
+//TODO: Make load button open a new modal.
+export function loadSaveCode() {
+    let loadMessage = document.querySelector(`#exportMessage`);
+    // loadMessage!.innerHTML = '';
+    // loadMessage!.innerHTML = `Please paste your save file code in here. `
+    let loadCode = (<HTMLInputElement>document.querySelector("#saveOutput")).value;
+    console.log(loadCode)
+
+
     //TODO: decrypt stringSave
     //let retrievedSave = stringSave.decrypt()
     // retrievedSave = JSON.parse(localStorage.getItem(saveSlot)!);
@@ -66,4 +85,7 @@ export function loadStringSave(stringSave: string) {
     // updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     // showNameDiv(retrievedSave.player.playerName);
     // loadPronounsRadioBtn(retrievedSave.player.pronouns);
+
+    //verify if save is valid. 
+    //fallback: If load is invalid, start new game.
 }

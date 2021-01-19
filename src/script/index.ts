@@ -1,7 +1,7 @@
 import { getName } from "../player/playerInfo.js"
 import { showPronounDialogue } from "../player/pronouns.js"
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { load, newSave } from "./saveScript.js";
+import { exportSave, load, loadSaveCode, newSave } from "./saveScript.js";
 
 ///////////////////Initialize game///////////////////
 window.onload = function(){
@@ -44,4 +44,16 @@ loadButton.forEach(element => {
     element.addEventListener('click', function () {
         load(slotNumber!);
     })
+})
+
+// Add event listener to export save button
+const exportSaveBtn = document.querySelector(".exportSave");
+exportSaveBtn?.addEventListener('click', function () {
+    exportSave();
+})
+
+// Add event listener to import save button
+const importSaveBtn = document.querySelector(".importSave");
+importSaveBtn?.addEventListener(`click`, function () {
+    loadSaveCode();
 })
