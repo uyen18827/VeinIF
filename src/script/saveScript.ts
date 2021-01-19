@@ -50,17 +50,15 @@ export function exportSave() {
     let inventory = getInventory();
     let pid = getCurrentParagraphID();
     let save = JSON.stringify(new Save(player, inventory, pid));
-    let stringSave = JSON.stringify(save);
     let saveMessage = document.querySelector('#exportMessage');
     saveMessage!.innerHTML = ``; //clear old message
     saveMessage!.innerHTML += `Save created at ${new Date().toLocaleString()}.<br> 
     Copy and keep the code bellow to load later`
     let saveOutput = document.querySelector(`#saveOutput`);
     saveOutput!.innerHTML = `` //clear old save
-    saveOutput!.innerHTML += `${stringSave}`;
+    saveOutput!.innerHTML += `${btoa(save)}`; //encode to Base64
     (<HTMLInputElement>saveOutput).select();
     document.execCommand('copy');
-    //TODO: encrypt stringSave 
 }
 
 // A textarea input will be provided for user to paste in the string
@@ -75,17 +73,15 @@ export function loadSaveCode() {
     // loadMessage!.innerHTML = '';
     // loadMessage!.innerHTML = `Please paste your save file code in here. `
     let loadCode = (<HTMLInputElement>document.querySelector("#saveOutput")).value;
-    console.log(loadCode)
+    loadCode = atob(loadCode);
+    console.log(loadCode);
+    let retrievedSave = JSON.parse(loadCode);
+    console.log(retrievedSave)
+    setPlayer(retrievedSave.player);
+    updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
+    showNameDiv(retrievedSave.player.playerName);
+    loadPronounsRadioBtn(retrievedSave.player.pronouns);
 
-
-    //TODO: decrypt stringSave
-    //let retrievedSave = stringSave.decrypt()
-    // retrievedSave = JSON.parse(localStorage.getItem(saveSlot)!);
-    // setPlayer(retrievedSave.player);
-    // updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
-    // showNameDiv(retrievedSave.player.playerName);
-    // loadPronounsRadioBtn(retrievedSave.player.pronouns);
-
-    //verify if save is valid. 
+    //TODO: verify if save is valid. 
     //fallback: If load is invalid, start new game.
 }
