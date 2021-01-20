@@ -54,7 +54,6 @@ export function exportStorageSave(saveSlot: string) {
     (<HTMLInputElement>saveOutput).select();   
 }
 
-// TODO: export append the textarea
 /**
  * Generate a random-looking string that save the game's progress.
  * The string is encoded to Base64 to prevent player (to an extent) from altering their save.
