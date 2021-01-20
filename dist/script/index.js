@@ -1,7 +1,7 @@
 import { getName } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { exportSave, load, loadSaveCode, newSave } from "./saveScript.js";
+import { exportSave, exportStorageSave, load, loadSaveCode, newSave } from "./saveScript.js";
 ///////////////////Initialize game///////////////////
 window.onload = function () {
     updateParagraph(0);
@@ -35,6 +35,14 @@ loadButton.forEach(element => {
     let slotNumber = element.getAttribute("value");
     element.addEventListener('click', function () {
         load(slotNumber);
+    });
+});
+// Add event listener to all Load buttons
+const exportLocalSaveBtn = document.querySelectorAll(".export");
+exportLocalSaveBtn.forEach(element => {
+    let slotNumber = element.getAttribute("value");
+    element.addEventListener('click', function () {
+        exportStorageSave(slotNumber);
     });
 });
 // Add event listener to export save button

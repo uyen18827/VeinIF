@@ -13,10 +13,7 @@ export function newSave(saveSlot: string) {
     //check if LocalStorage is supported on client's browser
     if (typeof (Storage) !== "undefined") {
         console.log(`LocalStorage is supported! Saved file to slot ${saveSlot}`);
-        let player = getPlayer();
-        let inventory = getInventory();
-        let pid = getCurrentParagraphID();
-        let save = new Save(player, inventory, pid);
+        let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID());
         let stringSave = JSON.stringify(save);
         localStorage.setItem(saveSlot, stringSave);
     }
@@ -39,24 +36,35 @@ export function load(saveSlot: string) {
     }
 }
 
-// TODO: export save from save slot. 
+// TODO: export save from save slot.
+export function exportStorageSave(saveSlot: string) {
+    let retrievedSave = localStorage.getItem(saveSlot);
+    let saveMessage = document.querySelector('#exportMessage');
+    saveMessage!.innerHTML = ``; //clear old message
+    saveMessage!.innerHTML += `Save exported from ${saveSlot}.<br> 
+    Copy and keep the code bellow to load later`;
+    let saveOutput = document.querySelector(`#saveOutput`);
+    saveOutput!.innerHTML = `` //clear old save
+    saveOutput!.innerHTML += `${btoa(retrievedSave!)}`; //encode to Base64
+    (<HTMLInputElement>saveOutput).select();
+    document.execCommand('copy');    
+}
+
 // TODO: export append the textarea
 /**
  * Generate a random-looking string that save the game's progress.
- * The string is encrypted to prevent player from altering their save.
+ * The string is encoded to Base64 to prevent player (to an extent) from altering their save.
  */
 export function exportSave() {
-    let player = getPlayer();
-    let inventory = getInventory();
-    let pid = getCurrentParagraphID();
-    let save = JSON.stringify(new Save(player, inventory, pid));
+    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID());
+    let stringSave = JSON.stringify(save);
     let saveMessage = document.querySelector('#exportMessage');
     saveMessage!.innerHTML = ``; //clear old message
     saveMessage!.innerHTML += `Save created at ${new Date().toLocaleString()}.<br> 
     Copy and keep the code bellow to load later`
     let saveOutput = document.querySelector(`#saveOutput`);
     saveOutput!.innerHTML = `` //clear old save
-    saveOutput!.innerHTML += `${btoa(save)}`; //encode to Base64
+    saveOutput!.innerHTML += `${btoa(stringSave)}`; //encode to Base64
     (<HTMLInputElement>saveOutput).select();
     document.execCommand('copy');
 }
