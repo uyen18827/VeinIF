@@ -1,8 +1,9 @@
 import { getItem } from "../inventory/inventory.js";
+import { Items } from "../model/item.js";
 import { Paragraphs } from "../model/paragraph.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
-import { Paragraph } from "./allParagraphs.js";
+import { getParagraph } from "./allParagraphs.js";
 var currentParagraph: string | undefined;
 /**
  * Show available choices in a paragraph
@@ -36,7 +37,7 @@ function showChoices(choices: any, choiceContainer: any) {
  * @param items 
  * @param itemContainer 
  */
-function showItems(items: any, itemContainer: any) {
+function showItems(items: Items[] | undefined, itemContainer: any) {
     if (items) {
         for (var i = 0; i < items.length; i++) {
             let currentItem = items[i];
@@ -58,14 +59,14 @@ function showItems(items: any, itemContainer: any) {
         }
     }
 }
-let p = new Paragraph(getPlayer());
+
 /**Get nextid, then show the paragraph with that id.
   * @param {number} nextid next paragraph's id.
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
 */
 export function updateParagraph(nextid: number, style?: string) {
-    p.player = getPlayer();
-    let allParagraphs = p.getParagraph(nextid);
+    let player = getPlayer();
+    let allParagraphs = getParagraph(player)[nextid];
     const choiceContainer: HTMLElement | any = document.getElementById("choices");
     const paragraphContainer: HTMLElement | any = document.getElementById("paragraph");
     const itemContainer: HTMLElement | any = document.getElementById("items");
