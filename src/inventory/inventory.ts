@@ -7,6 +7,14 @@ function addToInventory(item: Items) {
     inventory.push(item);
 }
 
+/**
+ * Transfer items form an array of items to the inventory one by one.
+ * @param items Array of items
+ */
+export function loadBulkInventory(items: Items[]) {
+    items.forEach(element => addToInventory(element));
+}
+
 export function getInventory() {
     return inventory;
 }

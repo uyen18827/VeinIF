@@ -3,6 +3,13 @@ export let inventory = [];
 function addToInventory(item) {
     inventory.push(item);
 }
+/**
+ * Transfer items form an array of items to the inventory one by one.
+ * @param items Array of items
+ */
+export function loadBulkInventory(items) {
+    items.forEach(element => addToInventory(element));
+}
 export function getInventory() {
     return inventory;
 }
