@@ -1,4 +1,4 @@
-import { getInventory } from "../inventory/inventory.js";
+import { clearInventory, getInventory, loadBulkInventory } from "../inventory/inventory.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
@@ -12,6 +12,17 @@ function save() {
     let stringSave = JSON.stringify(save);
     return stringSave;
 }
+
+function load(retrievedSave: any) {
+    clearInventory();
+    setPlayer(retrievedSave.player);
+    updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
+    loadBulkInventory(retrievedSave.inventory);
+    showNameDiv(retrievedSave.player.playerName);
+    loadPronounsRadioBtn(retrievedSave.player.pronouns);
+}
+//TODO: Auto-save + Auto-load back to the player's last location.
+// auto-save can be toggle on/off
 
 /**
  * Save the game's state to LocalStorage
@@ -29,14 +40,11 @@ export function newSave(saveSlot: string) {
 }
 //TODO: Make a proper LocalStorage is not supported message that shows on page, not just in console.
 
-export function load(saveSlot: string) {
+export function loadSave(saveSlot: string) {
     if (typeof (Storage) !== "undefined") {
         console.log("LocalStorage is supported!")
         let retrievedSave = JSON.parse(localStorage.getItem(saveSlot)!);
-        setPlayer(retrievedSave.player);
-        updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
-        showNameDiv(retrievedSave.player.playerName);
-        loadPronounsRadioBtn(retrievedSave.player.pronouns);
+        load(retrievedSave);
     } else {
         console.log("LocalStorage is not supported in this browser! Please export the save code instead.")
     }
@@ -82,11 +90,8 @@ export function loadSaveCode() {
     console.log(loadCode);
     let retrievedSave = JSON.parse(loadCode);
     console.log(retrievedSave)
-    setPlayer(retrievedSave.player);
-    updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
-    showNameDiv(retrievedSave.player.playerName);
-    loadPronounsRadioBtn(retrievedSave.player.pronouns);
-
+    load(retrievedSave);
+    //TODO: Load inventory items into HTML
     //TODO: verify if save is valid. 
     //fallback: If load is invalid, start new game.
 }

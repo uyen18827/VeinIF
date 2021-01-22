@@ -1,7 +1,7 @@
 import { getName } from "../player/playerInfo.js"
 import { showPronounDialogue } from "../player/pronouns.js"
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { exportSave, exportStorageSave, load, loadSaveCode, newSave } from "./saveScript.js";
+import { exportSave, exportStorageSave, loadSave, loadSaveCode, newSave } from "./saveScript.js";
 
 ///////////////////Initialize game///////////////////
 window.onload = function(){
@@ -42,7 +42,7 @@ const loadButton = document.querySelectorAll(".load");
 loadButton.forEach(element => {
     let slotNumber = element.getAttribute("value");
     element.addEventListener('click', function () {
-        load(slotNumber!);
+        loadSave(slotNumber!);
     })
 })
 
