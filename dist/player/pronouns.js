@@ -68,8 +68,18 @@ export function getPronouns() {
  */
 export function setPronouns(pronouns) {
     player.pronouns = pronouns;
+    showPronouns(pronouns);
 }
 export function loadPronounsRadioBtn(pronouns) {
     let savedPronouns = document.getElementById(`${pronouns.subjectPro}`);
     savedPronouns.checked = true;
+}
+/**
+ * Show player's pronouns on all element with class = "playerPronouns"
+ */
+export function showPronouns(pronouns) {
+    let pronounsClassed = document.querySelectorAll(".playerPronouns");
+    if (pronounsClassed) {
+        pronounsClassed.forEach(element => element.innerHTML = `Pronouns: ${pronouns.Category}`);
+    }
 }

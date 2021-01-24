@@ -67,9 +67,21 @@ export function getPronouns() {
  */
 export function setPronouns(pronouns: Pronouns) {
     player.pronouns = pronouns;
+    showPronouns(pronouns);
 }
 
 export function loadPronounsRadioBtn(pronouns: Pronouns){
     let savedPronouns: HTMLElement | any = document.getElementById(`${pronouns.subjectPro}`);
     savedPronouns.checked = true;
+}
+
+/**
+ * Show player's pronouns on all element with class = "playerPronouns"
+ */
+export function showPronouns(pronouns: Pronouns) {
+    let pronounsClassed = document.querySelectorAll(".playerPronouns");
+    if (pronounsClassed) {
+        pronounsClassed.forEach(element => element.innerHTML = `Pronouns: ${pronouns.Category}`);
+    }
+    
 }
