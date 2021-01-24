@@ -2,7 +2,7 @@ import { clearInventory, getInventory, loadBulkInventory } from "../inventory/in
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
-import { loadPronounsRadioBtn } from "../player/pronouns.js";
+import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns.js";
 /**
  * Create a new save and stringify it.
  */
@@ -17,10 +17,18 @@ function load(retrievedSave) {
     updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     loadBulkInventory(retrievedSave.inventory);
     showNameDiv(retrievedSave.player.playerName);
+    showPronouns(retrievedSave.player.pronouns);
     loadPronounsRadioBtn(retrievedSave.player.pronouns);
 }
 //TODO: Auto-save + Auto-load back to the player's last location.
 // auto-save can be toggle on/off
+export function autoSave() {
+    localStorage.setItem('autoSave', save());
+}
+export function autoLoad() {
+    let retrievedSave = JSON.parse(localStorage.getItem('autoSave'));
+    load(retrievedSave);
+}
 /**
  * Save the game's state to LocalStorage
  * @param saveSlot string that would later used as LocalStorage key.
@@ -59,7 +67,7 @@ export function exportStorageSave(saveSlot) {
 }
 /**
  * Generate a random-looking string that save the game's progress.
- * The string is encoded to Base64 to prevent player (to an extent) from altering their save.
+ * The string is encoded to Base64 to prevent players (to an extent) from altering their save.
  */
 export function exportSave() {
     let saveMessage = document.querySelector('#exportMessage');
