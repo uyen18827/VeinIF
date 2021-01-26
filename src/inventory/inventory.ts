@@ -32,7 +32,7 @@ export function getItem(item: Items) {
         console.log(`${item.itemName} has been added to inventory`);
         addToInventory(item);
         console.log(inventory);
-        appendItemHTML(inventoryTab, inventoryTabContent, item);
+        appendItemHTML(item);
     }
     else {
         inInventory.itemQty += 1;
@@ -47,7 +47,9 @@ export function getItem(item: Items) {
  * @param inventoryTabContent HTMLElement that will contain the item's description (Bootstrap's tab-pane)
  * @param item 
  */
-export function appendItemHTML(inventoryTab: HTMLElement | any, inventoryTabContent: HTMLElement | any, item: Items) {
+export function appendItemHTML(item: Items) {
+    let inventoryTab = document.querySelector("#inventory-tab")!;
+    let inventoryTabContent = document.querySelector("#inventory-tabContent")!;
     let tab: string = `<li class="nav-item" role="presentation">
         <a class="nav-link" 
         id="pills-${item.itemCode}-tab" 
@@ -65,6 +67,13 @@ export function appendItemHTML(inventoryTab: HTMLElement | any, inventoryTabCont
     ${item.description}
     </div>`
     inventoryTabContent.innerHTML += tabContent;
+}
+
+export function clearInventoryHTML() {
+    let inventoryTab = document.querySelector("#inventory-tab")!;
+    let inventoryTabContent = document.querySelector("#inventory-tabContent")!;
+    inventoryTab.textContent = '';
+    inventoryTabContent.textContent = '';
 }
 
 //TODO: Shows item quantity on screen.
