@@ -1,4 +1,5 @@
-import { clearInventory, getInventory, loadBulkInventory } from "../inventory/inventory.js";
+import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
+import { Items } from "../model/item.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
@@ -15,15 +16,22 @@ function save() {
 
 function load(retrievedSave: any) {
     clearInventory();
+    clearInventoryHTML();
     setPlayer(retrievedSave.player);
     updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     loadBulkInventory(retrievedSave.inventory);
+    retrievedSave.inventory.forEach((element: Items) => {
+        appendItemHTML(element);
+    });
     showNameDiv(retrievedSave.player.playerName);
-    showPronouns(retrievedSave.player.pronouns)
-    loadPronounsRadioBtn(retrievedSave.player.pronouns);
+    showPronouns(retrievedSave.player.pronouns);
+    let savedPronouns = document.getElementById(`${retrievedSave.player.pronouns.subjectPro}`);
+    if (savedPronouns) {
+        loadPronounsRadioBtn(retrievedSave.player.pronouns);
+    }
 }
-//TODO: Auto-save + Auto-load back to the player's last location.
-// auto-save can be toggle on/off
+// TODO: user should be able to toggle auto-save on/off
+
 export function autoSave() {
     localStorage.setItem('autoSave', save());
 }

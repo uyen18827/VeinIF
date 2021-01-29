@@ -1,10 +1,17 @@
 import { getName } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { exportSave, exportStorageSave, loadSave, loadSaveCode, newSave } from "./saveScript.js";
+import { autoLoad, exportSave, exportStorageSave, loadSave, loadSaveCode, newSave } from "./saveScript.js";
 ///////////////////Initialize game///////////////////
 window.onload = function () {
-    updateParagraph(0);
+    //check if autoSave exits?
+    let autoSave = localStorage.getItem('autoSave');
+    if (autoSave) {
+        autoLoad();
+    }
+    else {
+        updateParagraph(0);
+    }
 };
 // Add event listener to HTML element input with id = "playerName"
 const nameInput = document.querySelector("#playerName");
