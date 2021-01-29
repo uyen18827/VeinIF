@@ -1,6 +1,8 @@
+import { addToPickedUp } from "../conditions/pickedUpItems.js";
 import { getItem } from "../inventory/inventory.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
+import { autoSave } from "../script/saveScript.js";
 import { getParagraph } from "./allParagraphs.js";
 var currentParagraph;
 /**
@@ -26,6 +28,7 @@ function showChoices(choices, choiceContainer) {
             let choiceHTML = choiceContainer.querySelector(`#n${nextid}`);
             choiceHTML.addEventListener('click', function () {
                 updateParagraph(nextid, style);
+                autoSave();
             });
         }
     }
@@ -47,10 +50,12 @@ function showItems(items, itemContainer) {
             let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
             itemHTML.addEventListener("click", function () {
                 getItem(currentItem);
+                addToPickedUp(currentItem, getCurrentParagraphID());
                 console.log(currentItem.itemName);
                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
                 itemHTML.innerHTML = message;
                 itemHTML.style.color = "#6A6C6E";
+                autoSave();
             }, { once: true });
             console.log(`item Name: ${currentItem.itemName}`);
             console.log(`item code: ${currentItem.itemCode}`);
@@ -85,7 +90,9 @@ export function updateParagraph(nextid, style) {
             items = allParagraphs.item;
             console.log(items);
             showChoices(choices, choiceContainer);
-            showItems(items, itemContainer);
+            if (items) {
+                showItems(items, itemContainer);
+            }
             showPronounDialogue();
             setCurrentParagraphID(nextid);
             break;
@@ -98,7 +105,9 @@ export function updateParagraph(nextid, style) {
             items = allParagraphs.item;
             console.log(items);
             showChoices(choices, choiceContainer);
-            showItems(items, itemContainer);
+            if (items) {
+                showItems(items, itemContainer);
+            }
             showPronounDialogue();
             setCurrentParagraphID(nextid);
             break;
