@@ -10,7 +10,7 @@ export const player: Player = {
         possAdj: "", //possessive adjective
         possessivePro: "", //possessive pronoun
         reflex: "", //reflexive pronoun
-        is: "" //he's, she's, they're
+        is: "", //he's, she's, they're
     },
 }
 export function getPlayer() {
@@ -32,7 +32,7 @@ export function getName() {
     console.log(`Player Name is: ${playerName}`);
     setName(playerName);
     showNameDiv(playerName);
-    console.log(player)
+    console.log(player);
 }
 
 /**
@@ -45,9 +45,23 @@ export function showNameDiv(playerName: string){
         container.forEach(element => {
             element.innerHTML = `Name: ${playerName} `;
         });
-        //old code: const container = document.getElementById("yourName");
-        // container.innerHTML = null;
-        // let output: string = `Your name is: ${playerName} `;
-        // container.innerHTML += output;
     }
+}
+
+/**Reset player information to initial value. */
+export function resetPlayer() {
+    let player: Player = {
+        id: 0,
+        playerName: "",
+        pronouns: {
+            Category: "",
+            subjectPro: "", //subject pronoun
+            objectPro: "", //object pronoun
+            possAdj: "", //possessive adjective
+            possessivePro: "", //possessive pronoun
+            reflex: "", //reflexive pronoun
+            is: "", //he's, she's, they're
+        },
+    }
+    setPlayer(player);
 }

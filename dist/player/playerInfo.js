@@ -8,7 +8,7 @@ export const player = {
         possAdj: "",
         possessivePro: "",
         reflex: "",
-        is: "" //he's, she's, they're
+        is: "",
     },
 };
 export function getPlayer() {
@@ -39,9 +39,22 @@ export function showNameDiv(playerName) {
         container.forEach(element => {
             element.innerHTML = `Name: ${playerName} `;
         });
-        //old code: const container = document.getElementById("yourName");
-        // container.innerHTML = null;
-        // let output: string = `Your name is: ${playerName} `;
-        // container.innerHTML += output;
     }
+}
+/**Reset player information to initial value. */
+export function resetPlayer() {
+    let player = {
+        id: 0,
+        playerName: "",
+        pronouns: {
+            Category: "",
+            subjectPro: "",
+            objectPro: "",
+            possAdj: "",
+            possessivePro: "",
+            reflex: "",
+            is: "",
+        },
+    };
+    setPlayer(player);
 }
