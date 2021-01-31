@@ -48,7 +48,7 @@ export function autoLoad() {
 export function newSave(saveSlot: string) {
     //check if LocalStorage is supported on client's browser
     if (typeof (Storage) !== "undefined") {
-        console.log(`LocalStorage is supported! Saved file to slot ${saveSlot}`);
+        console.log(`LocalStorage is supported! Saved file to ${saveSlot}`);
         localStorage.setItem(saveSlot, save());
     }
     else {
