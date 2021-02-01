@@ -2,6 +2,7 @@ import { getName } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { autoLoad, exportSave, exportStorageSave, loadSave, loadSaveCode, newSave } from "./saveScript.js";
+import { restartGame } from "./settings.js";
 ///////////////////Initialize game///////////////////
 window.onload = function () {
     //check if autoSave exits?
@@ -62,3 +63,6 @@ const importSaveBtn = document.querySelector(".importSave");
 importSaveBtn?.addEventListener(`click`, function () {
     loadSaveCode();
 });
+// Add event listener to restart game button
+const restartBtn = document.querySelector(".restartBtn");
+restartBtn?.addEventListener('click', function () { restartGame(); });
