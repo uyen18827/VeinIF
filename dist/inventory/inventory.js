@@ -5,6 +5,7 @@ function addToInventory(item) {
 }
 /**
  * Transfer items form an array of items to the inventory one by one.
+ * Use case: load inventory from save file && add a bulk of item from treasure chest to inventory
  * @param items Array of items
  */
 export function loadBulkInventory(items) {
@@ -19,8 +20,6 @@ export function clearInventory() {
 }
 export function getItem(item) {
     const inInventory = inventory.find(element => element.itemCode == item.itemCode);
-    let inventoryTab = document.querySelector("#inventory-tab");
-    let inventoryTabContent = document.querySelector("#inventory-tabContent");
     if (!inInventory) {
         console.log(`${item.itemName} has been added to inventory`);
         addToInventory(item);
@@ -31,17 +30,18 @@ export function getItem(item) {
         inInventory.itemQty += 1;
         console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
         console.log(inventory);
+        //update item quantity on view
+        let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
+        quantityDiv.textContent = `Quantity: ${inInventory.itemQty}`;
     }
 }
 /**
  * After picking up an item, the item's name and description will be viewable on Inventory's UI
- * @param inventoryTab HTMLElement that will contain the item's name (Bootstrap's tab pills)
- * @param inventoryTabContent HTMLElement that will contain the item's description (Bootstrap's tab-pane)
  * @param item
  */
 export function appendItemHTML(item) {
-    let inventoryTab = document.querySelector("#inventory-tab");
-    let inventoryTabContent = document.querySelector("#inventory-tabContent");
+    let inventoryTab = document.querySelector("#inventory-tab"); //(Bootstrap's tab pills)
+    let inventoryTabContent = document.querySelector("#inventory-tabContent"); //(Bootstrap's tab-pane)
     let tab = `<li class="nav-item" role="presentation">
         <a class="nav-link" 
         id="pills-${item.itemCode}-tab" 
@@ -56,6 +56,7 @@ export function appendItemHTML(item) {
     role="tabpanel" 
     aria-labelledby="pills-${item.itemCode}-tab">
     ${item.description}
+    <div id="${item.itemCode}-quantity">Quantity: ${item.itemQty}</div>
     </div>`;
     inventoryTabContent.innerHTML += tabContent;
 }
