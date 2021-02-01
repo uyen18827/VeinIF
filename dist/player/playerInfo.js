@@ -1,3 +1,4 @@
+import { showPronouns } from "./pronouns.js";
 export const player = {
     id: 0,
     playerName: "",
@@ -43,7 +44,7 @@ export function showNameDiv(playerName) {
 }
 /**Reset player information to initial value. */
 export function resetPlayer() {
-    let player = {
+    let defaultPlayer = {
         id: 0,
         playerName: "",
         pronouns: {
@@ -56,5 +57,7 @@ export function resetPlayer() {
             is: "",
         },
     };
-    setPlayer(player);
+    setPlayer(defaultPlayer);
+    showNameDiv(defaultPlayer.playerName);
+    showPronouns(defaultPlayer.pronouns);
 }
