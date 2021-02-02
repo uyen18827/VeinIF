@@ -1,3 +1,4 @@
+import { getPickedUpMap, loadToPickedUp } from "../conditions/pickedUpItems.js";
 import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
@@ -7,7 +8,7 @@ import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns.js";
  * Create a new save and stringify it.
  */
 function save() {
-    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID());
+    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID(), getPickedUpMap());
     let stringSave = JSON.stringify(save);
     return stringSave;
 }
@@ -15,6 +16,7 @@ function load(retrievedSave) {
     clearInventory();
     clearInventoryHTML();
     setPlayer(retrievedSave.player);
+    loadToPickedUp(retrievedSave.pickedUpMap);
     updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     loadBulkInventory(retrievedSave.inventory);
     retrievedSave.inventory.forEach((element) => {

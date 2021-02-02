@@ -1,4 +1,4 @@
-import { addToPickedUp } from "../conditions/pickedUpItems.js";
+import { addToPickedUp, getPickedUpMap } from "../conditions/pickedUpItems.js";
 import { getItem } from "../inventory/inventory.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
@@ -38,27 +38,65 @@ function showChoices(choices, choiceContainer) {
  * @param items
  * @param itemContainer
  */
-function showItems(items, itemContainer) {
+// function showItems(items: Items[], itemContainer: any) {
+//     if (items) {
+//         for (var i = 0; i < items.length; i++) {
+//             let currentItem = items[i];
+//             let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
+//             itemContainer.innerHTML += item;
+//         }
+//         for (var i = 0; i < items.length; i++) {
+//             let currentItem = items[i];
+//             let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
+//             itemHTML.addEventListener("click", function () {
+//                 getItem(currentItem);
+//                 addToPickedUp(currentItem, getCurrentParagraphID())
+//                 console.log(currentItem.itemName);
+//                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
+//                 itemHTML.innerHTML = message;
+//                 itemHTML.style.color = "#6A6C6E";
+//                 autoSave();
+//             }, { once: true })
+//             console.log(`item Name: ${currentItem.itemName}`);
+//             console.log(`item code: ${currentItem.itemCode}`);
+//         }
+//     }
+// }
+function showItems(items, itemContainer, pid) {
     if (items) {
         for (var i = 0; i < items.length; i++) {
             let currentItem = items[i];
-            let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
-            itemContainer.innerHTML += item;
+            let found = getPickedUpMap().find(element => element.itemName == currentItem.itemName && element.itemCode == currentItem.itemCode && element.location == pid);
+            if (found) {
+                let message = `<a href="#" class="items picked" id="${currentItem.itemCode}">[Added to Inventory] You've already picked up ${currentItem.itemName}</a><br>`;
+                console.log(`${currentItem.itemName} is already inside picked up map`);
+                itemContainer.innerHTML += message;
+            }
+            else {
+                let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
+                itemContainer.innerHTML += item;
+            }
         }
         for (var i = 0; i < items.length; i++) {
             let currentItem = items[i];
             let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
-            itemHTML.addEventListener("click", function () {
-                getItem(currentItem);
-                addToPickedUp(currentItem, getCurrentParagraphID());
-                console.log(currentItem.itemName);
-                let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
-                itemHTML.innerHTML = message;
+            let pickedUp = itemContainer.querySelector(`.picked`);
+            if (pickedUp) {
                 itemHTML.style.color = "#6A6C6E";
-                autoSave();
-            }, { once: true });
-            console.log(`item Name: ${currentItem.itemName}`);
-            console.log(`item code: ${currentItem.itemCode}`);
+            }
+            else {
+                itemHTML.addEventListener("click", function () {
+                    getItem(currentItem);
+                    addToPickedUp(currentItem, getCurrentParagraphID());
+                    console.log(currentItem.itemName);
+                    let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
+                    itemHTML.innerHTML = message;
+                    itemHTML.style.color = "#6A6C6E";
+                    autoSave();
+                }, { once: true });
+            }
+            // console.log(`item Name: ${currentItem.itemName}`);
+            // console.log(`item code: ${currentItem.itemCode}`);
         }
     }
 }
@@ -91,7 +129,7 @@ export function updateParagraph(nextid, style) {
             console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
-                showItems(items, itemContainer);
+                showItems(items, itemContainer, nextid);
             }
             showPronounDialogue();
             setCurrentParagraphID(nextid);
@@ -106,7 +144,7 @@ export function updateParagraph(nextid, style) {
             console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
-                showItems(items, itemContainer);
+                showItems(items, itemContainer, nextid);
             }
             showPronounDialogue();
             setCurrentParagraphID(nextid);
