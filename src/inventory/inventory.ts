@@ -34,7 +34,7 @@ export function getItem(item: Items) {
         appendItemHTML(item);
     }
     else {
-        inInventory.itemQty += 1;
+        inInventory.itemQty += item.itemQty;
         console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
         console.log(inventory);
         //update item quantity on view
