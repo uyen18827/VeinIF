@@ -73,7 +73,7 @@ function showItems(items, itemContainer, pid) {
                 itemContainer.innerHTML += message;
             }
             else {
-                let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
+                let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found ×${currentItem.itemQty} ${currentItem.itemName}</a><br>`;
                 itemContainer.innerHTML += item;
             }
         }
