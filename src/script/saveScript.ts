@@ -1,6 +1,5 @@
-import { getPickedUpMap, loadToPickedUp, pickedUpMap } from "../conditions/pickedUpItems.js";
 import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
-import { Items } from "../model/item.js";
+import { inventoryItem } from "../model/item.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
@@ -10,7 +9,7 @@ import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns.js";
  * Create a new save and stringify it.
  */
 function save() {
-    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID(), getPickedUpMap());
+    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID());
     let stringSave = JSON.stringify(save);
     return stringSave;
 }
@@ -19,11 +18,11 @@ function load(retrievedSave: any) {
     clearInventory();
     clearInventoryHTML();
     setPlayer(retrievedSave.player);
-    loadToPickedUp(retrievedSave.pickedUpMap);
-    updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     loadBulkInventory(retrievedSave.inventory);
-    retrievedSave.inventory.forEach((element: Items) => {
-        appendItemHTML(element);
+    updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
+    retrievedSave.inventory.forEach((element: inventoryItem) => {
+        appendItemHTML(element.item);
+        console.log(element)
     });
     showNameDiv(retrievedSave.player.playerName);
     showPronouns(retrievedSave.player.pronouns);
@@ -78,7 +77,7 @@ export function exportStorageSave(saveSlot: string) {
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
     (<HTMLInputElement>saveOutput).value = `${btoa(retrievedSave!)}`; //encode to Base64
-    (<HTMLInputElement>saveOutput).select();   
+    (<HTMLInputElement>saveOutput).select();
 }
 
 /**
@@ -92,7 +91,7 @@ export function exportSave() {
     Copy and keep the code bellow to load later`
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
-    (<HTMLInputElement>saveOutput).value  += `${btoa(save())}`; //encode to Base64
+    (<HTMLInputElement>saveOutput).value += `${btoa(save())}`; //encode to Base64
     (<HTMLInputElement>saveOutput).select();
 }
 

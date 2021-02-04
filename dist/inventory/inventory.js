@@ -1,3 +1,4 @@
+import { inventoryItem } from "../model/item.js";
 import { capitalise } from "../tools/formatting.js";
 export let inventory = [];
 function addToInventory(item) {
@@ -18,21 +19,27 @@ export function clearInventory() {
     inventory.length = 0;
     return inventory;
 }
-export function getItem(item) {
-    const inInventory = inventory.find(element => element.itemCode == item.itemCode);
+export function getItem(item, pid) {
+    const inInventory = inventory.find(element => element.item.itemCode == item.itemCode);
     if (!inInventory) {
+        let newItem = new inventoryItem(item, pid);
         console.log(`${item.itemName} has been added to inventory`);
-        addToInventory(item);
+        addToInventory(newItem);
         console.log(inventory);
         appendItemHTML(item);
     }
     else {
-        inInventory.itemQty += item.itemQty;
+        inInventory.item.itemQty += item.itemQty;
         console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
         console.log(inventory);
         //update item quantity on view
         let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
-        quantityDiv.textContent = `Quantity: ${inInventory.itemQty}`;
+        quantityDiv.textContent = `Quantity: ${inInventory.item.itemQty}`;
+        let pidCheck = inInventory.pickedUpLocation.find(location => location == pid);
+        console.log(pidCheck, pid);
+        if (!pidCheck) {
+            inInventory.pickedUpLocation.push(pid);
+        }
     }
 }
 /**
@@ -66,4 +73,3 @@ export function clearInventoryHTML() {
     inventoryTab.textContent = '';
     inventoryTabContent.textContent = '';
 }
-//TODO: Shows item quantity on screen.

@@ -28,14 +28,12 @@ export function getParagraph(player) {
                     itemQty: 1,
                     description: "An old, rusty sword you found on the ground.",
                     itemCode: "sword",
-                    pickedUp: false
                 },
                 {
                     itemName: 'great sword',
                     itemQty: 1,
                     description: "An old, rusty great sword you found on the ground.",
                     itemCode: "great_sword",
-                    pickedUp: false
                 },
             ],
             variable: "valor:1",
@@ -46,18 +44,24 @@ export function getParagraph(player) {
             name: "greeting",
             content: `This is the third paragraph. A guy whoops in and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here!" Oh well, this is the end. Bye ${player?.playerName}!`,
             choices: [
-                { choiceCont: "Last one!", nextid: 3 }
+                { choiceCont: "Last one!", nextid: 3 },
+            ],
+            item: [
+                { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
             ],
             preId: 1,
         },
         {
             id: 3,
             name: "key on ground",
-            content: `You found a key lying on the ground.<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
+            content: `You found a key lying on the ground. Along with some flowers<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
             choices: [
                 { choiceCont: "Move along", nextid: 4, style: "append" }
             ],
-            item: [{ itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", pickedUp: false }],
+            item: [
+                { itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", },
+                { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
+            ],
             preId: 2
         },
         {
@@ -67,7 +71,7 @@ export function getParagraph(player) {
             choices: [
                 {
                     choiceCont: "Let's go back from the beginning", nextid: 0,
-                    precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1", pickedUp: false } }
+                    precondition: { item: { itemName: "key", itemQty: 1, itemCode: "key1", } }
                 },
                 { choiceCont: "Or go on?", nextid: 5 }
             ],

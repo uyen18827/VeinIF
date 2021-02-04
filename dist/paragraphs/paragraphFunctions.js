@@ -1,5 +1,4 @@
-import { addToPickedUp, getPickedUpMap } from "../conditions/pickedUpItems.js";
-import { getItem } from "../inventory/inventory.js";
+import { getInventory, getItem } from "../inventory/inventory.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { autoSave } from "../script/saveScript.js";
@@ -33,70 +32,57 @@ function showChoices(choices, choiceContainer) {
         }
     }
 }
-/**
- * Show items present in a paragraph. Upon clicking on the item, it'll be added to inventory
- * @param items
- * @param itemContainer
- */
-// function showItems(items: Items[], itemContainer: any) {
-//     if (items) {
-//         for (var i = 0; i < items.length; i++) {
-//             let currentItem = items[i];
-//             let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found a ${currentItem.itemName}</a><br>`;
-//             itemContainer.innerHTML += item;
-//         }
-//         for (var i = 0; i < items.length; i++) {
-//             let currentItem = items[i];
-//             let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
-//             itemHTML.addEventListener("click", function () {
-//                 getItem(currentItem);
-//                 addToPickedUp(currentItem, getCurrentParagraphID())
-//                 console.log(currentItem.itemName);
-//                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
-//                 itemHTML.innerHTML = message;
-//                 itemHTML.style.color = "#6A6C6E";
-//                 autoSave();
-//             }, { once: true })
-//             console.log(`item Name: ${currentItem.itemName}`);
-//             console.log(`item code: ${currentItem.itemCode}`);
-//         }
-//     }
-// }
 function showItems(items, itemContainer, pid) {
-    if (items) {
-        for (var i = 0; i < items.length; i++) {
-            let currentItem = items[i];
-            let found = getPickedUpMap().find(element => element.itemName == currentItem.itemName && element.itemCode == currentItem.itemCode && element.location == pid);
-            if (found) {
+    //these are kinda ugly but oh my god did it run :( Probably should refactor some other time
+    for (var i = 0; i < items.length; i++) {
+        let currentItem = items[i];
+        let found = getInventory().find(element => element.item.itemName == currentItem.itemName && element.item.itemCode == currentItem.itemCode);
+        if (found) { //item name is in inventory
+            //Check if item had been found at this location
+            let pidCheck = found.pickedUpLocation.find(element => element == pid);
+            if (pidCheck) {
                 let message = `<a href="#" class="items picked" id="${currentItem.itemCode}">[Added to Inventory] You've already picked up ${currentItem.itemName}</a><br>`;
-                console.log(`${currentItem.itemName} is already inside picked up map`);
+                console.log(`${currentItem.itemName} is already picked up at this location (${pid})`);
                 itemContainer.innerHTML += message;
             }
-            else {
-                let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found ×${currentItem.itemQty} ${currentItem.itemName}</a><br>`;
+            else { //not found at this location
+                let item = `<a href="#" class="items item-new-location" id="${currentItem.itemCode}">You found ×${currentItem.itemQty} ${currentItem.itemName}</a><br>`;
                 itemContainer.innerHTML += item;
             }
         }
-        for (var i = 0; i < items.length; i++) {
-            let currentItem = items[i];
-            let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
-            let pickedUp = itemContainer.querySelector(`.picked`);
-            if (pickedUp) {
+        else { //entirely new item name, entirely new location
+            let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found ×${currentItem.itemQty} ${currentItem.itemName}</a><br>`;
+            itemContainer.innerHTML += item;
+        }
+    }
+    //add Event listener
+    for (var i = 0; i < items.length; i++) {
+        let currentItem = items[i];
+        let itemHTML = itemContainer.querySelector(`#${currentItem.itemCode}`);
+        let pickedUp = itemHTML.classList.contains(`picked`);
+        let newLocation = itemHTML.classList.contains(`item-new-location`);
+        //if item has class item-new-location, push new location and add to quantity
+        if (newLocation) {
+            itemHTML.addEventListener("click", function () {
+                getItem(currentItem, getCurrentParagraphID());
+                let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
+                itemHTML.innerHTML = message;
                 itemHTML.style.color = "#6A6C6E";
-            }
-            else {
-                itemHTML.addEventListener("click", function () {
-                    getItem(currentItem);
-                    addToPickedUp(currentItem, getCurrentParagraphID());
-                    console.log(currentItem.itemName);
-                    let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
-                    itemHTML.innerHTML = message;
-                    itemHTML.style.color = "#6A6C6E";
-                    autoSave();
-                }, { once: true });
-            }
-            // console.log(`item Name: ${currentItem.itemName}`);
-            // console.log(`item code: ${currentItem.itemCode}`);
+                autoSave();
+            }, { once: true });
+        }
+        else if (pickedUp) {
+            itemHTML.style.color = "#6A6C6E";
+        }
+        else { //entirely new item name, entirely new location
+            itemHTML.addEventListener("click", function () {
+                getItem(currentItem, getCurrentParagraphID());
+                console.log(currentItem.itemName);
+                let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
+                itemHTML.innerHTML = message;
+                itemHTML.style.color = "#6A6C6E";
+                autoSave();
+            }, { once: true });
         }
     }
 }

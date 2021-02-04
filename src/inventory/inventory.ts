@@ -1,9 +1,10 @@
-import { Items } from "../model/item";
+import { inventoryItem, Items } from "../model/item.js";
+import { Paragraphs } from "../model/paragraph.js";
 import { capitalise } from "../tools/formatting.js";
 
-export let inventory: Array<Items> = [];
+export let inventory: Array<inventoryItem> = [];
 
-function addToInventory(item: Items) {
+function addToInventory(item: inventoryItem) {
     inventory.push(item);
 }
 
@@ -12,7 +13,7 @@ function addToInventory(item: Items) {
  * Use case: load inventory from save file && add a bulk of item from treasure chest to inventory
  * @param items Array of items
  */
-export function loadBulkInventory(items: Items[]) {
+export function loadBulkInventory(items: inventoryItem[]) {
     items.forEach(element => addToInventory(element));
 }
 
@@ -25,21 +26,27 @@ export function clearInventory() {
     return inventory;
 }
 
-export function getItem(item: Items) {
-    const inInventory = inventory.find(element => element.itemCode == item.itemCode);
+export function getItem(item: Items, pid: Paragraphs["id"]) {
+    const inInventory = inventory.find(element => element.item.itemCode == item.itemCode);
     if (!inInventory) {
+        let newItem = new inventoryItem(item, pid)
         console.log(`${item.itemName} has been added to inventory`);
-        addToInventory(item);
+        addToInventory(newItem);
         console.log(inventory);
         appendItemHTML(item);
     }
     else {
-        inInventory.itemQty += item.itemQty;
+        inInventory.item.itemQty += item.itemQty;
         console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
         console.log(inventory);
         //update item quantity on view
         let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
-        quantityDiv!.textContent = `Quantity: ${inInventory.itemQty}`;
+        quantityDiv!.textContent = `Quantity: ${inInventory.item.itemQty}`;
+        let pidCheck = inInventory.pickedUpLocation.find(location => location == pid);
+        console.log(pidCheck, pid)
+        if (!pidCheck) {
+            inInventory.pickedUpLocation.push(pid);
+        }
     }
 }
 
@@ -76,5 +83,3 @@ export function clearInventoryHTML() {
     inventoryTab.textContent = '';
     inventoryTabContent.textContent = '';
 }
-
-//TODO: Shows item quantity on screen.

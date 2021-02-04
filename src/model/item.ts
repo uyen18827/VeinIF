@@ -1,5 +1,5 @@
-import { Paragraphs, Precondition } from "./paragraph";
-
+import { Paragraphs, Precondition } from "./paragraph.js";
+/**Interface for items that's displayed in a paragraph */
 export interface Items {
     itemName: string,
     description?: string;
@@ -7,22 +7,20 @@ export interface Items {
     itemQty: number,
     itemCode: string,
     precondition?: Precondition;
-    pickedUp?: boolean;
 }
 //each itemCode must be unique
 //Don't use special characters in itemCode. There will be consequences (bug).
 
 /**
- * pickedUpItem contains information regarding an item that's been "picked up" by player.
- * Information includes itemName, itemCode, and location (paragraph id)
+ * When player pick up and Item and put it into their inventory,
+ * It'll turn into InventoryItem, which saves the item's info and
+ * where it was picked up (its location - paragraph id)
  */
-export class pickedUpItem {
-    itemName: string;
-    itemCode: string;
-    location: Paragraphs["id"];
-    constructor(n: string, c: string, l: Paragraphs["id"]) {
-        this.itemName = n;
-        this.itemCode = c;
-        this.location = l;
+export class inventoryItem {
+    pickedUpLocation: Array<Paragraphs["id"]> = [];
+    item: Items;
+    constructor(i: Items, p: Paragraphs["id"]) {
+        this.item = i;
+        this.pickedUpLocation.push(p);
     }
 }
