@@ -3,6 +3,10 @@ import { showPronounDialogue } from "../player/pronouns.js"
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { autoLoad, exportSave, exportStorageSave, loadSave, loadSaveCode, newSave } from "./saveScript.js";
 import { restartGame } from "./settings.js";
+import { inventoryItem, Items } from "../model/item.js";
+import { addNewStat, getStat } from "../player/statInfos.js";
+import { showAllStatHTML } from "../conditions/statsFunctions.js";
+import { getParagraph } from "../paragraphs/allParagraphs.js";
 
 ///////////////////Initialize game///////////////////
 window.onload = function () {
@@ -34,6 +38,9 @@ if (button) {
 
 ///////////////////////////////////////////////////
 showPronounDialogue();
+addNewStat('Smart', 10);
+//after a new stat's introduced, run showAllStatHTML
+showAllStatHTML(getStat());
 
 // Add event listener to all Save buttons
 const saveButton = document.querySelectorAll(".save");
@@ -78,3 +85,31 @@ importSaveBtn?.addEventListener(`click`, function () {
 // Add event listener to restart game button
 const restartBtn = document.querySelector(".restartBtn");
 restartBtn?.addEventListener('click', function () { restartGame() });
+
+// let item1: Items = {
+//     itemName: "meow",
+//     description: "cat! It's a cat!",
+//     itemQty: 1,
+//     itemCode: 'meow1',
+// }
+// let m1 = new inventoryItem(item1, 3);
+// let mockInventory : inventoryItem[] = [];
+// function addToInventoryMock(item: Items, pid: number) {
+//     let found = mockInventory.find(element => element.item.itemName = item.itemName);
+//     if (found) {
+//         found.item.itemQty += item.itemQty;
+//         let pidCheck = found.pickedUpLocation.find(location => location = pid);
+//         if (!pidCheck) {
+//             found.pickedUpLocation.push(pid);
+//         }
+//     }
+//     else {
+//         let newItem = new inventoryItem(item, pid)
+//         mockInventory.push(newItem);
+//     }
+// }
+// addToInventoryMock(item1, 0);
+// addToInventoryMock(item1, 3);
+// console.log('Mock inventory: ')
+// console.log(mockInventory)
+

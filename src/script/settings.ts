@@ -10,3 +10,23 @@ export function restartGame() {
     autoSave();
     clearInventoryHTML();
 }
+
+export interface gameDetails{
+    gameVersion: string;
+    IFID: string;
+    name: string;
+    description: string;//game description;
+    author: string;
+    engineVersion: string;
+    engine: string;    
+}
+
+let gameInfo: gameDetails = {
+    gameVersion: `0.0.1`,
+    IFID: ``,
+    name: ``,
+    description: ``,
+    author: ``, //your name
+    engineVersion: `0.0.0.1`,
+    engine: `VellumEngine`
+}

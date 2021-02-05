@@ -42,6 +42,21 @@ export function getItem(item, pid) {
         }
     }
 }
+/**Remove a certain number of item in inventory.
+ * When it reaches 0, remove item from view, but still keep it in inventory array.
+ */
+export function deleteItem(item, quantity) {
+    let toBeDeleted = getInventory().find(element => element.item.itemName == item.itemName && element.item.itemCode == item.itemCode);
+    toBeDeleted.item.itemQty -= quantity;
+    if (toBeDeleted.item.itemQty == 0) {
+        removeItemHTML(item.itemCode);
+    }
+}
+export function removeItemHTML(itemCode) {
+    let itemHTML = document.querySelector(`#pills-${itemCode}-tab`);
+    //not tested yet.
+    itemHTML.remove();
+}
 /**
  * After picking up an item, the item's name and description will be viewable on Inventory's UI
  * @param item

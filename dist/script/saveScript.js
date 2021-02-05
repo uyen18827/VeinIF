@@ -1,4 +1,5 @@
 import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
+import { clearAllStat, getStat, loadStat } from "../player/statInfos.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
@@ -7,7 +8,7 @@ import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns.js";
  * Create a new save and stringify it.
  */
 function save() {
-    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID());
+    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID(), getStat());
     let stringSave = JSON.stringify(save);
     return stringSave;
 }
@@ -16,10 +17,13 @@ function load(retrievedSave) {
     clearInventoryHTML();
     setPlayer(retrievedSave.player);
     loadBulkInventory(retrievedSave.inventory);
+    clearAllStat();
+    loadStat(retrievedSave.stat);
     updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     retrievedSave.inventory.forEach((element) => {
-        appendItemHTML(element.item);
-        console.log(element);
+        if (element.item.itemQty > 0) {
+            appendItemHTML(element.item);
+        }
     });
     showNameDiv(retrievedSave.player.playerName);
     showPronouns(retrievedSave.player.pronouns);

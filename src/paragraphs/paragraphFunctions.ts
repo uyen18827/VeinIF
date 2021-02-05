@@ -1,6 +1,7 @@
+import { checkChoiceCondition } from "../conditions/statsFunctions.js";
 import { getInventory, getItem } from "../inventory/inventory.js";
 import { Items } from "../model/item.js";
-import { Paragraphs } from "../model/paragraph.js";
+import { Paragraphs, singleParagraph } from "../model/paragraph.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { autoSave } from "../script/saveScript.js";
@@ -17,16 +18,24 @@ function showChoices(choices: any, choiceContainer: any) {
             var currentChoice = choices[i];
             var nextid: number = currentChoice.nextid;
             let choice = `<a href="#" 
-            class="choices" id="n${nextid}" >
+            class="choices" id="cid-${currentChoice.id}" >
             ${currentChoice.choiceCont} 
             </a><br>`
+            if (currentChoice.precondition) {
+                console.log(`choice n.${currentChoice.id} is not undefined`);
+                checkChoiceCondition(currentChoice, currentChoice.precondition);
+            }
+            else {
+                console.log(`choice n.${currentChoice.id} has no condition`);
+            }
             choiceContainer.innerHTML += choice;
         }
         for (var i = 0; i < choices.length; i++) {
             let currentChoice = choices[i];
             let nextid: number = currentChoice.nextid;
             let style = choices[i].style;
-            let choiceHTML = choiceContainer.querySelector(`#n${nextid}`);
+            let choiceHTML = choiceContainer.querySelector(`#cid-${currentChoice.id}`);
+            //if passed condition check, add event listener, if not, don't do anything
             choiceHTML.addEventListener('click', function () {
                 updateParagraph(nextid, style);
                 autoSave();
@@ -97,7 +106,8 @@ function showItems(items: Items[], itemContainer: any, pid: number) {
 */
 export function updateParagraph(nextid: number, style?: string) {
     let player = getPlayer();
-    let allParagraphs = getParagraph(player)[nextid];
+    let p = new singleParagraph(getParagraph(player)[nextid]);
+    let nextParagraph = p.paragraph;
     const choiceContainer: HTMLElement | any = document.getElementById("choices");
     const paragraphContainer: HTMLElement | any = document.getElementById("paragraph");
     const itemContainer: HTMLElement | any = document.getElementById("items");
@@ -112,11 +122,11 @@ export function updateParagraph(nextid: number, style?: string) {
     });
     switch (style) {
         case "append":
-            currentParagraph = currentParagraph + " " + allParagraphs.content;
+            currentParagraph = currentParagraph + " " + nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
             choiceContainer.innerHTML = null;
-            choices = allParagraphs.choices;
-            items = allParagraphs.item;
+            choices = nextParagraph.choices;
+            items = nextParagraph.item;
             console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
@@ -128,10 +138,10 @@ export function updateParagraph(nextid: number, style?: string) {
         default:
             paragraphContainer.innerHTML = null;
             choiceContainer.innerHTML = null;
-            currentParagraph = allParagraphs.content;
+            currentParagraph = nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
-            choices = allParagraphs.choices;
-            items = allParagraphs.item;
+            choices = nextParagraph.choices;
+            items = nextParagraph.item;
             console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {

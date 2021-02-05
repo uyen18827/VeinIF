@@ -1,5 +1,5 @@
 import { Items } from "./item";
-import { Stat } from "./player";
+import { Stat } from "./Stat";
 
 export interface Paragraphs {
     id: number;
@@ -14,6 +14,7 @@ export interface Paragraphs {
 }
 
 export interface Choices {
+    id: number;
     choiceCont: string,
     nextid: number;
     precondition?: Precondition;
@@ -33,5 +34,12 @@ const precondition: Precondition = {
         itemName: "key",
         itemQty: 1,
         itemCode: "key"
+    }
+}
+
+export class singleParagraph {
+    paragraph: Paragraphs;
+    constructor(p: Paragraphs) {
+        this.paragraph = p;
     }
 }

@@ -9,4 +9,8 @@ const precondition = {
         itemCode: "key"
     }
 };
-export {};
+export class singleParagraph {
+    constructor(p) {
+        this.paragraph = p;
+    }
+}

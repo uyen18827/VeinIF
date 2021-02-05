@@ -9,3 +9,12 @@ export function restartGame() {
     autoSave();
     clearInventoryHTML();
 }
+let gameInfo = {
+    gameVersion: `0.0.1`,
+    IFID: ``,
+    name: ``,
+    description: ``,
+    author: ``,
+    engineVersion: `0.0.0.1`,
+    engine: `VellumEngine`
+};

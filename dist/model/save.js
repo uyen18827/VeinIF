@@ -1,8 +1,9 @@
 export class Save {
-    constructor(p, i, pid) {
+    constructor(p, i, pid, s) {
         this.player = p;
         this.inventory = i;
         this.currentParagraphId = pid;
+        this.stat = s;
     }
 }
 // let save1 = new Save(getPlayer(), inventory, getParagraph.id)

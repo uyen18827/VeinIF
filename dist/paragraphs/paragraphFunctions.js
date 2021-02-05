@@ -1,4 +1,6 @@
+import { checkChoiceCondition } from "../conditions/statsFunctions.js";
 import { getInventory, getItem } from "../inventory/inventory.js";
+import { singleParagraph } from "../model/paragraph.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { autoSave } from "../script/saveScript.js";
@@ -15,16 +17,24 @@ function showChoices(choices, choiceContainer) {
             var currentChoice = choices[i];
             var nextid = currentChoice.nextid;
             let choice = `<a href="#" 
-            class="choices" id="n${nextid}" >
+            class="choices" id="cid-${currentChoice.id}" >
             ${currentChoice.choiceCont} 
             </a><br>`;
+            if (currentChoice.precondition) {
+                console.log(`choice n.${currentChoice.id} is not undefined`);
+                checkChoiceCondition(currentChoice, currentChoice.precondition);
+            }
+            else {
+                console.log(`choice n.${currentChoice.id} has no condition`);
+            }
             choiceContainer.innerHTML += choice;
         }
         for (var i = 0; i < choices.length; i++) {
             let currentChoice = choices[i];
             let nextid = currentChoice.nextid;
             let style = choices[i].style;
-            let choiceHTML = choiceContainer.querySelector(`#n${nextid}`);
+            let choiceHTML = choiceContainer.querySelector(`#cid-${currentChoice.id}`);
+            //if passed condition check, add event listener, if not, don't do anything
             choiceHTML.addEventListener('click', function () {
                 updateParagraph(nextid, style);
                 autoSave();
@@ -92,7 +102,8 @@ function showItems(items, itemContainer, pid) {
 */
 export function updateParagraph(nextid, style) {
     let player = getPlayer();
-    let allParagraphs = getParagraph(player)[nextid];
+    let p = new singleParagraph(getParagraph(player)[nextid]);
+    let nextParagraph = p.paragraph;
     const choiceContainer = document.getElementById("choices");
     const paragraphContainer = document.getElementById("paragraph");
     const itemContainer = document.getElementById("items");
@@ -107,11 +118,11 @@ export function updateParagraph(nextid, style) {
     });
     switch (style) {
         case "append":
-            currentParagraph = currentParagraph + " " + allParagraphs.content;
+            currentParagraph = currentParagraph + " " + nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
             choiceContainer.innerHTML = null;
-            choices = allParagraphs.choices;
-            items = allParagraphs.item;
+            choices = nextParagraph.choices;
+            items = nextParagraph.item;
             console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
@@ -123,10 +134,10 @@ export function updateParagraph(nextid, style) {
         default:
             paragraphContainer.innerHTML = null;
             choiceContainer.innerHTML = null;
-            currentParagraph = allParagraphs.content;
+            currentParagraph = nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
-            choices = allParagraphs.choices;
-            items = allParagraphs.item;
+            choices = nextParagraph.choices;
+            items = nextParagraph.item;
             console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
