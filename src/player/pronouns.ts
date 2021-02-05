@@ -45,7 +45,6 @@ export function showPronounDialogue() {
             <input type="radio" id="${pronouns[i].subjectPro}" name="pronouns" value="${pronouns[i].Category}">
             <label for="${pronouns[i].subjectPro}">${pronouns[i].Category}</label><br>`
             pronounsContainer.innerHTML += pronounEntry;
-            console.log(pronouns[i]);
         }
         pronounsContainer.addEventListener('click', getPronouns);
     }
