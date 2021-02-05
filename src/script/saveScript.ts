@@ -113,7 +113,6 @@ export function loadSaveCode() {
     let retrievedSave = JSON.parse(loadCode);
     console.log(retrievedSave)
     load(retrievedSave);
-    //TODO: Load inventory items into HTML
     //TODO: verify if save is valid. 
     //fallback: If load is invalid, start new game.
 }
