@@ -8,3 +8,7 @@ export function capitalise(word) {
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
 }
 ////////////////////////////////////////////////////////////////////////////////////
+/**Grey out text */
+export function greyOut(thing) {
+    thing.style.color = "#6A6C6E";
+}
