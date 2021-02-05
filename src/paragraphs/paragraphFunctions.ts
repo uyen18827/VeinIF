@@ -16,11 +16,11 @@ function showChoices(choices: any, choiceContainer: any) {
     if (choices) {
         for (var i = 0; i < choices.length; i++) {
             var currentChoice = choices[i];
-            var nextid: number = currentChoice.nextid;
             let choice = `<a href="#" 
-            class="choices" id="cid-${currentChoice.id}" >
+            class="choices" id="cid${currentChoice.id}" >
             ${currentChoice.choiceCont} 
             </a><br>`
+            choiceContainer.innerHTML += choice;
             if (currentChoice.precondition) {
                 console.log(`choice n.${currentChoice.id} is not undefined`);
                 checkChoiceCondition(currentChoice, currentChoice.precondition);
@@ -28,18 +28,19 @@ function showChoices(choices: any, choiceContainer: any) {
             else {
                 console.log(`choice n.${currentChoice.id} has no condition`);
             }
-            choiceContainer.innerHTML += choice;
         }
         for (var i = 0; i < choices.length; i++) {
             let currentChoice = choices[i];
             let nextid: number = currentChoice.nextid;
             let style = choices[i].style;
-            let choiceHTML = choiceContainer.querySelector(`#cid-${currentChoice.id}`);
-            //if passed condition check, add event listener, if not, don't do anything
-            choiceHTML.addEventListener('click', function () {
-                updateParagraph(nextid, style);
-                autoSave();
-            });
+            let choiceHTML = choiceContainer.querySelector(`#cid${currentChoice.id}`);
+            if (!choiceHTML.classList.contains("choice-blocked")) {
+                choiceHTML.addEventListener('click', function () {
+                    updateParagraph(nextid, style);
+                    autoSave();
+                });
+            }
+            //if doesn't have class choice-blocked, add event listener, if not, don't do anything
         }
     }
 }
@@ -122,33 +123,31 @@ export function updateParagraph(nextid: number, style?: string) {
     });
     switch (style) {
         case "append":
+            setCurrentParagraphID(nextid);
             currentParagraph = currentParagraph + " " + nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
             choiceContainer.innerHTML = null;
             choices = nextParagraph.choices;
             items = nextParagraph.item;
-            console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
                 showItems(items, itemContainer, nextid);
             }
             showPronounDialogue();
-            setCurrentParagraphID(nextid);
             break;
         default:
+            setCurrentParagraphID(nextid);
             paragraphContainer.innerHTML = null;
             choiceContainer.innerHTML = null;
             currentParagraph = nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
             choices = nextParagraph.choices;
             items = nextParagraph.item;
-            console.log(items);
             showChoices(choices, choiceContainer);
             if (items) {
                 showItems(items, itemContainer, nextid);
             }
             showPronounDialogue();
-            setCurrentParagraphID(nextid);
             break;
     }
 }

@@ -5,39 +5,41 @@ import { getInventory } from "../inventory/inventory.js";
 import { Choices, Precondition } from "../model/paragraph.js";
 import { getStat } from "../player/statInfos.js";
 import { Stat } from "../model/Stat";
+import { greyOut } from "../tools/formatting.js";
 //before this, check if condition is present.
 //if there's no condition on a choice, skip this function entirely.
 export function checkChoiceCondition(choice: Choices, condition: Precondition) {
     let item = condition.item;
     let stat = condition.stat
     if (item) {
-        checkInInventory(item.itemName, item.itemQty);
+        checkInInventory(choice.id, item.itemName, item.itemQty);
     }
     if (stat) {
         checkStat(stat.statName, stat.value);
     }
 }
 
-function greyOutChoice(choice: Choices) {
-    let choiceHTML = document.querySelector(`#cid-${choice.id}}`);
-    choiceHTML!.style.color = "#6A6C6E";
-}
-
-
-
-function checkInInventory(itemName: string, itemQty: number) {
+/**
+ * Check in player's inventory if they have the needed item to proceed with a choice.
+ * If not, grey out the choice and class "choice-blocked"
+ * @param choice 
+ * @param itemName : string
+ * @param itemQty 
+ */
+function checkInInventory(choiceId: Choices['id'], itemName: string, itemQty: number) {
     const inInventory = getInventory().find(element => element.item.itemName == itemName &&
         element.item.itemQty == itemQty);
     if (!inInventory) {
         console.log(`Condition: ${itemName} cannot be found in inventory`);
-        console.log(getInventory);
-        // document.querySelector(`#n${}`)
-        //grey out the choice + show the reason 
+        let choiceHTML = document.querySelector(`#cid${choiceId}`);
+        greyOut((<HTMLElement>choiceHTML));
+        choiceHTML!.innerHTML += `[Condition not met: ${itemName} cannot be found in inventory]`;
+        choiceHTML!.classList.add("choice-blocked");
     }
-    else {
-        console.log(`Condition: ${itemName} found in inventory! Proceed`)
-        //let the player click on the choice
-    }
+    // else {
+    //     console.log(`Condition: ${itemName} found in inventory! Proceed`)
+    //     //let the player click on the choice
+    // }
 }
 
 function checkStat(statName: string, value: number) {
