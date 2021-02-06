@@ -2,7 +2,7 @@ import { Paragraphs, Precondition } from "./paragraph.js";
 /**Interface for items that's displayed in a paragraph */
 export interface Items {
     itemName: string,
-    description?: string;
+    description: string;
     itemImg?: string,
     itemQty: number,
     itemCode: string,
