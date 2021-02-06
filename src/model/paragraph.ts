@@ -18,24 +18,30 @@ export interface Choices {
     choiceCont: string,
     nextid: number;
     precondition?: Precondition;
-    style?: string;
+    style?: string; //next paragraph's appearance's style
+    consequence?: Consequence;
+}
+
+export interface Consequence{
+    stat?: Array<Stat>, //add or subtract from stat
+    item?: Array<Items>, //use or add item
 }
 
 export interface Precondition {
-    stat?: Stat,
-    item?: Items,
+    stat?: Array<Stat>,
+    item?: Array<Items>,
 }
-const precondition: Precondition = {
-    stat: {
-        statName: "intellect",
-        value: 1
-    },
-    item: {
-        itemName: "key",
-        itemQty: 1,
-        itemCode: "key"
-    }
-}
+// const precondition: Precondition = {
+//     stat: [{
+//         statName: "intellect",
+//         value: 1
+//     }],
+//     item: [{
+//         itemName: "key",
+//         itemQty: 1,
+//         itemCode: "key"
+//     }]
+// }
 
 export class singleParagraph {
     paragraph: Paragraphs;
