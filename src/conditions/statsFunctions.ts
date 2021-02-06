@@ -4,7 +4,6 @@
 import { getInventory } from "../inventory/inventory.js";
 import { Choices, Precondition } from "../model/paragraph.js";
 import { getStat } from "../player/statInfos.js";
-import { Stat } from "../model/Stat";
 import { greyOut } from "../tools/formatting.js";
 //before this, check if condition is present.
 //if there's no condition on a choice, skip this function entirely.
@@ -12,10 +11,14 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
     let item = condition.item;
     let stat = condition.stat
     if (item) {
-        checkInInventory(choice.id, item.itemName, item.itemQty);
+        item.forEach(item => {
+            checkInInventory(choice.id, item.itemName, item.itemQty);
+        });
     }
     if (stat) {
-        checkStat(stat.statName, stat.value);
+        stat.forEach(stat => {
+            checkStat(stat.statName, stat.value);
+        });
     }
 }
 
@@ -27,13 +30,19 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
  * @param itemQty 
  */
 function checkInInventory(choiceId: Choices['id'], itemName: string, itemQty: number) {
-    const inInventory = getInventory().find(element => element.item.itemName == itemName &&
-        element.item.itemQty == itemQty);
+    const inInventory = getInventory().find(element => element.item.itemName == itemName);
     if (!inInventory) {
-        console.log(`Condition: ${itemName} cannot be found in inventory`);
+        // console.log(`Condition: ${itemName} cannot be found in inventory`);
         let choiceHTML = document.querySelector(`#cid${choiceId}`);
         greyOut((<HTMLElement>choiceHTML));
         choiceHTML!.innerHTML += `[Condition not met: ${itemName} cannot be found in inventory]`;
+        choiceHTML!.classList.add("choice-blocked");
+    }
+    else if (inInventory && inInventory.item.itemQty < itemQty) {
+        // console.log(`Condition: ${itemName} found in inventory, but quantity is not enough`);
+        let choiceHTML = document.querySelector(`#cid${choiceId}`);
+        greyOut((<HTMLElement>choiceHTML));
+        choiceHTML!.innerHTML += `[Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
         choiceHTML!.classList.add("choice-blocked");
     }
     // else {
@@ -42,6 +51,7 @@ function checkInInventory(choiceId: Choices['id'], itemName: string, itemQty: nu
     // }
 }
 
+//TODO: Finish checkStat
 function checkStat(statName: string, value: number) {
     var found = getStat().find(element => element.statName = statName);
     if (found) {
@@ -55,15 +65,3 @@ function checkStat(statName: string, value: number) {
         }
     }
 };
-
-export function appendStatHTML(stat: Stat) {
-    let statContainer = document.querySelector(`.stat`);
-    statContainer!.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
-}
-
-export function showAllStatHTML(stat: Stat[]) {
-    stat.forEach(element => {
-        appendStatHTML(element);
-    });
-}
-

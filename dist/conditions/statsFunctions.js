@@ -9,10 +9,14 @@ export function checkChoiceCondition(choice, condition) {
     let item = condition.item;
     let stat = condition.stat;
     if (item) {
-        checkInInventory(choice.id, item.itemName, item.itemQty);
+        item.forEach(item => {
+            checkInInventory(choice.id, item.itemName, item.itemQty);
+        });
     }
     if (stat) {
-        checkStat(stat.statName, stat.value);
+        stat.forEach(stat => {
+            checkStat(stat.statName, stat.value);
+        });
     }
 }
 /**
@@ -23,13 +27,19 @@ export function checkChoiceCondition(choice, condition) {
  * @param itemQty
  */
 function checkInInventory(choiceId, itemName, itemQty) {
-    const inInventory = getInventory().find(element => element.item.itemName == itemName &&
-        element.item.itemQty == itemQty);
+    const inInventory = getInventory().find(element => element.item.itemName == itemName);
     if (!inInventory) {
-        console.log(`Condition: ${itemName} cannot be found in inventory`);
+        // console.log(`Condition: ${itemName} cannot be found in inventory`);
         let choiceHTML = document.querySelector(`#cid${choiceId}`);
         greyOut(choiceHTML);
         choiceHTML.innerHTML += `[Condition not met: ${itemName} cannot be found in inventory]`;
+        choiceHTML.classList.add("choice-blocked");
+    }
+    else if (inInventory && inInventory.item.itemQty < itemQty) {
+        // console.log(`Condition: ${itemName} found in inventory, but quantity is not enough`);
+        let choiceHTML = document.querySelector(`#cid${choiceId}`);
+        greyOut(choiceHTML);
+        choiceHTML.innerHTML += `[Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
         choiceHTML.classList.add("choice-blocked");
     }
     // else {
@@ -37,6 +47,7 @@ function checkInInventory(choiceId, itemName, itemQty) {
     //     //let the player click on the choice
     // }
 }
+//TODO: Finish checkStat
 function checkStat(statName, value) {
     var found = getStat().find(element => element.statName = statName);
     if (found) {
@@ -51,12 +62,3 @@ function checkStat(statName, value) {
     }
 }
 ;
-export function appendStatHTML(stat) {
-    let statContainer = document.querySelector(`.stat`);
-    statContainer.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
-}
-export function showAllStatHTML(stat) {
-    stat.forEach(element => {
-        appendStatHTML(element);
-    });
-}
