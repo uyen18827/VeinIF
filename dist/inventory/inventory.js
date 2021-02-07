@@ -28,17 +28,29 @@ export function getItem(item, pid) {
         console.log(inventory);
         appendItemHTML(item);
     }
-    else {
+    else if (inInventory && inInventory.item.itemQty == 0) {
         inInventory.item.itemQty += item.itemQty;
         console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
         console.log(inventory);
-        //update item quantity on view
-        let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
-        quantityDiv.textContent = `Quantity: ${inInventory.item.itemQty}`;
-        let pidCheck = inInventory.pickedUpLocation.find(location => location == pid);
-        console.log(pidCheck, pid);
-        if (!pidCheck) {
-            inInventory.pickedUpLocation.push(pid);
+        appendItemHTML(inInventory.item);
+    }
+    else {
+        inInventory.item.itemQty += item.itemQty;
+        //when itemQty = 0, remove it from view.
+        if (inInventory.item.itemQty == 0) {
+            removeItemHTML(inInventory.item.itemCode);
+        }
+        else {
+            console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
+            console.log(inventory);
+            //update item quantity on view
+            let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
+            quantityDiv.textContent = `Quantity: ${inInventory.item.itemQty}`;
+            let pidCheck = inInventory.pickedUpLocation.find(location => location == pid);
+            console.log(pidCheck, pid);
+            if (!pidCheck) {
+                inInventory.pickedUpLocation.push(pid);
+            }
         }
     }
 }
@@ -52,10 +64,14 @@ export function deleteItem(item, quantity) {
         removeItemHTML(item.itemCode);
     }
 }
+/**
+ * Remove item from view.
+ */
 export function removeItemHTML(itemCode) {
     let itemHTML = document.querySelector(`#pills-${itemCode}-tab`);
-    //not tested yet.
+    let itemDescriptionHTML = document.querySelector(`#pills-${itemCode}`);
     itemHTML.remove();
+    itemDescriptionHTML.remove();
 }
 /**
  * After picking up an item, the item's name and description will be viewable on Inventory's UI
@@ -82,6 +98,9 @@ export function appendItemHTML(item) {
     </div>`;
     inventoryTabContent.innerHTML += tabContent;
 }
+/**
+ * Clear all item from Inventory interface
+ */
 export function clearInventoryHTML() {
     let inventoryTab = document.querySelector("#inventory-tab");
     let inventoryTabContent = document.querySelector("#inventory-tabContent");

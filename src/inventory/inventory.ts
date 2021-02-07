@@ -35,8 +35,19 @@ export function getItem(item: Items, pid: Paragraphs["id"]) {
         console.log(inventory);
         appendItemHTML(item);
     }
+    else if (inInventory && inInventory.item.itemQty == 0) {
+        inInventory.item.itemQty += item.itemQty;
+        console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
+        console.log(inventory);
+        appendItemHTML(inInventory.item);
+    }
     else {
         inInventory.item.itemQty += item.itemQty;
+        //when itemQty = 0, remove it from view.
+        if (inInventory.item.itemQty == 0) {
+            removeItemHTML(inInventory.item.itemCode)
+        }
+        else{
         console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
         console.log(inventory);
         //update item quantity on view
@@ -46,6 +57,7 @@ export function getItem(item: Items, pid: Paragraphs["id"]) {
         console.log(pidCheck, pid)
         if (!pidCheck) {
             inInventory.pickedUpLocation.push(pid);
+            }
         }
     }
 }
@@ -61,10 +73,14 @@ export function deleteItem(item: Items, quantity: number) {
     }
 }
 
+/**
+ * Remove item from view.
+ */
 export function removeItemHTML(itemCode: string) {
     let itemHTML = document.querySelector(`#pills-${itemCode}-tab`);
-    //not tested yet.
+    let itemDescriptionHTML = document.querySelector(`#pills-${itemCode}`)
     itemHTML!.remove();
+    itemDescriptionHTML!.remove();
 }
 
 /**
@@ -93,7 +109,9 @@ export function appendItemHTML(item: Items) {
     </div>`
     inventoryTabContent.innerHTML += tabContent;
 }
-
+/**
+ * Clear all item from Inventory interface
+ */
 export function clearInventoryHTML() {
     let inventoryTab = document.querySelector("#inventory-tab")!;
     let inventoryTabContent = document.querySelector("#inventory-tabContent")!;
