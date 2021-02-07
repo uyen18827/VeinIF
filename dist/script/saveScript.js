@@ -1,5 +1,5 @@
 import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
-import { clearAllStat, getStat, loadStat } from "../player/statInfos.js";
+import { clearAllStat, getStat, loadStat, showAllStatHTML } from "../player/statInfos.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
@@ -19,6 +19,7 @@ function load(retrievedSave) {
     loadBulkInventory(retrievedSave.inventory);
     clearAllStat();
     loadStat(retrievedSave.stat);
+    showAllStatHTML(retrievedSave.stat);
     updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
     retrievedSave.inventory.forEach((element) => {
         if (element.item.itemQty > 0) {
