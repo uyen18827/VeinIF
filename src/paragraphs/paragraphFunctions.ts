@@ -1,3 +1,4 @@
+import { applyConsequence } from "../conditions/consequences.js";
 import { checkChoiceCondition } from "../conditions/statsFunctions.js";
 import { getInventory, getItem } from "../inventory/inventory.js";
 import { Items } from "../model/item.js";
@@ -22,11 +23,11 @@ function showChoices(choices: any, choiceContainer: any) {
             </a><br>`
             choiceContainer.innerHTML += choice;
             if (currentChoice.precondition) {
-                console.log(`choice n.${currentChoice.id} is not undefined`);
+                console.log(`choice n.${currentChoice.id} has condition!`);
                 checkChoiceCondition(currentChoice, currentChoice.precondition);
             }
             else {
-                console.log(`choice n.${currentChoice.id} has no condition`);
+                // console.log(`choice n.${currentChoice.id} has no condition`);
             }
         }
         for (var i = 0; i < choices.length; i++) {
@@ -37,10 +38,13 @@ function showChoices(choices: any, choiceContainer: any) {
             if (!choiceHTML.classList.contains("choice-blocked")) {
                 choiceHTML.addEventListener('click', function () {
                     updateParagraph(nextid, style);
+                    if (currentChoice.consequence) {
+                        applyConsequence(currentChoice.consequence);
+                    }
                     autoSave();
                 });
             }
-            //if doesn't have class choice-blocked, add event listener, if not, don't do anything
+            //if element doesn't have class choice-blocked, add event listener, else, don't do anything
         }
     }
 }
