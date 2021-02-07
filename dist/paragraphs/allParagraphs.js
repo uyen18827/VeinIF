@@ -67,19 +67,33 @@ export function getParagraph(player) {
         {
             id: 4,
             name: "surprise",
-            content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA`,
+            content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA<br>
+        You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door.`,
             choices: [
                 {
                     id: 1,
-                    choiceCont: "Let's go back from the beginning", nextid: 0,
+                    choiceCont: "[Use Key] Let's go back from the beginning", nextid: 0,
                     precondition: {
-                        item: { itemName: "key", itemQty: 1, itemCode: "key1", }
+                        item: [
+                            { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
+                            { itemName: 'flowers', itemQty: 6, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
+                        ],
+                    },
+                    consequence: {
+                        item: [{ itemName: "key", description: "A small key. You wonder what it's for.", itemQty: -1, itemCode: "key1", }],
+                        stat: [{ statName: 'Meow', value: 1 }]
                     }
                 },
                 {
                     id: 2,
-                    choiceCont: "Or go on?",
+                    choiceCont: "Or go on? Have this little treat if you plan to go on. (1x key, 1x candied nut)",
                     nextid: 5,
+                    consequence: {
+                        item: [
+                            { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
+                            { itemName: "candied nut", description: "A sweet, sweet treat", itemQty: 1, itemCode: "nut1", },
+                        ]
+                    },
                 }
             ],
             preId: 3

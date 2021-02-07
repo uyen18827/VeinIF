@@ -49,7 +49,7 @@ export function getParagraph(player?: Player) {
         name: "greeting",
         content: `This is the third paragraph. A guy whoops in and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here!" Oh well, this is the end. Bye ${player?.playerName}!`,
         choices: [
-          { id:1, choiceCont: "Last one!", nextid: 3 },
+          { id: 1, choiceCont: "Last one!", nextid: 3 },
         ],
         item: [
           { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
@@ -62,7 +62,7 @@ export function getParagraph(player?: Player) {
         name: "key on ground",
         content: `You found a key lying on the ground. Along with some flowers<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
         choices: [
-          { id:1, choiceCont: "Move along", nextid: 4, style: "append" }
+          { id: 1, choiceCont: "Move along", nextid: 4, style: "append" }
         ],
         item: [
           { itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", },
@@ -73,20 +73,35 @@ export function getParagraph(player?: Player) {
       {
         id: 4,
         name: "surprise",
-        content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA`,
+        content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA<br>
+        You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door.`,
         choices: [
           {
-            id:1,
-            choiceCont: "Let's go back from the beginning", nextid: 0,
+            id: 1,
+            choiceCont: "[Use Key] Let's go back from the beginning", nextid: 0,
             precondition:
             {
-              item: { itemName: "key", itemQty: 1, itemCode: "key1", }
+              item: [
+                { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
+                { itemName: 'flowers', itemQty: 6, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
+              ],
+
+            },
+            consequence: {
+              item: [{ itemName: "key", description: "A small key. You wonder what it's for.", itemQty: -1, itemCode: "key1", }],
+              stat: [{ statName: 'Meow', value: 1 }]
             }
           },
           {
             id: 2,
-            choiceCont: "Or go on?",
+            choiceCont: "Or go on? Have this little treat if you plan to go on. (1x key, 1x candied nut)",
             nextid: 5,
+            consequence: {
+              item: [
+                { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
+                { itemName: "candied nut", description: "A sweet, sweet treat", itemQty: 1, itemCode: "nut1", },
+              ]
+            },
           }
         ],
         preId: 3
@@ -97,7 +112,7 @@ export function getParagraph(player?: Player) {
         name: "oh? you're still here?",
         content: ``,
         choices: [
-          { id:1, choiceCont: "This is truly the end. There's nothing else. Let's just go back", nextid: 0 },
+          { id: 1, choiceCont: "This is truly the end. There's nothing else. Let's just go back", nextid: 0 },
           { id: 2, choiceCont: "Trust me on this one my friend.", nextid: 0 }
         ]
       }
