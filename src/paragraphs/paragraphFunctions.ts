@@ -116,7 +116,7 @@ export function updateParagraph(nextid: number, style?: string) {
     const choiceContainer: HTMLElement | any = document.getElementById("choices");
     const paragraphContainer: HTMLElement | any = document.getElementById("paragraph");
     const itemContainer: HTMLElement | any = document.getElementById("items");
-    let choices;
+    let choices = nextParagraph.choices;
     let items = null;
     itemContainer.innerHTML = null;
     document.addEventListener("keyup", function (e: any) {
@@ -131,7 +131,6 @@ export function updateParagraph(nextid: number, style?: string) {
             currentParagraph = currentParagraph + " " + nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
             choiceContainer.innerHTML = null;
-            choices = nextParagraph.choices;
             items = nextParagraph.item;
             showChoices(choices, choiceContainer);
             if (items) {
@@ -145,7 +144,6 @@ export function updateParagraph(nextid: number, style?: string) {
             choiceContainer.innerHTML = null;
             currentParagraph = nextParagraph.content;
             paragraphContainer.innerHTML = currentParagraph;
-            choices = nextParagraph.choices;
             items = nextParagraph.item;
             showChoices(choices, choiceContainer);
             if (items) {
@@ -155,8 +153,7 @@ export function updateParagraph(nextid: number, style?: string) {
             break;
     }
 }
-//TODO: known problems: when there's two options that redirect the user to the same paragraph,
-//only the first option will work.
+
 let currentPid: number = 0;
 function setCurrentParagraphID(pid: Paragraphs["id"]) {
     currentPid = pid;
