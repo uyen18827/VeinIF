@@ -15,7 +15,7 @@ export function checkChoiceCondition(choice, condition) {
     }
     if (stat) {
         stat.forEach(stat => {
-            checkStat(stat.statName, stat.value);
+            checkStat(choice.id, stat.statName, stat.value);
         });
     }
 }
@@ -48,17 +48,29 @@ function checkInInventory(choiceId, itemName, itemQty) {
     // }
 }
 //TODO: Finish checkStat
-function checkStat(statName, value) {
+function checkStat(choiceId, statName, value) {
     var found = getStat().find(element => element.statName = statName);
+    let choiceHTML = document.querySelector(`#cid${choiceId}`);
     if (found) {
         if (found.value < value) {
             console.log("Condition not met!");
             //grey out the choice + show the reason
+            greyOut(choiceHTML);
+            choiceHTML.innerHTML += `[Condition not met: ${statName} value ${found.value}/${value}]`;
+            choiceHTML.classList.add("choice-blocked");
+            console.log(`${found.value} < ${value}`);
+            //if found is undefined, also grey out. => not implemented yet.
         }
         if (found.value >= value) {
             console.log("Condition met. Proceed.");
             //let the player click on the choice
         }
+    }
+    else {
+        console.log("Condition not met!");
+        choiceHTML.innerHTML += `[Condition not met: player does not have ${statName}]`;
+        greyOut(choiceHTML);
+        choiceHTML.classList.add("choice-blocked");
     }
 }
 ;
