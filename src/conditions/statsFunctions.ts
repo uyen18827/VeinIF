@@ -9,7 +9,7 @@ import { greyOut } from "../tools/formatting.js";
 //if there's no condition on a choice, skip this function entirely.
 export function checkChoiceCondition(choice: Choices, condition: Precondition) {
     let item = condition.item;
-    let stat = condition.stat
+    let stat = condition.stat;
     if (item) {
         item.forEach(item => {
             checkInInventory(choice.id, item.itemName, item.itemQty);
@@ -17,7 +17,7 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
     }
     if (stat) {
         stat.forEach(stat => {
-            checkStat(choice.id,stat.statName, stat.value);
+            checkStat(choice.id, stat.statName, stat.value);
         });
     }
 }
@@ -53,10 +53,10 @@ function checkInInventory(choiceId: Choices['id'], itemName: string, itemQty: nu
 
 //TODO: Finish checkStat
 function checkStat(choiceId: Choices[`id`], statName: string, value: number) {
-    var found = getStat().find(element => element.statName = statName);
+    var found = getStat().find(element => element.statName == statName);
     let choiceHTML = document.querySelector(`#cid${choiceId}`);
     if (found) {
-        if (found.value < value ) {
+        if (found.value < value) {
             console.log("Condition not met!");
             //grey out the choice + show the reason
             greyOut((<HTMLElement>choiceHTML));

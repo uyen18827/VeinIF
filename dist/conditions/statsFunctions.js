@@ -49,7 +49,7 @@ function checkInInventory(choiceId, itemName, itemQty) {
 }
 //TODO: Finish checkStat
 function checkStat(choiceId, statName, value) {
-    var found = getStat().find(element => element.statName = statName);
+    var found = getStat().find(element => element.statName == statName);
     let choiceHTML = document.querySelector(`#cid${choiceId}`);
     if (found) {
         if (found.value < value) {
