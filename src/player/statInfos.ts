@@ -1,10 +1,20 @@
 import { Stat } from "../model/Stat.js";
 
 //Place the initial value of your player's Stat here, if you want to.
-const playerStat: Stat[] = [
-    // { statName: "Intellect", value: 10 },
-    // { statName: "Endurance", value: 4 }
+export let playerStat: Array<Stat> = [
+    { statName: "Intellect", value: 10 },
+    { statName: "Endurance", value: 4 },
+    { statName: 'Athletic', value: 0 }
 ]
+
+export function restoreDefaultStat() {
+    let defaultPlayerStat: Array<Stat> = [
+        { statName: "Intellect", value: 10 },
+        { statName: "Endurance", value: 4 },
+        { statName: 'Athletic', value: 0 }
+    ];
+    loadStat(defaultPlayerStat);
+}
 
 export function getStat() {
     return playerStat;
@@ -24,18 +34,18 @@ export function addNewStat(statName: string, value: number) {
  * Note that the stat must exist before trying to modify it.
 */
 export function modifyStatValue(stat: Stat, value: number) {
-    let _stat = getStat().find(element => element.statName = stat.statName);
+    let _stat = getStat().find(element => element.statName == stat.statName);
     _stat!.value += value;
 }
 
+/** Load Stats from an Array */
 export function loadStat(stat: Stat[]) {
-    stat.forEach(element => {
-        addNewStat(element.statName, element.value);
-    })
+    stat.forEach(element => addNewStat(element.statName, element.value));
 }
 
 export function clearAllStat() {
-    getStat().length = 0
+    getStat().length = 0;
+    return playerStat;
 }
 
 export function deleteStat(statName: Stat["statName"]) {
@@ -44,16 +54,17 @@ export function deleteStat(statName: Stat["statName"]) {
 
 //if stat already exist, add modify value, if not in playerStat, add to it.
 export function handleStats(stat: Stat) {
-    let found = getStat().find(element => element.statName = stat.statName);
+    let found = playerStat.find(element => element.statName == stat.statName);
     if (found) {
+        console.log(`it is found`)
         modifyStatValue(found, stat.value);
         updateStatHTML(found);
-        console.log(`Handled! modified`)
+        console.log(`Handled! modified ${found.value}`);
     }
     if (!found) {
         addNewStat(stat.statName, stat.value);
         appendStatHTML(stat);
-        console.log(`added new stat - Handled!`)
+        console.log(`not found, so added new stat`)
     }
 }
 
