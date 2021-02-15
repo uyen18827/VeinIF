@@ -9,7 +9,7 @@ export class Save {
     currentParagraphId: Paragraphs["id"];
     stat: Stat[];
 
-    constructor(p: Player, i: Array<inventoryItem>, pid: Paragraphs["id"], s: Stat[]) {
+    constructor(p: Player, i: Array<inventoryItem>, pid: Paragraphs["id"], s: Array<Stat>) {
         this.player = p;
         this.inventory = i;
         this.currentParagraphId = pid;
