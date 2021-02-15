@@ -14,13 +14,14 @@ window.onload = function () {
     }
     else {
         updateParagraph(0);
+        showAllStatHTML(getStat());
     }
 }
 // Add event listener to HTML element input with id = "playerName"
 const nameInput = document.querySelector("#playerName");
 if (nameInput) {
     nameInput.addEventListener('keyup', getName);
-}
+};
 
 ////////////////////button!!!!!!!!!!!!/////////////
 const button = document.querySelector("#coolbutton");
@@ -35,7 +36,6 @@ if (button) {
 
 ///////////////////////////////////////////////////
 showPronounDialogue();
-showAllStatHTML(getStat());
 
 // Add event listener to all Save buttons
 const saveButton = document.querySelectorAll(".save");
