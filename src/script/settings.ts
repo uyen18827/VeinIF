@@ -1,7 +1,7 @@
 import { clearInventory, clearInventoryHTML } from "../inventory/inventory.js";
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { resetPlayer } from "../player/playerInfo.js";
-import { clearAllStat, clearStatHTML } from "../player/statInfos.js";
+import { clearAllStat, clearStatHTML, getStat, restoreDefaultStat, showAllStatHTML } from "../player/statInfos.js";
 import { autoSave } from "./saveScript.js";
 
 export function restartGame() {
@@ -11,8 +11,10 @@ export function restartGame() {
     clearInventoryHTML();
     clearAllStat();
     clearStatHTML();
+    restoreDefaultStat();
+    showAllStatHTML(getStat());
     autoSave();
-}
+};
 
 export interface gameDetails{
     gameVersion: string;
