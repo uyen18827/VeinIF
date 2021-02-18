@@ -1,17 +1,17 @@
-import { Stat } from "../model/Stat.js";
+import { Stat, statStyle, statWithStyle } from "../model/Stat.js";
 
 //Place the initial value of your player's Stat here, if you want to.
-export let playerStat: Array<Stat> = [
-    { statName: "Intellect", value: 10 },
-    { statName: "Endurance", value: 4 },
-    { statName: 'Athletic', value: 0 }
+export let playerStat: Array<statWithStyle> = [
+    { statName: "Intellect", value: 10, style: statStyle.show },
+    { statName: "Endurance", value: 4, style: statStyle.show },
+    { statName: 'Athletic', value: 0, style: statStyle.show }
 ]
 
 export function restoreDefaultStat() {
-    let defaultPlayerStat: Array<Stat> = [
-        { statName: "Intellect", value: 10 },
-        { statName: "Endurance", value: 4 },
-        { statName: 'Athletic', value: 0 }
+    let defaultPlayerStat: Array<statWithStyle> = [
+        { statName: "Intellect", value: 10, style: statStyle.show },
+        { statName: "Endurance", value: 4, style: statStyle.show },
+        { statName: 'Athletic', value: 0, style: statStyle.show }
     ];
     loadStat(defaultPlayerStat);
 }
@@ -25,8 +25,8 @@ export function getStat() {
  * @param statName 
  * @param value 
  */
-export function addNewStat(statName: string, value: number) {
-    let newStat = new Stat(statName, value);
+export function addNewStat(statName: string, value: number, style: statStyle) {
+    let newStat = new statWithStyle(statName, value, style);
     getStat().push(newStat);
 }
 
@@ -39,8 +39,8 @@ export function modifyStatValue(stat: Stat, value: number) {
 }
 
 /** Load Stats from an Array */
-export function loadStat(stat: Stat[]) {
-    stat.forEach(element => addNewStat(element.statName, element.value));
+export function loadStat(stat: statWithStyle[]) {
+    stat.forEach(element => addNewStat(element.statName, element.value, element.style));
 }
 
 export function clearAllStat() {
@@ -53,17 +53,31 @@ export function deleteStat(statName: Stat["statName"]) {
 }
 
 //if stat already exist, add modify value, if not in playerStat, add to it.
-export function handleStats(stat: Stat) {
+export function handleStats(stat: statWithStyle) {
     let found = playerStat.find(element => element.statName == stat.statName);
     if (found) {
         console.log(`it is found`)
         modifyStatValue(found, stat.value);
-        updateStatHTML(found);
+        switch (stat.style) {
+            case (stat.style = statStyle.hide):
+                // do nothing :)
+                break;
+            default:
+                updateStatHTML(found);
+                break;
+        }
         console.log(`Handled! modified ${found.value}`);
     }
     if (!found) {
-        addNewStat(stat.statName, stat.value);
-        appendStatHTML(stat);
+        addNewStat(stat.statName, stat.value, stat.style);
+        switch (stat.style) {
+            case (stat.style = statStyle.hide):
+                // do nothing :)
+                break;
+            default:
+                appendStatHTML(stat);
+                break;
+        }
         console.log(`not found, so added new stat`)
     }
 }
@@ -81,9 +95,15 @@ export function clearStatHTML() {
 /** Show all Stat on the UI.
  * Use case: run when load game.
  */
-export function showAllStatHTML(stat: Stat[]) {
+export function showAllStatHTML(stat: statWithStyle[]) {
     stat.forEach(element => {
-        appendStatHTML(element);
+        switch (element.style) {
+            case (element.style = statStyle.show):
+                appendStatHTML(element);
+                break;
+            default:
+                break;
+        }
     });
 }
 

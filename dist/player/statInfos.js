@@ -1,15 +1,15 @@
-import { Stat } from "../model/Stat.js";
+import { statStyle, statWithStyle } from "../model/Stat.js";
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat = [
-    { statName: "Intellect", value: 10 },
-    { statName: "Endurance", value: 4 },
-    { statName: 'Athletic', value: 0 }
+    { statName: "Intellect", value: 10, style: statStyle.show },
+    { statName: "Endurance", value: 4, style: statStyle.show },
+    { statName: 'Athletic', value: 0, style: statStyle.show }
 ];
 export function restoreDefaultStat() {
     let defaultPlayerStat = [
-        { statName: "Intellect", value: 10 },
-        { statName: "Endurance", value: 4 },
-        { statName: 'Athletic', value: 0 }
+        { statName: "Intellect", value: 10, style: statStyle.show },
+        { statName: "Endurance", value: 4, style: statStyle.show },
+        { statName: 'Athletic', value: 0, style: statStyle.show }
     ];
     loadStat(defaultPlayerStat);
 }
@@ -21,8 +21,8 @@ export function getStat() {
  * @param statName
  * @param value
  */
-export function addNewStat(statName, value) {
-    let newStat = new Stat(statName, value);
+export function addNewStat(statName, value, style) {
+    let newStat = new statWithStyle(statName, value, style);
     getStat().push(newStat);
 }
 /** Add or subtract point from a stat
@@ -34,7 +34,7 @@ export function modifyStatValue(stat, value) {
 }
 /** Load Stats from an Array */
 export function loadStat(stat) {
-    stat.forEach(element => addNewStat(element.statName, element.value));
+    stat.forEach(element => addNewStat(element.statName, element.value, element.style));
 }
 export function clearAllStat() {
     getStat().length = 0;
@@ -49,15 +49,27 @@ export function handleStats(stat) {
     if (found) {
         console.log(`it is found`);
         modifyStatValue(found, stat.value);
-        updateStatHTML(found);
-        console.log(found);
+        switch (stat.style) {
+            case (stat.style = statStyle.hide):
+                // do nothing :)
+                break;
+            default:
+                updateStatHTML(found);
+                break;
+        }
         console.log(`Handled! modified ${found.value}`);
     }
     if (!found) {
-        addNewStat(stat.statName, stat.value);
-        appendStatHTML(stat);
-        console.log(`not found, so add new stat`);
-        console.log(`added new stat - Handled!`);
+        addNewStat(stat.statName, stat.value, stat.style);
+        switch (stat.style) {
+            case (stat.style = statStyle.hide):
+                // do nothing :)
+                break;
+            default:
+                appendStatHTML(stat);
+                break;
+        }
+        console.log(`not found, so added new stat`);
     }
 }
 export function appendStatHTML(stat) {
@@ -73,7 +85,13 @@ export function clearStatHTML() {
  */
 export function showAllStatHTML(stat) {
     stat.forEach(element => {
-        appendStatHTML(element);
+        switch (element.style) {
+            case (element.style = statStyle.show):
+                appendStatHTML(element);
+                break;
+            default:
+                break;
+        }
     });
 }
 export function updateStatHTML(stat) {
