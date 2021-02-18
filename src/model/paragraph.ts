@@ -1,5 +1,5 @@
 import { Items } from "./item";
-import { Stat } from "./Stat";
+import { Stat, statWithStyle } from "./Stat";
 
 export interface Paragraphs {
     id: number;
@@ -9,8 +9,6 @@ export interface Paragraphs {
     preId?: number;
     //item picked up during this scene. Optional.
     item?: Array<Items>;
-    //variable will be used 
-    variable?: any;
 }
 
 export interface Choices {
@@ -22,15 +20,31 @@ export interface Choices {
     consequence?: Consequence;
 }
 
+/**
+ * Items or Stat that will be added after a choice is clicked.
+ */
 export interface Consequence{
-    stat?: Array<Stat>, //add or subtract from stat
+    stat?: Array<statWithStyle>, //add or subtract from stat
     item?: Array<Items>, //use or add item
 }
 
+/**
+ * Conditions on which must be passed for a choice to be clickable
+ */
 export interface Precondition {
     stat?: Array<Stat>,
     item?: Array<Items>,
+    type?: type, //type: show, hidden or hideReason
+};
+
+enum type {
+    show = 0,
+    hidden = 1,
+    hideReason = 2,
 }
+//TODO: implement show/hide/hideReason on Precondition. 
+//Currently, precondition shows reason why a choice cannot be clicked by default 
+
 // const precondition: Precondition = {
 //     stat: [{
 //         statName: "intellect",

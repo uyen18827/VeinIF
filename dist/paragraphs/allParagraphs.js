@@ -1,4 +1,5 @@
 import { capitalise } from "../tools/formatting.js";
+import { statStyle } from "../model/Stat.js";
 export function getParagraph(player) {
     let paragraphs = [
         //Array starts at 0
@@ -36,8 +37,7 @@ export function getParagraph(player) {
                     itemCode: "great_sword",
                 },
             ],
-            variable: "valor:1",
-            preId: 0
+            preId: 0,
         },
         {
             id: 2,
@@ -56,7 +56,9 @@ export function getParagraph(player) {
             name: "key on ground",
             content: `You found a key lying on the ground. Along with some flowers<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
             choices: [
-                { id: 1, choiceCont: "Move along", nextid: 4, style: "append" }
+                {
+                    id: 1, choiceCont: "Move along", nextid: 4, style: "append",
+                }
             ],
             item: [
                 { itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", },
@@ -81,8 +83,11 @@ export function getParagraph(player) {
                     },
                     consequence: {
                         item: [{ itemName: "key", description: "A small key. You wonder what it's for.", itemQty: -1, itemCode: "key1", }],
-                        stat: [{ statName: 'Meow', value: 1 }]
-                    }
+                        stat: [
+                            { statName: 'Meow', value: 1, style: statStyle.show },
+                            { statName: `hiddenValue`, value: 1, style: statStyle.hide }
+                        ],
+                    },
                 },
                 {
                     id: 2,
@@ -92,9 +97,9 @@ export function getParagraph(player) {
                         item: [
                             { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
                             { itemName: "candied nut", description: "A sweet, sweet treat", itemQty: 1, itemCode: "nut1", },
-                        ]
+                        ],
                     },
-                }
+                },
             ],
             preId: 3
         },
@@ -103,10 +108,30 @@ export function getParagraph(player) {
             name: "oh? you're still here?",
             content: ``,
             choices: [
-                { id: 1, choiceCont: "This is truly the end. There's nothing else. Let's just go back", nextid: 0 },
-                { id: 2, choiceCont: "Trust me on this one my friend.", nextid: 0 }
-            ]
-        }
+                {
+                    id: 1, choiceCont: "This is truly the end. There's nothing else. Let's just go back", nextid: 0, consequence: {
+                        stat: [{ statName: 'Growl', value: 1, style: statStyle.show }],
+                    }
+                },
+                { id: 2, choiceCont: "Trust me on this one my friend.", nextid: 0 },
+                {
+                    id: 3, choiceCont: "Jump over the ledge?", nextid: 6,
+                    precondition: {
+                        item: [],
+                        stat: [
+                            { statName: `Athletic`, value: 10 },
+                        ],
+                    },
+                },
+            ],
+        },
+        {
+            id: 6,
+            content: `You leaped across the ledge! And landed successfully`,
+            choices: [
+                { id: 1, choiceCont: `Weeee!`, nextid: 0 },
+            ],
+        },
     ];
     return paragraphs;
 }
