@@ -36,6 +36,15 @@ export function getParagraph(player) {
                     description: "An old, rusty great sword you found on the ground.",
                     itemCode: "great_sword",
                 },
+                {
+                    itemName: 'very small sword',
+                    itemQty: 1,
+                    description: "A small small sword",
+                    itemCode: "smol_sword",
+                    precondition: {
+                        stat: [{ statName: 'Meow', value: 1 }],
+                    }
+                },
             ],
             preId: 0,
         },
@@ -70,11 +79,11 @@ export function getParagraph(player) {
             id: 4,
             name: "surprise",
             content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA<br>
-        You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door.`,
+        You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door. You must carry 6 flowers to get through the door.`,
             choices: [
                 {
                     id: 1,
-                    choiceCont: "[Use Key] Let's go back from the beginning", nextid: 0,
+                    choiceCont: "[Use Key] [Hold the flowers] Let's go back from the beginning", nextid: 0,
                     precondition: {
                         item: [
                             { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
