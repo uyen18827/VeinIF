@@ -7,6 +7,7 @@ import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { autoSave } from "../script/saveScript.js";
 import { getParagraph } from "./allParagraphs.js";
+import { checkItemCondition } from "../conditions/itemCondition.js";
 var currentParagraph: string | undefined;
 /**
  * Show available choices in a paragraph
@@ -65,11 +66,17 @@ function showItems(items: Items[], itemContainer: any, pid: number) {
             else { //not found at this location
                 let item = `<a href="#" class="items item-new-location" id="${currentItem.itemCode}">You found ×${currentItem.itemQty} ${currentItem.itemName}</a><br>`;
                 itemContainer.innerHTML += item;
+                if (currentItem.precondition) {
+                    checkItemCondition(currentItem, currentItem.precondition)
+                }
             }
         }
         else { //entirely new item name, entirely new location
             let item = `<a href="#" class="items" id="${currentItem.itemCode}">You found ×${currentItem.itemQty} ${currentItem.itemName}</a><br>`;
             itemContainer.innerHTML += item;
+            if (currentItem.precondition) {
+                checkItemCondition(currentItem, currentItem.precondition)
+            }
         }
     }
     //add Event listener
@@ -79,6 +86,7 @@ function showItems(items: Items[], itemContainer: any, pid: number) {
         let pickedUp = itemHTML.classList.contains(`picked`);
         let newLocation = itemHTML.classList.contains(`item-new-location`);
         //if item has class item-new-location, push new location and add to quantity
+        let itemBlocked = itemHTML?.classList.contains("item-blocked");
         if (newLocation) {
             itemHTML.addEventListener("click", function () {
                 getItem(currentItem, getCurrentParagraphID());
@@ -87,6 +95,9 @@ function showItems(items: Items[], itemContainer: any, pid: number) {
                 itemHTML.style.color = "#6A6C6E";
                 autoSave();
             }, { once: true });
+        }
+        else if (itemBlocked) {
+            //do nothing :) 
         }
         else if (pickedUp) {
             itemHTML.style.color = "#6A6C6E";
