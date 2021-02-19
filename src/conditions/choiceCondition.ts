@@ -2,9 +2,11 @@
 //For example, the choice "Climb the tree [Athletic 10]" needs Athletic = 10
 
 import { getInventory } from "../inventory/inventory.js";
+import { Items } from "../model/item.js";
 import { Choices, Precondition } from "../model/paragraph.js";
 import { getStat } from "../player/statInfos.js";
 import { greyOut } from "../tools/formatting.js";
+
 //before this, check if condition is present.
 //if there's no condition on a choice, skip this function entirely.
 export function checkChoiceCondition(choice: Choices, condition: Precondition) {

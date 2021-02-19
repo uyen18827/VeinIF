@@ -1,5 +1,5 @@
 import { applyConsequence } from "../conditions/consequences.js";
-import { checkChoiceCondition } from "../conditions/statsFunctions.js";
+import { checkChoiceCondition } from "../conditions/choiceCondition.js";
 import { getInventory, getItem } from "../inventory/inventory.js";
 import { singleParagraph } from "../model/paragraph.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
