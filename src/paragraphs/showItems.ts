@@ -2,7 +2,7 @@ import { getInventory, getItem } from "../inventory/inventory.js";
 import { Items } from "../model/item.js";
 import { autoSave } from "../script/saveScript.js";
 import { checkItemCondition } from "../conditions/itemCondition.js";
-import { getCurrentParagraphID } from "./paragraphFunctions";
+import { getCurrentParagraphID } from "./paragraphFunctions.js";
 
 export function showItems(items: Items[], itemContainer: any, pid: number) {
     //these are kinda ugly but oh my god did it run :( Probably should refactor some other time

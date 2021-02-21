@@ -2,8 +2,8 @@ import { singleParagraph } from "../model/paragraph.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
 import { getParagraph } from "./allParagraphs.js";
-import { showChoices } from "./showChoices";
-import { showItems } from "./showItems";
+import { showChoices } from "./showChoices.js";
+import { showItems } from "./showItems.js";
 var currentParagraph;
 /**Get nextid, then show the paragraph with that id.
   * @param {number} nextid next paragraph's id.

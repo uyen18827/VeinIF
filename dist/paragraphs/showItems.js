@@ -1,7 +1,7 @@
 import { getInventory, getItem } from "../inventory/inventory.js";
 import { autoSave } from "../script/saveScript.js";
 import { checkItemCondition } from "../conditions/itemCondition.js";
-import { getCurrentParagraphID } from "./paragraphFunctions";
+import { getCurrentParagraphID } from "./paragraphFunctions.js";
 export function showItems(items, itemContainer, pid) {
     //these are kinda ugly but oh my god did it run :( Probably should refactor some other time
     for (var i = 0; i < items.length; i++) {
