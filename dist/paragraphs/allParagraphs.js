@@ -126,7 +126,9 @@ export function getParagraph(player) {
                 {
                     id: 3, choiceCont: "Jump over the ledge?", nextid: 6,
                     precondition: {
-                        item: [],
+                        item: [
+                            { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
+                        ],
                         stat: [
                             { statName: `Athletic`, value: 10 },
                         ],
