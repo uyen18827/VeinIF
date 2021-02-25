@@ -29,16 +29,16 @@ export function showChoices(choices, choiceContainer) {
             let nextid = currentChoice.nextid;
             let style = choices[i].style;
             let choiceHTML = choiceContainer.querySelector(`#cid${currentChoice.id}`);
+            //if element doesn't have class choice-blocked, add event listener, else, don't do anything
             if (!choiceHTML.classList.contains("choice-blocked")) {
                 choiceHTML.addEventListener('click', function () {
-                    updateParagraph(nextid, style);
                     if (currentChoice.consequence) {
                         applyConsequence(currentChoice.consequence);
                     }
+                    updateParagraph(nextid, style);
                     autoSave();
                 });
             }
-            //if element doesn't have class choice-blocked, add event listener, else, don't do anything
         }
     }
 }
