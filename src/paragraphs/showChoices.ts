@@ -14,7 +14,7 @@ export function showChoices(choices: any, choiceContainer: any) {
             var currentChoice = choices[i];
             let choice = `<a href="#" 
             class="choices" id="cid${currentChoice.id}" >
-            ${currentChoice.choiceCont} 
+            ${currentChoice.content} 
             </a><br>`;
             choiceContainer.innerHTML += choice;
             if (currentChoice.precondition) {

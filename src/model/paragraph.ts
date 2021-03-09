@@ -13,7 +13,7 @@ export interface Paragraphs {
 
 export interface Choices {
     id: number;
-    choiceCont: string,
+    content: string,
     nextid: number;
     precondition?: Precondition;
     style?: string; //next paragraph's appearance's style
@@ -34,14 +34,13 @@ export interface Consequence{
 export interface Precondition {
     stat?: Array<Stat>,
     item?: Array<Items>,
-    type?: type, //type: show, hidden or hideReason
 };
 
-enum type {
-    show = 0,
-    hidden = 1,
-    hideReason = 2,
-}
+export enum conStyle {
+    show = 0, //show both the choice and the condition (met/not met)
+    hidden = 1, //hide the entire choice if the condition is not met
+    hideReason = 2, //hide the reason
+};
 //TODO: implement show/hide/hideReason on Precondition. 
 //Currently, precondition shows reason why a choice cannot be clicked by default 
 

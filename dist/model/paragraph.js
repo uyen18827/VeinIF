@@ -1,10 +1,11 @@
 ;
-var type;
-(function (type) {
-    type[type["show"] = 0] = "show";
-    type[type["hidden"] = 1] = "hidden";
-    type[type["hideReason"] = 2] = "hideReason";
-})(type || (type = {}));
+export var conStyle;
+(function (conStyle) {
+    conStyle[conStyle["show"] = 0] = "show";
+    conStyle[conStyle["hidden"] = 1] = "hidden";
+    conStyle[conStyle["hideReason"] = 2] = "hideReason";
+})(conStyle || (conStyle = {}));
+;
 //TODO: implement show/hide/hideReason on Precondition. 
 //Currently, precondition shows reason why a choice cannot be clicked by default 
 // const precondition: Precondition = {
