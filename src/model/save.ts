@@ -8,15 +8,16 @@ export class Save {
     inventory: Array<inventoryItem>
     currentParagraphId: Paragraphs["id"];
     stat: Stat[];
-
+    date: string;
     constructor(p: Player, i: Array<inventoryItem>, pid: Paragraphs["id"], s: Array<Stat>) {
         this.player = p;
         this.inventory = i;
         this.currentParagraphId = pid;
         this.stat = s;
+        this.date = new Date().toLocaleString();
     }
 }
 
 // let save1 = new Save(getPlayer(), inventory, getParagraph.id)
 // new save -> stringify save -> push into local storage
-// get from local storage -> json parse -> put data back
+// load: get from local storage or save string -> json parse -> put data back

@@ -1,5 +1,5 @@
 import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
-import { clearAllStat, getStat, loadStat, showAllStatHTML } from "../player/statInfos.js";
+import { clearAllStat, clearStatHTML, getStat, loadStat, showAllStatHTML } from "../player/statInfos.js";
 import { Save } from "../model/save.js";
 import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
@@ -18,6 +18,7 @@ function load(retrievedSave) {
     setPlayer(retrievedSave.player);
     loadBulkInventory(retrievedSave.inventory);
     clearAllStat();
+    clearStatHTML();
     loadStat(retrievedSave.stat);
     showAllStatHTML(retrievedSave.stat);
     updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
@@ -96,15 +97,17 @@ export function exportSave() {
  * Decode the encoded save string and load game.
  */
 export function loadSaveCode() {
-    let loadMessage = document.querySelector(`#exportMessage`);
-    // loadMessage!.innerHTML = '';
-    // loadMessage!.innerHTML = `Please paste your save file code in here. `
     let loadCode = document.querySelector("#saveOutput").value;
     loadCode = atob(loadCode);
     console.log(loadCode);
     let retrievedSave = JSON.parse(loadCode);
     console.log(retrievedSave);
     load(retrievedSave);
+    let loadMessage = document.querySelector(`#exportMessage`);
+    loadMessage.innerHTML += `<div class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
+        <strong> Load Success! </strong> Loaded save from ${retrievedSave.date}.
+            <button type = "button" class="btn-close" data - bs - dismiss="alert" aria - label="Close"> </button>
+                </div>`;
     //TODO: verify if save is valid. 
     //fallback: If load is invalid, start new game.
 }
