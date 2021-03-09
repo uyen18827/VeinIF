@@ -1,7 +1,7 @@
 import { getName } from "../player/playerInfo.js"
 import { showPronounDialogue } from "../player/pronouns.js"
 import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { autoLoad, exportSave, exportStorageSave, loadSave, loadSaveCode, newSave } from "./saveScript.js";
+import { autoLoad, exportSave, exportStorageSave, getSaveDesc, loadSave, loadSaveCode, newSave } from "./saveScript.js";
 import { restartGame } from "./settings.js";
 import { getStat, showAllStatHTML } from "../player/statInfos.js";
 
@@ -80,3 +80,8 @@ importSaveBtn?.addEventListener(`click`, function () {
 // Add event listener to restart game button
 const restartBtn = document.querySelector(".restartBtn");
 restartBtn?.addEventListener('click', function () { restartGame() });
+
+// Load save Description, from slot 1 to 3
+for (let i = 1; i < 4; i++){
+    getSaveDesc(`slot-${i}`);
+}

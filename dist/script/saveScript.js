@@ -51,6 +51,7 @@ export function newSave(saveSlot) {
     if (typeof (Storage) !== "undefined") {
         console.log(`LocalStorage is supported! Saved file to ${saveSlot}`);
         localStorage.setItem(saveSlot, save());
+        getSaveDesc(saveSlot);
     }
     else {
         console.log("LocalStorage is not supported in this browser! Please export the save code instead.");
@@ -110,4 +111,10 @@ export function loadSaveCode() {
                 </div>`;
     //TODO: verify if save is valid. 
     //fallback: If load is invalid, start new game.
+}
+export function getSaveDesc(saveSlot) {
+    let retrievedSave = JSON.parse(localStorage.getItem(saveSlot));
+    let description = retrievedSave.date;
+    let descContainer = document.querySelector(`#saveDesc-${saveSlot}`);
+    descContainer.innerHTML = description;
 }
