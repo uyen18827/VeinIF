@@ -11,11 +11,19 @@ export const player: Player = {
         possAdj: "", //possessive adjective
         possessivePro: "", //possessive pronoun
         reflex: "", //reflexive pronoun
-        is: "", //he's, she's, they're
+        is: "", //he is, she is, they are
     },
 }
 export function getPlayer() {
     return player;
+}
+
+/**
+ * Get pronouns set by the player.
+ * @returns player's pronouns
+ */
+export function getPlayerPronouns() {
+    return getPlayer().pronouns;
 }
 
 export function setPlayer(newPlayer: Player) {
@@ -28,6 +36,9 @@ export function setName(inputName: string) {
     player.playerName = inputName;
 }
 
+/**
+ * Get player's name from HTML input element id = 'playerName'
+ */
 export function getName() {
     var playerName = (document.getElementById("playerName") as HTMLInputElement).value;
     console.log(`Player Name is: ${playerName}`);
@@ -61,7 +72,7 @@ export function resetPlayer() {
             possAdj: "", //possessive adjective
             possessivePro: "", //possessive pronoun
             reflex: "", //reflexive pronoun
-            is: "", //he's, she's, they're
+            is: "", //he is, she is, they are
         },
     }
     setPlayer(defaultPlayer);

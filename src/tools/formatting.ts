@@ -1,3 +1,4 @@
+import { getPlayerPronouns } from "../player/playerInfo.js";
 /////////////////////////////Formatting tools////////////////////////////////////////
 /**
  *Capitalise the first letter in a string.
@@ -10,4 +11,20 @@ export function capitalise(word?: string) {
 /**Grey out text */
 export function greyOut(thing: HTMLElement) {
     thing.style.color = "#6A6C6E"
+}
+////////////////////////Grammar tools//////////////////////////////////////////
+/**
+ * Specify the verb form that goes with a set of pronouns.
+ * Ex: (have) She has a pen / They have a pen
+ * @param form verb form that goes with 'she/he'
+ * @param original base verb, usually goes with 'they/you/we'
+ * @returns form or original, depends on the player's selected pronouns.
+ */
+export function verbForm(form: string, original: string) {
+    let pronoun = getPlayerPronouns();
+    if (pronoun.subjectPro == "they") {
+        return original;
+    }
+    else
+        return form;
 }
