@@ -14,6 +14,6 @@ export interface Pronouns {
     possAdj: string; //possessive adjective
     possessivePro: string; //possessive pronoun
     reflex: string; //reflexive pronoun
-    is: string; //he's, she's, they're
+    is: string; //he is, she is, they are
 }
 

@@ -9,9 +9,9 @@ export const pronouns: Pronouns[] = [
         subjectPro: "he",
         objectPro: "him",
         possAdj: "his",
-        is: "he's",
         possessivePro: "his",
-        reflex: "himself"
+        reflex: "himself",
+        is: "he is",
     },
     {
         Category: "She/Her",
@@ -20,16 +20,16 @@ export const pronouns: Pronouns[] = [
         possAdj: "her",
         possessivePro: "hers",
         reflex: "herself",
-        is: "she's",
+        is: "she is",
     },
     {
         Category: "They/Them",
         subjectPro: "they",
         objectPro: "them",
         possAdj: "their",
-        is: "they're",
         possessivePro: "theirs",
-        reflex: "themselves"
+        reflex: "themselves",
+        is: "they are",
     }
 ];
 /**
