@@ -43,20 +43,23 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-8 col-sm-12">
-                <h1>Demo</h1>
-                <div id="paragraph">
-                </div>
-                <div id="choices"></div>
-                <div id="items"></div>
-                <!-- <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName"> -->
-                <!-- <p class="yourName"></p> -->
-                <!-- <div id="pronouns">
-                </div> -->
-                <!-- <button id="coolbutton">BUTTON!</button> // a button that logs "thing" into the console-->
+                <header>
+                    <h1>Demo</h1>
+                </header>
+                <main>
+                    <div id="paragraph"></div>
+                    <div id="choices"></div>
+                    <div id="items"></div>
+                </main>
             </div>
-<!-- height:500px -->
+            <!-- <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName"> -->
+            <!-- <p class="yourName"></p> -->
+            <!-- <div id="pronouns">
+                            </div> -->
+            <!-- <button id="coolbutton">BUTTON!</button> // a button that logs "thing" into the console-->
+
+            <!-- height:500px -->
             <div class="col-lg-2">
                 <div class="card" style="width: 100%; ">
                     <div class="card-body">
@@ -82,8 +85,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Player</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Inventory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Quest Log</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#saveModal"><i
@@ -173,6 +188,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <small>Day/Night Mode</small><br>
+                    <div class="row">
+                        <div class="col-7">
+                            Toggle Day or Night mode.
+                        </div>
+                        <div class="col-5" style="text-align: center">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Day</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Night</label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                     <small>Restart</small><br>
                     <div class="row">
                         <div class="col-7">
