@@ -1,76 +1,93 @@
 //Check if player's stat meet the need to proceed.
 //For example, the choice "Climb the tree [Athletic 10]" needs Athletic = 10
 import { getInventory } from "../inventory/inventory.js";
-import { getStat } from "../player/statInfos.js";
 import { greyOut } from "../tools/formatting.js";
-//before this, check if condition is present.
+import { checkStat } from "./checkStat.js";
+//before this, check if choice has precondition.
 //if there's no condition on a choice, skip this function entirely.
+/**
+ * Check all precondition of a single choice.
+ * @param choice
+ * @param condition
+ */
 export function checkChoiceCondition(choice, condition) {
     let item = condition.item;
     let stat = condition.stat;
+    let a, b;
     if (item) {
         item.forEach(item => {
-            checkInInventory(choice.id, item.itemName, item.itemQty);
+            let temp = checkInInventory(choice.id, item.itemName, item.itemQty);
+            if (temp == checkResult.failed) {
+                a = temp;
+            }
         });
     }
     if (stat) {
         stat.forEach(stat => {
-            checkStat(choice.id, stat.statName, stat.value);
+            let temp = checkStat(`cid${choice.id}`, stat.statName, stat.value);
+            if (temp == checkResult.failed) {
+                b = temp;
+            }
         });
     }
+    if (a == checkResult.failed || b == checkResult.failed) {
+        let choiceHTML = document.querySelector(`#cid${choice.id}`);
+        greyOut(choiceHTML);
+        choiceHTML.classList.add("choice-blocked");
+        console.log(`${choice.id} is blocked`);
+    }
 }
+/**Show/hide/ */
+// function handleConditionHTML(choiceId: Choices['id'], message: string, style: conStyle | undefined) {
+//     switch (style) {
+//         case (0): //show    
+//             let choiceHTML = document.querySelector(`#cid${choiceId}`);
+//             // greyOut((<HTMLElement>choiceHTML));
+//             choiceHTML!.innerHTML += message;
+//             // choiceHTML!.classList.add("choice-blocked");
+//             break;
+//         case (1): //hidden - hide the entire choice
+//             choiceHTML = document.querySelector(`#cid${choiceId}`);
+//             choiceHTML!.innerHTML = ``
+//             break;
+//         case (2): //hide reason
+//             // choiceHTML = document.querySelector(`#cid${choiceId}`);
+//             // greyOut((<HTMLElement>choiceHTML));
+//             // choiceHTML!.classList.add("choice-blocked");
+//             break;
+//         default: //do nothing, leave it alone.
+//             break;
+//     }
+// }
+export var checkResult;
+(function (checkResult) {
+    checkResult[checkResult["passed"] = 0] = "passed";
+    checkResult[checkResult["failed"] = 1] = "failed";
+})(checkResult || (checkResult = {}));
 /**
- * Check in player's inventory if they have the needed item to proceed with a choice.
- * If not, grey out the choice and class "choice-blocked"
- * @param choice
- * @param itemName : string
+ * Check if required item is in player's inventory
+ * @param choiceId
+ * @param itemName
  * @param itemQty
+ * @returns checkResult passed or failed
  */
 function checkInInventory(choiceId, itemName, itemQty) {
     const inInventory = getInventory().find(element => element.item.itemName == itemName);
+    let choiceHTML = document.querySelector(`#cid${choiceId}`);
     if (!inInventory) {
         // console.log(`Condition: ${itemName} cannot be found in inventory`);
-        let choiceHTML = document.querySelector(`#cid${choiceId}`);
-        greyOut(choiceHTML);
         choiceHTML.innerHTML += `[Condition not met: ${itemName} cannot be found in inventory]`;
-        choiceHTML.classList.add("choice-blocked");
+        console.log(`cannot find ${itemName} in inventory`);
+        return checkResult.failed;
     }
     else if (inInventory && inInventory.item.itemQty < itemQty) {
         // console.log(`Condition: ${itemName} found in inventory, but quantity is not enough`);
-        let choiceHTML = document.querySelector(`#cid${choiceId}`);
-        greyOut(choiceHTML);
         choiceHTML.innerHTML += `[Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
-        choiceHTML.classList.add("choice-blocked");
-    }
-    // else {
-    //     console.log(`Condition: ${itemName} found in inventory! Proceed`)
-    //     //let the player click on the choice
-    // }
-}
-//TODO: Finish checkStat
-function checkStat(choiceId, statName, value) {
-    var found = getStat().find(element => element.statName == statName);
-    let choiceHTML = document.querySelector(`#cid${choiceId}`);
-    if (found) {
-        if (found.value < value) {
-            console.log("Condition not met!");
-            //grey out the choice + show the reason
-            greyOut(choiceHTML);
-            choiceHTML.innerHTML += `[Condition not met: ${statName} value ${found.value}/${value}]`;
-            choiceHTML.classList.add("choice-blocked");
-            console.log(`${found.value} < ${value}`);
-            //if found is undefined, also grey out. => not implemented yet.
-        }
-        if (found.value >= value) {
-            console.log("Condition met. Proceed.");
-            //let the player click on the choice
-        }
+        return checkResult.failed;
     }
     else {
-        console.log("Condition not met!");
-        choiceHTML.innerHTML += `[Condition not met: player does not have ${statName}]`;
-        greyOut(choiceHTML);
-        choiceHTML.classList.add("choice-blocked");
+        console.log(`Condition: ${itemName} found in inventory! Proceed`);
+        //let the player click on the choice
+        return checkResult.passed;
     }
 }
-;

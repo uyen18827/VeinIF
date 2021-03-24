@@ -1,60 +1,45 @@
 import { getInventory } from "../inventory/inventory.js";
-import { getStat } from "../player/statInfos.js";
 import { greyOut } from "../tools/formatting.js";
+import { checkStat } from "./checkStat.js";
+import { checkResult } from "./choiceCondition.js";
 export function checkItemCondition(item, condition) {
     let preItem = condition.item;
     let stat = condition.stat;
+    let a, b;
     if (preItem) {
-        preItem.forEach(item => {
-            checkPreItem(item.itemCode, item.itemQty);
-            console.log(`found preItem precondition`);
+        preItem.forEach(requiredItem => {
+            let temp = checkPreItem(requiredItem.itemCode, requiredItem.itemQty);
+            if (temp == checkResult.failed) {
+                a = temp;
+            }
         });
     }
     if (stat) {
         stat.forEach(stat => {
-            console.log(`found stat precondition`);
-            checkStat(item.itemCode, stat.statName, stat.value);
+            let temp = checkStat(item.itemCode, stat.statName, stat.value);
+            if (temp == checkResult.failed) {
+                b = temp;
+            }
         });
     }
-}
-function checkStat(itemCode, statName, value) {
-    var found = getStat().find(element => element.statName == statName);
-    let itemHTML = document.querySelector(`#${itemCode}`);
-    if (found) {
-        if (found.value < value) {
-            console.log("Condition not met!");
-            //grey out the choice + show the reason
-            greyOut(itemHTML);
-            itemHTML.innerHTML += `[Condition not met: ${statName} value ${found.value}/${value}]`;
-            itemHTML.classList.add("item-blocked");
-            console.log(`${found.value} < ${value}`);
-            //if found is undefined, also grey out. => not implemented yet.
-        }
-        if (found.value >= value) {
-            console.log("Condition met. Proceed.");
-            //let the player click on the choice
-        }
-    }
-    else {
-        console.log("Condition not met!");
-        itemHTML.innerHTML += ` [Condition not met: player does not have ${statName}]`;
+    if (a == checkResult.failed || b == checkResult.failed) {
+        let itemHTML = document.querySelector(`#${item.itemCode}`);
         greyOut(itemHTML);
         itemHTML.classList.add("item-blocked");
+        console.log(`${item.itemCode} is blocked`);
     }
 }
 function checkPreItem(itemCode, itemQty) {
     const inInventory = getInventory().find(element => element.item.itemCode == itemCode);
     let itemHTML = document.querySelector(`#${itemCode}`);
-    greyOut(itemHTML);
     if (!inInventory) {
         // console.log(`Condition: ${itemName} cannot be found in inventory`);
         itemHTML.innerHTML += `[Condition not met: ${itemCode} cannot be found in inventory]`;
-        itemHTML.classList.add("choice-blocked");
+        return checkResult.failed;
     }
     else if (inInventory && inInventory.item.itemQty < itemQty) {
         // console.log(`Condition: ${itemName} found in inventory, but quantity is not enough`);
-        greyOut(itemHTML);
         itemHTML.innerHTML += `[Condition not met: ${itemCode} quantity ${inInventory.item.itemQty}/${itemQty}]`;
-        itemHTML.classList.add("choice-blocked");
+        return checkResult.failed;
     }
 }
