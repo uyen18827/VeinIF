@@ -12,3 +12,4 @@ export class inventoryItem {
         this.pickedUpLocation.push(p);
     }
 }
+// type itemCondition = Omit<Items, 'description'>

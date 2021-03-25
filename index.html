@@ -19,29 +19,6 @@
             <noscript>This webpage needs JavaScript to function properly. Please enable JavaScript in your
                 browser</noscript>
             <div class="col-lg-2">
-                <div class="card" style="width: 100%;">
-                    <div class="card-body">
-                        <h5 class="card-title">Player Info</h5>
-                        <h6 class="card-subtitle mb-2 text-muted ">Name:
-                            <div class="yourName d-inline"></div>
-                        </h6>
-                        <h6 class="card-subtitle mb-2 text-muted playerPronouns">Pronouns: </h6>
-                        <h6 class="card-subtitle mb-2">Stats: </h6>
-                        <div class="stat">
-                        </div>
-
-                        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p> -->
-                        <!-- <ul class="nav nav-pills mb-3" id="inventory-tab" role="tablist"> -->
-                        <!-- </ul> -->
-
-                        <!-- <div class="tab-content" id="inventory-tabContent"> -->
-                        <!-- </div> -->
-
-                        <!-- <a href="#" class="card-link">Card link</a>
-                      <a href="#" class="card-link">Another link</a> -->
-                    </div>
-                </div>
             </div>
             <div class="col-lg-8 col-sm-12">
                 <header>
@@ -61,16 +38,7 @@
 
             <!-- height:500px -->
             <div class="col-lg-2">
-                <div class="card" style="width: 100%; ">
-                    <div class="card-body">
-                        <h5 class="card-title">Inventory</h5>
-                            <!-- <small><p class="card-text">Such empties... You own nothing</p></small>  -->
-                            <ul class="nav nav-pills mb-3 " id="inventory-tab" role="tablist" style="max-height: 275;">
-                            </ul>
-                        <div class="tab-content" id="inventory-tabContent">
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -85,15 +53,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#playerModal" href="#">
                             Player</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#inventoryModal" href="#">
                             Inventory</a>
                     </li>
                     <li class="nav-item">
@@ -172,7 +137,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
         </div>
@@ -233,6 +197,58 @@
         </div>
     </div>
     <!-- ./Setting modal -->
+
+    <!-- Player modal --> 
+    <div class="modal fade" id="playerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Player Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="card-subtitle mb-2 text-muted ">Name:
+                        <div class="yourName d-inline"></div>
+                    </h6>
+                    <h6 class="card-subtitle mb-2 text-muted playerPronouns">Pronouns: </h6>
+                    <h6 class="card-subtitle mb-2">Stats: </h6>
+                    <div class="stat">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./Player modal -->
+
+    <!-- Inventory modal -->
+    <div class="modal fade" id="inventoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Inventory</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <!-- <small><p class="card-text">Such empties... You own nothing</p></small>  -->
+                        <ul class="nav nav-pills mb-3 " id="inventory-tab" role="tablist" style="max-height: 275;">
+                        </ul>
+                        <div class="tab-content" id="inventory-tabContent">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./Inventory modal -->
     <script src="dist/script/index.js" type="module"></script>
 </body>
 
