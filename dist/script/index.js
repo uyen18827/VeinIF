@@ -71,5 +71,7 @@ const restartBtn = document.querySelector(".restartBtn");
 restartBtn?.addEventListener('click', function () { restartGame(); });
 // Load save Description, from slot 1 to 3
 for (let i = 1; i < 4; i++) {
-    getSaveDesc(`slot-${i}`);
+    if (localStorage.getItem(`slot-${i}`)) {
+        getSaveDesc(`slot-${i}`);
+    }
 }
