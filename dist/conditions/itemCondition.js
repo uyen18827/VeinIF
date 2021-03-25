@@ -1,6 +1,5 @@
-import { getInventory } from "../inventory/inventory.js";
 import { greyOut } from "../tools/formatting.js";
-import { checkStat } from "./checkStat.js";
+import { checkInInventory, checkStat } from "./checkConditions.js";
 import { checkResult } from "./choiceCondition.js";
 export function checkItemCondition(item, condition) {
     let preItem = condition.item;
@@ -8,7 +7,7 @@ export function checkItemCondition(item, condition) {
     let a, b;
     if (preItem) {
         preItem.forEach(requiredItem => {
-            let temp = checkPreItem(requiredItem.itemCode, requiredItem.itemQty);
+            let temp = checkInInventory(`#${item.itemCode}`, requiredItem.itemCode, requiredItem.itemQty, requiredItem.itemName);
             if (temp == checkResult.failed) {
                 a = temp;
             }
@@ -29,17 +28,14 @@ export function checkItemCondition(item, condition) {
         console.log(`${item.itemCode} is blocked`);
     }
 }
-function checkPreItem(itemCode, itemQty) {
-    const inInventory = getInventory().find(element => element.item.itemCode == itemCode);
-    let itemHTML = document.querySelector(`#${itemCode}`);
-    if (!inInventory) {
-        // console.log(`Condition: ${itemName} cannot be found in inventory`);
-        itemHTML.innerHTML += `[Condition not met: ${itemCode} cannot be found in inventory]`;
-        return checkResult.failed;
-    }
-    else if (inInventory && inInventory.item.itemQty < itemQty) {
-        // console.log(`Condition: ${itemName} found in inventory, but quantity is not enough`);
-        itemHTML.innerHTML += `[Condition not met: ${itemCode} quantity ${inInventory.item.itemQty}/${itemQty}]`;
-        return checkResult.failed;
-    }
-}
+// function appendInventoryReason(elementId: string, itemName: string, reqQty: number, actualQty: number, result: checkResult) {
+//     let elementHTML = document.querySelector(`#${elementId}`);
+//     switch (result) {
+//         case (result = checkResult.notFound):
+//             elementHTML!.innerHTML += ` [Condition not met: ${itemName} cannot be found in inventory]`;
+//             break;
+//         case (result = checkResult.insufficientQuantity):
+//             elementHTML!.innerHTML += ` [Condition not met: ${itemName} quantity ${actualQty}/${reqQty}]`;
+//             break;
+//     }
+// }

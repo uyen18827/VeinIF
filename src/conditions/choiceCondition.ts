@@ -1,10 +1,9 @@
 //Check if player's stat meet the need to proceed.
 //For example, the choice "Climb the tree [Athletic 10]" needs Athletic = 10
 
-import { getInventory } from "../inventory/inventory.js";
 import { Choices, conStyle, Precondition } from "../model/paragraph.js";
 import { greyOut } from "../tools/formatting.js";
-import { checkStat } from "./checkStat.js";
+import { checkInInventory, checkStat } from "./checkConditions.js";
 
 //before this, check if choice has precondition.
 //if there's no condition on a choice, skip this function entirely.
@@ -19,7 +18,7 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
     let a, b: any;
     if (item) {
         item.forEach(item => {
-            let temp = checkInInventory(choice.id, item.itemName, item.itemQty);
+            let temp = checkInInventory(`#cid${choice.id}`, item.itemCode, item.itemQty, item.itemName,);
             if (temp == checkResult.failed) {
                 a = temp;
             }
@@ -62,31 +61,9 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
 //             break;
 //     }
 // }
-export enum checkResult { passed = 0, failed = 1 }
-/**
- * Check if required item is in player's inventory
- * @param choiceId 
- * @param itemName 
- * @param itemQty 
- * @returns checkResult passed or failed
- */
-function checkInInventory(choiceId: Choices['id'], itemName: string, itemQty: number) {
-    const inInventory = getInventory().find(element => element.item.itemName == itemName);
-    let choiceHTML = document.querySelector(`#cid${choiceId}`);
-    if (!inInventory) {
-        // console.log(`Condition: ${itemName} cannot be found in inventory`);
-        choiceHTML!.innerHTML += `[Condition not met: ${itemName} cannot be found in inventory]`;
-        console.log(`cannot find ${itemName} in inventory`);
-        return checkResult.failed;
-    }
-    else if (inInventory && inInventory.item.itemQty < itemQty) {
-        // console.log(`Condition: ${itemName} found in inventory, but quantity is not enough`);
-        choiceHTML!.innerHTML += `[Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
-        return checkResult.failed;
-    }
-    else {
-        console.log(`Condition: ${itemName} found in inventory! Proceed`)
-        //let the player click on the choice
-        return checkResult.passed;
-    }
+export enum checkResult {
+    passed = 0,
+    failed = 1,
+    // notFound = 2,
+    // insufficientQuantity = 3,
 }

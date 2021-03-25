@@ -1,3 +1,4 @@
+import { getInventory } from "../inventory/inventory.js";
 import { getStat } from "../player/statInfos.js";
 import { checkResult } from "./choiceCondition.js";
 
@@ -31,3 +32,28 @@ export function checkStat(elementId: string, statName: string, value: number) {
         return checkResult.failed;
     }
 };
+/**
+ * Check if required item is in player's inventory
+ * @param choiceId 
+ * @param itemCode 
+ * @param itemName 
+ * @param itemQty 
+ * @returns checkResult passed or failed
+ */
+export function checkInInventory(elementId: string, itemCode: string, itemQty: number, itemName: string) {
+    const inInventory = getInventory().find(element => element.item.itemCode == itemCode);
+    let elementHTML = document.querySelector(elementId);
+    if (!inInventory) {
+        elementHTML!.innerHTML += ` [Condition not met: ${itemName} cannot be found in inventory]`;
+        return checkResult.failed;
+    }
+    else if (inInventory && inInventory.item.itemQty < itemQty) {
+        elementHTML!.innerHTML += ` [Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
+        return checkResult.failed;
+    }
+    else {
+        console.log(`Condition: ${itemName} found in inventory! Proceed`)
+        //let the player click on the choice
+        return checkResult.passed;
+    }
+}
