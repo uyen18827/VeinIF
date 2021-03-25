@@ -10,8 +10,8 @@ import { updateParagraph } from "./paragraphFunctions.js";
  */
 export function showChoices(choices: any, choiceContainer: any) {
     if (choices) {
-        for (var i = 0; i < choices.length; i++) {
-            var currentChoice = choices[i];
+        for (let i = 0; i < choices.length; i++) {
+            let currentChoice = choices[i];
             let choice = `<a href="#" 
             class="choices" id="cid${currentChoice.id}" >
             ${currentChoice.content} 
@@ -24,8 +24,11 @@ export function showChoices(choices: any, choiceContainer: any) {
             else {
                 // console.log(`choice n.${currentChoice.id} has no condition`);
             }
+            //if(currentChoice.quest){
+            //
+            //}
         }
-        for (var i = 0; i < choices.length; i++) {
+        for (let i = 0; i < choices.length; i++) {
             let currentChoice = choices[i];
             let nextid: number = currentChoice.nextid;
             let style = choices[i].style;
@@ -36,10 +39,21 @@ export function showChoices(choices: any, choiceContainer: any) {
                     if (currentChoice.consequence) {
                         applyConsequence(currentChoice.consequence);
                     }
+                    removeChoices();
                     updateParagraph(nextid, style);
                     autoSave();
                 });
             }
         }
+    }
+}
+
+function removeChoices() {
+    let choiceContainer = document.querySelector('#choices');
+    removeAllChildNodes(choiceContainer);
+}
+function removeAllChildNodes(parent: any) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
     }
 }
