@@ -24,3 +24,10 @@ export class inventoryItem {
         this.pickedUpLocation.push(p);
     }
 }
+
+export interface requiredItem {
+    itemName: Items[`itemName`],
+    itemCode: Items[`itemCode`],
+    itemQty: number;
+}
+// type itemCondition = Omit<Items, 'description'>

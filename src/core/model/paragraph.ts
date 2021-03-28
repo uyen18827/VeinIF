@@ -1,4 +1,4 @@
-import { Items } from "./item";
+import { Items, requiredItem } from "./item";
 import { Stat, statWithStyle } from "./Stat";
 
 export interface Paragraphs {
@@ -33,7 +33,8 @@ export interface Consequence{
  */
 export interface Precondition {
     stat?: Array<Stat>,
-    item?: Array<Items>,
+    item?: Array<requiredItem>,
+    style?: conStyle; //this override the global setting 
 };
 
 export enum conStyle {

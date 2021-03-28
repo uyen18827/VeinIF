@@ -1,6 +1,6 @@
 import { inventoryItem, Items } from "../model/item.js";
 import { Paragraphs } from "../model/paragraph.js";
-import { capitalise } from "../tools/formatting.js";
+import { capitalise } from "../../tools/formatting.js";
 
 export let inventory: Array<inventoryItem> = [];
 

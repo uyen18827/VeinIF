@@ -54,15 +54,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#playerModal" href="#">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#playerModal" href="#"><i
+                                class="bi bi-person"></i>
                             Player</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#inventoryModal" href="#">
+                        <a class="nav-link" data-bs-toggle="modal" data-bs-target="#inventoryModal" href="#"><i
+                                class="bi bi-archive"></i>
                             Inventory</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#"><i class="bi bi-book"></i>
                             Quest Log</a>
                     </li>
                     <li class="nav-item">
@@ -159,11 +161,13 @@
                         </div>
                         <div class="col-5" style="text-align: center">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Day</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="option2">
                                 <label class="form-check-label" for="inlineRadio2">Night</label>
                             </div>
                         </div>
@@ -198,8 +202,8 @@
     </div>
     <!-- ./Setting modal -->
 
-    <!-- Player modal --> 
-    <div class="modal fade" id="playerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Player modal -->
+    <div class="modal fade" id="playerModal" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -208,13 +212,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h6 class="card-subtitle mb-2 text-muted ">Name:
-                        <div class="yourName d-inline"></div>
-                    </h6>
-                    <h6 class="card-subtitle mb-2 text-muted playerPronouns">Pronouns: </h6>
-                    <h6 class="card-subtitle mb-2">Stats: </h6>
-                    <div class="stat">
+                    <div class="row">
+                        <!-- <small><p class="card-text">Such empties... You own nothing</p></small>  -->
+                        <div class="col-md-6 col-sm-12">
+                            <h6 class="mb-2">General Information</h6>
+                            <h6 style="display:inline;" class="text-muted">Name: </h6>
+                            <p style="display:inline;" class="yourName d-inline"></p>
+                            <br>
+                            <h6 class="mb-2 text-muted" style="display:inline;">Pronouns: </h6><p class=" playerPronouns" style="display:inline;"></p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <h6 class="mb-2">Stats: </h6>
+                            <div class="stat">
+                            </div>
+                        </div>
                     </div>
+                    
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -226,7 +240,7 @@
     <!-- ./Player modal -->
 
     <!-- Inventory modal -->
-    <div class="modal fade" id="inventoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="inventoryModal" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -235,11 +249,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
                         <!-- <small><p class="card-text">Such empties... You own nothing</p></small>  -->
-                        <ul class="nav nav-pills mb-3 " id="inventory-tab" role="tablist" style="max-height: 275;">
-                        </ul>
-                        <div class="tab-content" id="inventory-tabContent">
+                        <div class="col-md-6 col-sm-12">
+                            <h6 style="text-align: center">Items</h6>
+                            <ul class="nav nav-pills mb-3 " id="inventory-tab" role="tablist" style="max-height: 275;">
+                            </ul>
                         </div>
+                        <div class="col-md-6 col-sm-12">
+                            <h6 style="text-align: center">Description</h6>
+                            <div class="tab-content" id="inventory-tabContent">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -249,7 +271,7 @@
         </div>
     </div>
     <!-- ./Inventory modal -->
-    <script src="dist/script/index.js" type="module"></script>
+    <script src="dist/core/script/index.js" type="module"></script>
 </body>
 
 </html>

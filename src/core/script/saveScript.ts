@@ -45,7 +45,9 @@ export function autoSave() {
 
 export function autoLoad() {
     let retrievedSave = JSON.parse(localStorage.getItem('autoSave')!);
-    load(retrievedSave);
+    if (retrievedSave) {
+        load(retrievedSave);
+    }
 }
 
 /**
@@ -78,7 +80,7 @@ export function loadSave(saveSlot: string) {
 export function exportStorageSave(saveSlot: string) {
     let retrievedSave = localStorage.getItem(saveSlot);
     let saveMessage = document.querySelector('#exportMessage');
-    saveMessage!.innerHTML = ``; //clear old message
+    saveMessage!.textContent = null; //clear old message
     saveMessage!.innerHTML += `Save exported from ${saveSlot}.<br> 
     Copy and keep the code bellow to load later`;
     let saveOutput = document.querySelector(`#saveOutput`);
@@ -93,7 +95,7 @@ export function exportStorageSave(saveSlot: string) {
  */
 export function exportSave() {
     let saveMessage = document.querySelector('#exportMessage');
-    saveMessage!.innerHTML = ``; //clear old message
+    saveMessage!.textContent = null; //clear old message
     saveMessage!.innerHTML += `Save created at ${new Date().toLocaleString()}.<br> 
     Copy and keep the code bellow to load later`
     let saveOutput = document.querySelector(`#saveOutput`);

@@ -1,5 +1,5 @@
 import { Paragraphs } from "../model/paragraph.js";
-import { capitalise } from "../tools/formatting.js";
+import { capitalise, verbForm } from "../../tools/formatting.js";
 import { Player } from "../model/player.js";
 import { statStyle } from "../model/Stat.js";
 
@@ -19,7 +19,10 @@ export function getParagraph(player?: Player) {
       {
         id: 1,
         name: "wood",
-        content: `You are walking into the woods and there's no one around. Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise. After all, there's no reason for anyone to be out at this hour. <br>Or is it?<br>
+        content: `You are walking into the woods and there's no one around.
+        Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise.
+        After all, there's no reason for anyone to be out at this hour.
+        <br>Or is it?<br>
         No time for pleasantries, but at the very least, could you tell us a bit about yourself?<br>
         <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName" value="${player?.playerName}">
         <div id="pronouns">And your pronouns? <br></div>
@@ -46,7 +49,8 @@ export function getParagraph(player?: Player) {
             description: "A small small sword",
             itemCode: "smol_sword",
             precondition: {
-              stat: [{statName: 'Meow', value: 1}],
+              stat: [{ statName: 'Meow', value: 1 }],
+              item: [{ itemName: "candied nut", itemQty: 1, itemCode: "nut1", }]
             }
           },
         ],
@@ -56,7 +60,7 @@ export function getParagraph(player?: Player) {
       {
         id: 2,
         name: "greeting",
-        content: `This is the third paragraph. A guy whoops in and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here!" Oh well, this is the end. Bye ${player?.playerName}!`,
+        content: `This is the third paragraph. A guy whoops in and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} laughing when I came in. Oh well, this is the end. Bye ${player?.playerName}!"`,
         choices: [
           { id: 1, content: "Last one!", nextid: 3 },
         ],
@@ -96,8 +100,8 @@ export function getParagraph(player?: Player) {
             precondition:
             {
               item: [
-                { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
-                { itemName: 'flowers', itemQty: 6, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
+                { itemName: "key", itemQty: 1, itemCode: "key1", },
+                { itemName: 'flowers', itemQty: 6, itemCode: `wild_flowers` }
               ],
             },
             consequence: {
@@ -119,6 +123,11 @@ export function getParagraph(player?: Player) {
               ],
             },
           },
+          {
+            id: 3, 
+            content: `Hmmm`, 
+            nextid:  7
+          },
         ],
         preId: 3
       },
@@ -129,7 +138,9 @@ export function getParagraph(player?: Player) {
         content: ``,
         choices: [
           {
-            id: 1, content: "This is truly the end. There's nothing else. Let's just go back", nextid: 0, consequence: {
+            id: 1, content: "This is truly the end. There's nothing else. Let's just go back",
+            nextid: 0,
+            consequence: {
               stat: [{ statName: 'Growl', value: 1, style: statStyle.show }],
             }
           },
@@ -138,7 +149,7 @@ export function getParagraph(player?: Player) {
             id: 3, content: "Jump over the ledge?", nextid: 6,
             precondition: {
               item: [
-                { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
+                { itemName: "key", itemQty: 1, itemCode: "key1", },
               ],
               stat: [
                 { statName: `Athletic`, value: 10 },
@@ -151,7 +162,58 @@ export function getParagraph(player?: Player) {
         id: 6,
         content: `You leaped across the ledge! And landed successfully`,
         choices: [
-          { id: 1, content: `Weeee!`, nextid: 0 },
+          {
+            id: 1, content: `Weeee!`, nextid: 0,
+          },
+        ],
+      },
+      {
+        id: 7,
+        name: "cave ahead",
+        content: `You walked south from where you started. You saw a cave`,
+        choices: [
+          {
+            id: 1,
+            content: `Enter Cave`,
+            nextid: 8
+          },
+          {
+            id: 2,
+            content: `Turn back to where you started`,
+            nextid: 6
+          },
+          {
+            id: 3,
+            content: `Stop and think for a moment`,
+            nextid: 9,
+          },
+        ],
+      },
+      {
+        id: 8,
+        name: "enter cave",
+        content: `You enter the cave. It's dark, pitch-black in here`,
+        choices: [
+          {
+            id: 1,
+            content: `Try to adjust your eyes`,
+            nextid: 10,
+            precondition: {
+              item: [{
+                itemName: `sword`,
+                itemQty: 1,
+                itemCode: `sword`,
+              },
+              ],
+              stat: [],
+            },
+            
+          },
+          {
+            id: 2,
+            content: `Turn back to the cave entrance`,
+            nextid: 7
+          },
         ],
       },
     ];

@@ -83,8 +83,11 @@ export function handleStats(stat: statWithStyle) {
 }
 
 export function appendStatHTML(stat: Stat) {
-    let statContainer = document.querySelector(`.stat`);
-    statContainer!.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
+    let statContainer = document.querySelectorAll(`.stat`);
+    statContainer!.forEach(element => {
+        element.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
+    });
+    // statContainer!.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
 }
 
 export function clearStatHTML() {
