@@ -1,7 +1,7 @@
 import { Paragraphs, singleParagraph } from "../model/paragraph.js";
 import { getName, getPlayer } from "../player/playerInfo.js";
 import { showPronounDialogue } from "../player/pronouns.js";
-import { getParagraph } from "./allParagraphs.js";
+import { getParagraph } from "../../game/allParagraphs.js";
 import { showChoices } from "./showChoices.js";
 import { showItems } from "./showItems.js";
 let currentParagraph: string | undefined;

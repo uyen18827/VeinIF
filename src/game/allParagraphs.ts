@@ -1,7 +1,7 @@
-import { Paragraphs } from "../model/paragraph.js";
-import { capitalise, verbForm } from "../../tools/formatting.js";
-import { Player } from "../model/player.js";
-import { statStyle } from "../model/Stat.js";
+import { Paragraphs } from "../core/model/paragraph.js";
+import { capitalise, verbForm } from "../tools/formatting.js";
+import { Player } from "../core/model/player.js";
+import { statStyle } from "../core/model/Stat.js";
 
 export function getParagraph(player?: Player) {
   let paragraphs: Paragraphs[] =

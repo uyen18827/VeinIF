@@ -1,4 +1,4 @@
-import { getPlayerPronouns } from "../player/playerInfo.js";
+import { getPlayerPronouns } from "../core/player/playerInfo.js";
 /////////////////////////////Formatting tools////////////////////////////////////////
 /**
  *Capitalise the first letter in a string.
@@ -29,3 +29,24 @@ export function verbForm(form, original) {
     else
         return form;
 }
+export function showOnCondition(type, requiredElement, value, message, failedMessage) {
+    switch (type) {
+        case (type = 'stat'):
+            //a = check in player's stat
+            //if a = checkResult.passed
+            return requiredElement;
+        case (type = 'item'):
+            //a = check in player's inventory
+            //if a = checkResult.passed
+            return requiredElement;
+        case (type = 'quest'):
+            //a = check in player's quest log
+            //if a = checkResult.passed
+            return requiredElement;
+        case (type = 'variable'):
+            //a = check in player's variables
+            //if a = checkResult.passed
+            return requiredElement;
+    }
+}
+showOnCondition('stat', `athletic`, 12, `You could try to pry it open with your crowbar`, `There's nothing else you can do here<br>`);
