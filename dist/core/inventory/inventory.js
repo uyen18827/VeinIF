@@ -1,5 +1,5 @@
 import { inventoryItem } from "../model/item.js";
-import { capitalise } from "../tools/formatting.js";
+import { capitalise } from "../../tools/formatting.js";
 export let inventory = [];
 function addToInventory(item) {
     inventory.push(item);

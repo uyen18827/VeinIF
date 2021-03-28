@@ -1,4 +1,4 @@
-import { greyOut } from "../tools/formatting.js";
+import { greyOut } from "../../tools/formatting.js";
 import { checkInInventory, checkStat } from "./checkConditions.js";
 import { checkResult } from "./choiceCondition.js";
 export function checkItemCondition(item, condition) {

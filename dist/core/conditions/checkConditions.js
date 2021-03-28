@@ -2,7 +2,7 @@ import { getInventory } from "../inventory/inventory.js";
 import { getStat } from "../player/statInfos.js";
 import { checkResult } from "./choiceCondition.js";
 /**
- * Check if player's stat
+ * Check if player's stat satisfy precondition
  * @param elementId HTML element's id
  * @param statName required stat's name
  * @param value required value
@@ -13,10 +13,9 @@ export function checkStat(elementId, statName, value) {
     let elementHTML = document.querySelector(`#${elementId}`);
     if (found) {
         if (found.value < value) {
-            console.log("Condition not met!");
+            console.log(`Condition not met! ${found.value} < ${value}`);
             //show reason why it's failed
             elementHTML.innerHTML += ` [Condition not met: ${statName} value ${found.value}/${value}]`;
-            // console.log(`${found.value} < ${value}`);
             return checkResult.failed;
         }
         if (found.value >= value) {

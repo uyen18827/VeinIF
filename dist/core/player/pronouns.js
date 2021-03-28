@@ -79,6 +79,6 @@ export function loadPronounsRadioBtn(pronouns) {
 export function showPronouns(pronouns) {
     let pronounsClassed = document.querySelectorAll(".playerPronouns");
     if (pronounsClassed) {
-        pronounsClassed.forEach(element => element.innerHTML = `Pronouns: ${pronouns.Category}`);
+        pronounsClassed.forEach(element => element.innerHTML = `${pronouns.Category}`);
     }
 }

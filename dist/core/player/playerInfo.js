@@ -1,3 +1,4 @@
+import { defaultPlayer } from "../../game/playerInfo.js";
 import { showPronouns } from "./pronouns.js";
 export const player = {
     id: 0,
@@ -14,6 +15,9 @@ export const player = {
 };
 export function getPlayer() {
     return player;
+}
+export function getDefaultPlayer() {
+    return defaultPlayer;
 }
 /**
  * Get pronouns set by the player.
@@ -54,20 +58,7 @@ export function showNameDiv(playerName) {
 }
 /**Reset player information to initial value. */
 export function resetPlayer() {
-    let defaultPlayer = {
-        id: 0,
-        playerName: "",
-        pronouns: {
-            Category: "",
-            subjectPro: "",
-            objectPro: "",
-            possAdj: "",
-            possessivePro: "",
-            reflex: "",
-            is: "",
-        },
-    };
-    setPlayer(defaultPlayer);
+    setPlayer(getDefaultPlayer());
     showNameDiv(defaultPlayer.playerName);
     showPronouns(defaultPlayer.pronouns);
 }
