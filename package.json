@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "lite-server",
     "tsc:w": "tsc -w",
-    "dev": "concurrently \"npm:tsc:w\" \"npm:server\""
+    "dev": "concurrently \"npm:tsc:w\" \"npm:server\"",
+    "build": "webpack"
   },
   "keywords": [
     "interactive fiction"
@@ -15,10 +16,16 @@
   "author": "Uyen Nguyen",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^5.3.0",
-    "lite-server": "^2.6.1"
+    "concurrently": "^5.3.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.31"
+    "@types/node": "^14.14.37",
+    "@types/webpack": "^5.28.0",
+    "lite-server": "^2.6.1",
+    "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
   }
 }
