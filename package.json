@@ -8,7 +8,7 @@
     "server": "lite-server",
     "tsc:w": "tsc -w",
     "dev": "concurrently \"npm:tsc:w\" \"npm:server\"",
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "keywords": [
     "interactive fiction"
