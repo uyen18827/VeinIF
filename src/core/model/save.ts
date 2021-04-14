@@ -6,13 +6,13 @@ import { Stat } from "./Stat";
 export class Save {
     player: Player;
     inventory: Array<inventoryItem>
-    currentParagraphId: Paragraphs["id"];
+    currentParagraphName: Paragraphs["name"];
     stat: Stat[];
     date: string;
-    constructor(p: Player, i: Array<inventoryItem>, pid: Paragraphs["id"], s: Array<Stat>) {
+    constructor(p: Player, i: Array<inventoryItem>, pname: Paragraphs["name"], s: Array<Stat>) {
         this.player = p;
         this.inventory = i;
-        this.currentParagraphId = pid;
+        this.currentParagraphName = pname;
         this.stat = s;
         this.date = new Date().toLocaleString();
     }

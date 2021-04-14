@@ -5,7 +5,7 @@ import { resetPlayer } from "../player/playerInfo.js";
 import { clearAllStat, clearStatHTML, getStat, restoreDefaultStat, showAllStatHTML } from "../player/statInfos.js";
 import { autoSave } from "./saveScript.js";
 export function restartGame() {
-    updateParagraph(0);
+    updateParagraph("start");
     clearInventory();
     resetPlayer();
     clearInventoryHTML();

@@ -10,7 +10,7 @@ export const player = {
         possAdj: "",
         possessivePro: "",
         reflex: "",
-        is: "",
+        is: "", //he is, she is, they are
     },
 };
 export function getPlayer() {

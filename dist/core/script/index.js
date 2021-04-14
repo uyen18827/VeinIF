@@ -12,7 +12,7 @@ window.onload = function () {
         autoLoad();
     }
     else {
-        updateParagraph(0);
+        updateParagraph("start");
         showAllStatHTML(getStat());
     }
 };

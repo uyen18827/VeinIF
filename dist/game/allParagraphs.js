@@ -4,15 +4,15 @@ export function getParagraph(player) {
     let paragraphs = [
         //Array starts at 0
         {
-            id: 0,
+            // id: 0,
             name: "start",
             content: `This is the first paragraph. <u><b>Welcome to a game!<\/b><\/u> This game is a multi choice Interactive fiction. Different choices will lead to different outcomes. Rejoice! Enjoy your time playing here!`,
             choices: [
-                { id: 1, content: "Alright then, lead me to the next paragraph", nextid: 1 },
+                { id: 1, content: "Alright then, lead me to the next paragraph", nextid: 1, nextName: "wood" },
             ],
         },
         {
-            id: 1,
+            // id: 1,
             name: "wood",
             content: `You are walking into the woods and there's no one around.
         Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise.
@@ -23,8 +23,8 @@ export function getParagraph(player) {
         <div id="pronouns">And your pronouns? <br></div>
         `,
             choices: [
-                { id: 1, content: "Ooooh! Next!!!!!", nextid: 2 },
-                { id: 2, content: `I'm scared. Let's go back to the first one!`, nextid: 0 }
+                { id: 1, content: "Ooooh! Next!!!!!", nextid: 2, nextName: `greeting` },
+                { id: 2, content: `I'm scared. Let's go back to the first one!`, nextid: 0, nextName: `start` }
             ],
             item: [
                 {
@@ -53,11 +53,11 @@ export function getParagraph(player) {
             preId: 0,
         },
         {
-            id: 2,
+            // id: 2,
             name: "greeting",
-            content: `This is the third paragraph. A guy whoops in and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} laughing when I came in. Oh well, this is the end. Bye ${player?.playerName}!"`,
+            content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.subjectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"`,
             choices: [
-                { id: 1, content: "Last one!", nextid: 3 },
+                { id: 1, content: "Last one!", nextid: 3, nextName: "key on ground" },
             ],
             item: [
                 { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
@@ -65,12 +65,15 @@ export function getParagraph(player) {
             preId: 1,
         },
         {
-            id: 3,
+            // id: 3,
             name: "key on ground",
             content: `You found a key lying on the ground. Along with some flowers<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
             choices: [
                 {
-                    id: 1, content: "Move along", nextid: 4, style: "append",
+                    id: 1, content: "Move along", nextid: 4, style: "append", nextName: "surprise"
+                    // precondition: {
+                    //   stat: [{ statName: 'Meow', value: 2 }],
+                    // }
                 }
             ],
             item: [
@@ -80,7 +83,7 @@ export function getParagraph(player) {
             preId: 2
         },
         {
-            id: 4,
+            // id: 4,
             name: "surprise",
             content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA<br>
         You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door. You must carry 6 flowers to get through the door.`,
@@ -88,6 +91,7 @@ export function getParagraph(player) {
                 {
                     id: 1,
                     content: "[Use Key] [Hold the flowers] Let's go back from the beginning", nextid: 0,
+                    nextName: "start",
                     precondition: {
                         item: [
                             { itemName: "key", itemQty: 1, itemCode: "key1", },
@@ -106,6 +110,7 @@ export function getParagraph(player) {
                     id: 2,
                     content: "Or go on? Have this little treat if you plan to go on. (1x key, 1x candied nut)",
                     nextid: 5,
+                    nextName: "oh? you're still here?",
                     consequence: {
                         item: [
                             { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
@@ -116,26 +121,29 @@ export function getParagraph(player) {
                 {
                     id: 3,
                     content: `Hmmm`,
-                    nextid: 7
+                    nextid: 7,
+                    nextName: "cave ahead"
                 },
             ],
             preId: 3
         },
         {
-            id: 5,
+            // id: 5,
             name: "oh? you're still here?",
             content: ``,
             choices: [
                 {
                     id: 1, content: "This is truly the end. There's nothing else. Let's just go back",
+                    nextName: "start",
                     nextid: 0,
                     consequence: {
                         stat: [{ statName: 'Growl', value: 1, style: statStyle.show }],
                     }
                 },
-                { id: 2, content: "Trust me on this one my friend.", nextid: 0 },
+                { id: 2, content: "Trust me on this one my friend.", nextid: 0, nextName: "start" },
                 {
                     id: 3, content: "Jump over the ledge?", nextid: 6,
+                    nextName: "edge",
                     precondition: {
                         item: [
                             { itemName: "key", itemQty: 1, itemCode: "key1", },
@@ -148,38 +156,42 @@ export function getParagraph(player) {
             ],
         },
         {
-            id: 6,
-            content: `You leaped across the ledge! And landed successfully`,
+            // id: 6,
+            name: "edge",
+            content: `You leaped across the ledge! And landed successfully. You are safe, for now.`,
             choices: [
                 {
-                    id: 1, content: `Weeee!`, nextid: 0,
+                    id: 1, content: `Weeee!`, nextid: 0, nextName: "start"
                 },
             ],
         },
         {
-            id: 7,
+            // id: 7,
             name: "cave ahead",
             content: `You walked south from where you started. You saw a cave`,
             choices: [
                 {
                     id: 1,
                     content: `Enter Cave`,
-                    nextid: 8
+                    nextid: 8,
+                    nextName: "enter cave",
                 },
                 {
                     id: 2,
                     content: `Turn back to where you started`,
-                    nextid: 6
+                    nextid: 6,
+                    nextName: "edge"
                 },
                 {
                     id: 3,
                     content: `Stop and think for a moment`,
                     nextid: 9,
+                    nextName: "start"
                 },
             ],
         },
         {
-            id: 8,
+            // id: 8,
             name: "enter cave",
             content: `You enter the cave. It's dark, pitch-black in here`,
             choices: [
@@ -187,6 +199,7 @@ export function getParagraph(player) {
                     id: 1,
                     content: `Try to adjust your eyes`,
                     nextid: 10,
+                    nextName: "start",
                     precondition: {
                         item: [{
                                 itemName: `sword`,
@@ -200,7 +213,8 @@ export function getParagraph(player) {
                 {
                     id: 2,
                     content: `Turn back to the cave entrance`,
-                    nextid: 7
+                    nextid: 7,
+                    nextName: "cave ahead"
                 },
             ],
         },

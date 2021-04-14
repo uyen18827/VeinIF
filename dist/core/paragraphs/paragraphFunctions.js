@@ -9,9 +9,13 @@ let currentParagraph;
   * @param {number} nextid next paragraph's id.
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
 */
-export function updateParagraph(nextid, style) {
+export function updateParagraph(nextName, style) {
     let player = getPlayer();
-    let p = new singleParagraph(getParagraph(player)[nextid]);
+    // console.log(getParagraph(player));
+    let pName = getParagraph(player).findIndex(element => element.name == nextName);
+    // console.log(pName, nextName);
+    // console.log(getParagraph(player)[pName])
+    let p = new singleParagraph(getParagraph(player)[pName]);
     let nextParagraph = p.paragraph;
     // let nextParagraph = getParagraph(player)[nextid];
     const choiceContainer = document.getElementById("choices");
@@ -27,7 +31,7 @@ export function updateParagraph(nextid, style) {
             }
         });
     }
-    setCurrentParagraphID(nextid);
+    setCurrentParagraphName(nextName);
     switch (style) {
         case "append":
             currentParagraph = currentParagraph + " " + nextParagraph.content;
@@ -43,7 +47,7 @@ export function updateParagraph(nextid, style) {
     items = nextParagraph.item;
     showChoices(choices, choiceContainer);
     if (items) {
-        showItems(items, itemContainer, nextid);
+        showItems(items, itemContainer, nextName);
     }
     showPronounDialogue();
 }
@@ -59,11 +63,10 @@ export function choiceContainerContent(content) {
     const choiceContainer = document.getElementById("choices");
     choiceContainer.innerHTML += content;
 }
-let currentPid = 0;
-function setCurrentParagraphID(pid) {
-    currentPid = pid;
-    console.log(`current pid = ${pid}`);
+let currentName = "start";
+function setCurrentParagraphName(name) {
+    currentName = name;
 }
-export function getCurrentParagraphID() {
-    return currentPid;
+export function getCurrentParagraphName() {
+    return currentName;
 }

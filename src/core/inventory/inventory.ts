@@ -26,10 +26,10 @@ export function clearInventory() {
     return inventory;
 }
 
-export function getItem(item: Items, pid: Paragraphs["id"]) {
+export function getItem(item: Items, pName: Paragraphs["name"]) {
     const inInventory = inventory.find(element => element.item.itemCode == item.itemCode);
     if (!inInventory) {
-        let newItem = new inventoryItem(item, pid)
+        let newItem = new inventoryItem(item, pName)
         console.log(`${item.itemName} has been added to inventory`);
         addToInventory(newItem);
         console.log(inventory);
@@ -53,10 +53,10 @@ export function getItem(item: Items, pid: Paragraphs["id"]) {
         //update item quantity on view
         let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
         quantityDiv!.textContent = `Quantity: ${inInventory.item.itemQty}`;
-        let pidCheck = inInventory.pickedUpLocation.find(location => location == pid);
-        console.log(pidCheck, pid)
-        if (!pidCheck) {
-            inInventory.pickedUpLocation.push(pid);
+        let pNameCheck = inInventory.pickedUpLocation.find(location => location == pName);
+        console.log(pNameCheck, pName)
+        if (!pNameCheck) {
+            inInventory.pickedUpLocation.push(pName);
             }
         }
     }

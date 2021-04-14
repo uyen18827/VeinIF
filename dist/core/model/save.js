@@ -1,8 +1,8 @@
 export class Save {
-    constructor(p, i, pid, s) {
+    constructor(p, i, pname, s) {
         this.player = p;
         this.inventory = i;
-        this.currentParagraphId = pid;
+        this.currentParagraphName = pname;
         this.stat = s;
         this.date = new Date().toLocaleString();
     }

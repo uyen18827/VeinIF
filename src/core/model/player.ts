@@ -8,12 +8,19 @@ export interface Player {
 
 /** Interface for player's pronouns */
 export interface Pronouns {
+    /** Pronouns Category */
     Category: string;
-    subjectPro: string; //subject pronoun
-    objectPro: string; //object pronoun
-    possAdj: string; //possessive adjective
-    possessivePro: string; //possessive pronoun
-    reflex: string; //reflexive pronoun
-    is: string; //he is, she is, they are
+    /** Subject Pronouns: he, she, they */
+    subjectPro: string;
+    /** Object Pronouns: him, her, them */
+    objectPro: string;
+    /** Possessive Adjective: his, her, their */
+    possAdj: string;
+    /** Possessive Pronoun: his, hers, theirs */
+    possessivePro: string;
+    /** Reflexive Pronouns: himself, herself, themselves */
+    reflex: string;
+    /** he is, she is, they are */
+    is: string;
 }
 

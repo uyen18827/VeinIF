@@ -2,19 +2,21 @@ import { getInventory, getItem } from "../inventory/inventory.js";
 import { Items } from "../model/item.js";
 import { autoSave } from "../script/saveScript.js";
 import { checkItemCondition } from "../conditions/itemCondition.js";
-import { getCurrentParagraphID } from "./paragraphFunctions.js";
+import { getCurrentParagraphName } from "./paragraphFunctions.js";
 
-export function showItems(items: Items[], itemContainer: any, pid: number) {
+export function showItems(items: Items[], itemContainer: any, pname: string) {
     //these are kinda ugly but oh my god did it run :( Probably should refactor some other time
     for (var i = 0; i < items.length; i++) {
         let currentItem = items[i];
         let found = getInventory().find(element => element.item.itemName == currentItem.itemName && element.item.itemCode == currentItem.itemCode);
         if (found) { //item name is in inventory
             //Check if item had been found at this location
-            let pidCheck = found.pickedUpLocation.find(element => element == pid);
-            if (pidCheck) {
+            console.log(pname);
+            let pNameCheck = found.pickedUpLocation.includes(`${pname}`);
+            console.log(pNameCheck);
+            if (pNameCheck) {
                 let message = `<a href="#" class="items picked" id="${currentItem.itemCode}">[Added to Inventory] You've already picked up ${currentItem.itemName}</a><br>`;
-                console.log(`${currentItem.itemName} is already picked up at this location (${pid})`);
+                console.log(`${currentItem.itemName} is already picked up at this location (${pname})`);
                 itemContainer.innerHTML += message;
             }
             else { //not found at this location
@@ -43,7 +45,7 @@ export function showItems(items: Items[], itemContainer: any, pid: number) {
         let itemBlocked = itemHTML?.classList.contains("item-blocked");
         if (newLocation) {
             itemHTML.addEventListener("click", function () {
-                getItem(currentItem, getCurrentParagraphID());
+                getItem(currentItem, getCurrentParagraphName());
                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
                 itemHTML.innerHTML = message;
                 itemHTML.style.color = "#6A6C6E";
@@ -58,7 +60,7 @@ export function showItems(items: Items[], itemContainer: any, pid: number) {
         }
         else { //entirely new item name, entirely new location
             itemHTML.addEventListener("click", function () {
-                getItem(currentItem, getCurrentParagraphID());
+                getItem(currentItem, getCurrentParagraphName());
                 console.log(currentItem.itemName);
                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
                 itemHTML.innerHTML = message;

@@ -30,7 +30,7 @@ export function showChoices(choices: any, choiceContainer: any) {
         }
         for (let i = 0; i < choices.length; i++) {
             let currentChoice = choices[i];
-            let nextid: number = currentChoice.nextid;
+            let nextName = currentChoice.nextName;
             let style = choices[i].style;
             let choiceHTML = choiceContainer.querySelector(`#cid${currentChoice.id}`);
             //if element doesn't have class choice-blocked, add event listener, else, don't do anything
@@ -40,7 +40,7 @@ export function showChoices(choices: any, choiceContainer: any) {
                         applyConsequence(currentChoice.consequence);
                     }
                     removeChoices();
-                    updateParagraph(nextid, style);
+                    updateParagraph(nextName, style);
                     autoSave();
                 });
             }

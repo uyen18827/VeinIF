@@ -2,22 +2,22 @@ import { Items, requiredItem } from "./item";
 import { Stat, statWithStyle } from "./Stat";
 
 export interface Paragraphs {
-    id: number;
-    name?: string;
+    name: string;
     content: string;
     choices?: Array<Choices>
     preId?: number;
-    //item picked up during this scene. Optional.
+    /**item that can be picked up during this scene. Optional.*/
     item?: Array<Items>;
 }
 
 export interface Choices {
     id: number;
-    content: string,
+    content: string;
     nextid: number;
     precondition?: Precondition;
     style?: string; //next paragraph's appearance's style
     consequence?: Consequence;
+    nextName: string;
 }
 
 /**

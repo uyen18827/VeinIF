@@ -9,9 +9,13 @@ let currentParagraph: string | undefined;
   * @param {number} nextid next paragraph's id.
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
 */
-export function updateParagraph(nextid: number, style?: string) {
+export function updateParagraph(nextName: string, style?: string) {
     let player = getPlayer();
-    let p = new singleParagraph(getParagraph(player)[nextid]);
+    // console.log(getParagraph(player));
+    let pName = getParagraph(player).findIndex(element => element.name == nextName);
+    // console.log(pName, nextName);
+    // console.log(getParagraph(player)[pName])
+    let p = new singleParagraph(getParagraph(player)[pName]);
     let nextParagraph = p.paragraph;
     // let nextParagraph = getParagraph(player)[nextid];
     const choiceContainer: HTMLElement | any = document.getElementById("choices");
@@ -27,7 +31,7 @@ export function updateParagraph(nextid: number, style?: string) {
             }
         });
     }
-    setCurrentParagraphID(nextid);
+    setCurrentParagraphName(nextName);
     switch (style) {
         case "append":
             currentParagraph = currentParagraph + " " + nextParagraph.content;
@@ -43,7 +47,7 @@ export function updateParagraph(nextid: number, style?: string) {
     items = nextParagraph.item;
     showChoices(choices, choiceContainer);
     if (items) {
-        showItems(items, itemContainer, nextid);
+        showItems(items, itemContainer, nextName);
     }
     showPronounDialogue();
 }
@@ -61,11 +65,10 @@ export function choiceContainerContent(content: string | null) {
     choiceContainer.innerHTML += content;
 }
 
-let currentPid: number = 0;
-function setCurrentParagraphID(pid: Paragraphs["id"]) {
-    currentPid = pid;
-    console.log(`current pid = ${pid}`)
+let currentName: string = "start";
+function setCurrentParagraphName(name: Paragraphs['name']){
+    currentName = name;
 }
-export function getCurrentParagraphID() {
-    return currentPid;
+export function getCurrentParagraphName() {
+    return currentName;
 }

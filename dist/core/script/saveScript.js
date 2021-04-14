@@ -1,14 +1,14 @@
 import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
 import { clearAllStat, clearStatHTML, getStat, loadStat, showAllStatHTML } from "../player/statInfos.js";
 import { Save } from "../model/save.js";
-import { getCurrentParagraphID, updateParagraph } from "../paragraphs/paragraphFunctions.js";
+import { getCurrentParagraphName, updateParagraph } from "../paragraphs/paragraphFunctions.js";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
 import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns.js";
 /**
  * Create a new save and stringify it.
  */
 function save() {
-    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphID(), getStat());
+    let save = new Save(getPlayer(), getInventory(), getCurrentParagraphName(), getStat());
     let stringSave = JSON.stringify(save);
     return stringSave;
 }
@@ -21,7 +21,7 @@ function load(retrievedSave) {
     clearStatHTML();
     loadStat(retrievedSave.stat);
     showAllStatHTML(retrievedSave.stat);
-    updateParagraph(retrievedSave.currentParagraphId, retrievedSave.player);
+    updateParagraph(retrievedSave.currentParagraphName, retrievedSave.player);
     retrievedSave.inventory.forEach((element) => {
         if (element.item.itemQty > 0) {
             appendItemHTML(element.item);

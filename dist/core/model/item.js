@@ -7,9 +7,12 @@
  */
 export class inventoryItem {
     constructor(i, p) {
+        // pickedUpLocation: Array<Paragraphs["id"]> = [];
         this.pickedUpLocation = [];
         this.item = i;
         this.pickedUpLocation.push(p);
     }
 }
 // type itemCondition = Omit<Items, 'description'>
+//NOTE for authors: Please refrain from  changing Paragraph's name as this would affect
+//pickedUpLocation and other paragraph's dependency
