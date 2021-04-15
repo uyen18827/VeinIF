@@ -2,11 +2,14 @@ import { Items, requiredItem } from "./item";
 import { Stat, statWithStyle } from "./Stat";
 
 export interface Paragraphs {
+    /**A paragraph's unique identifier. There shouldn't be two paragraph with the same name. */
     name: string;
+    /**The main body of the paragraph. This element should contain your story/writing. */
     content: string;
+    /**Array of choices that will lead player to another paragraph. */
     choices?: Array<Choices>
     preId?: number;
-    /**item that can be picked up during this scene. Optional.*/
+    /**Array contains items that can be picked up during this scene. Optional.*/
     item?: Array<Items>;
 }
 

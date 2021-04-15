@@ -5,8 +5,8 @@ import { getParagraph } from "../../game/allParagraphs.js";
 import { showChoices } from "./showChoices.js";
 import { showItems } from "./showItems.js";
 let currentParagraph: string | undefined;
-/**Get nextid, then show the paragraph with that id.
-  * @param {number} nextid next paragraph's id.
+/**Get nextName, then show the paragraph with that name.
+  * @param {number} nextName next paragraph's name.
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
 */
 export function updateParagraph(nextName: string, style?: string) {

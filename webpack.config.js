@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     // entry: './src/core/script/index.ts',
-    entry: './dist/core/script/index.js',
+    entry: './build/core/script/index.js',
     module: {
         rules: [
             {
