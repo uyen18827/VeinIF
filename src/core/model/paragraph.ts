@@ -16,7 +16,7 @@ export interface Paragraphs {
 export interface Choices {
     id: number;
     content: string;
-    nextid: number;
+    // nextid: number;
     precondition?: Precondition;
     style?: string; //next paragraph's appearance's style
     consequence?: Consequence;

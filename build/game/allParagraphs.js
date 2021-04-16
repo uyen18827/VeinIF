@@ -2,13 +2,11 @@ import { capitalise, verbForm } from "../tools/formatting.js";
 import { statStyle } from "../core/model/Stat.js";
 export function getParagraph(player) {
     let paragraphs = [
-        //Array starts at 0
         {
-            // id: 0,
             name: "start",
             content: `This is the first paragraph. <u><b>Welcome to a game!<\/b><\/u> This game is a multi choice Interactive fiction. Different choices will lead to different outcomes. Rejoice! Enjoy your time playing here!`,
             choices: [
-                { id: 1, content: "Alright then, lead me to the next paragraph", nextid: 1, nextName: "wood" },
+                { id: 1, content: "Alright then, lead me to the next paragraph", nextName: "wood" },
             ],
         },
         {
@@ -23,8 +21,8 @@ export function getParagraph(player) {
         <div id="pronouns">And your pronouns? <br></div>
         `,
             choices: [
-                { id: 1, content: "Ooooh! Next!!!!!", nextid: 2, nextName: `greeting` },
-                { id: 2, content: `I'm scared. Let's go back to the first one!`, nextid: 0, nextName: `start` }
+                { id: 1, content: "Ooooh! Next!!!!!", nextName: `greeting` },
+                { id: 2, content: `I'm scared. Let's go back to the first one!`, nextName: `start` }
             ],
             item: [
                 {
@@ -57,7 +55,7 @@ export function getParagraph(player) {
             name: "greeting",
             content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.subjectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"`,
             choices: [
-                { id: 1, content: "Last one!", nextid: 3, nextName: "key on ground" },
+                { id: 1, content: "Last one!", nextName: "key on ground" },
             ],
             item: [
                 { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
@@ -70,7 +68,7 @@ export function getParagraph(player) {
             content: `You found a key lying on the ground. Along with some flowers<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
             choices: [
                 {
-                    id: 1, content: "Move along", nextid: 4, style: "append", nextName: "surprise"
+                    id: 1, content: "Move along", style: "append", nextName: "surprise"
                     // precondition: {
                     //   stat: [{ statName: 'Meow', value: 2 }],
                     // }
@@ -90,7 +88,7 @@ export function getParagraph(player) {
             choices: [
                 {
                     id: 1,
-                    content: "[Use Key] [Hold the flowers] Let's go back from the beginning", nextid: 0,
+                    content: "[Use Key] [Hold the flowers] Let's go back from the beginning",
                     nextName: "start",
                     precondition: {
                         item: [
@@ -109,7 +107,6 @@ export function getParagraph(player) {
                 {
                     id: 2,
                     content: "Or go on? Have this little treat if you plan to go on. (1x key, 1x candied nut)",
-                    nextid: 5,
                     nextName: "oh? you're still here?",
                     consequence: {
                         item: [
@@ -121,7 +118,6 @@ export function getParagraph(player) {
                 {
                     id: 3,
                     content: `Hmmm`,
-                    nextid: 7,
                     nextName: "cave ahead"
                 },
             ],
@@ -135,14 +131,13 @@ export function getParagraph(player) {
                 {
                     id: 1, content: "This is truly the end. There's nothing else. Let's just go back",
                     nextName: "start",
-                    nextid: 0,
                     consequence: {
                         stat: [{ statName: 'Growl', value: 1, style: statStyle.show }],
                     }
                 },
-                { id: 2, content: "Trust me on this one my friend.", nextid: 0, nextName: "start" },
+                { id: 2, content: "Trust me on this one my friend.", nextName: "start" },
                 {
-                    id: 3, content: "Jump over the ledge?", nextid: 6,
+                    id: 3, content: "Jump over the ledge?",
                     nextName: "edge",
                     precondition: {
                         item: [
@@ -161,7 +156,7 @@ export function getParagraph(player) {
             content: `You leaped across the ledge! And landed successfully. You are safe, for now.`,
             choices: [
                 {
-                    id: 1, content: `Weeee!`, nextid: 0, nextName: "start"
+                    id: 1, content: `Weeee!`, nextName: "start"
                 },
             ],
         },
@@ -173,19 +168,16 @@ export function getParagraph(player) {
                 {
                     id: 1,
                     content: `Enter Cave`,
-                    nextid: 8,
                     nextName: "enter cave",
                 },
                 {
                     id: 2,
                     content: `Turn back to where you started`,
-                    nextid: 6,
                     nextName: "edge"
                 },
                 {
                     id: 3,
                     content: `Stop and think for a moment`,
-                    nextid: 9,
                     nextName: "start"
                 },
             ],
@@ -198,7 +190,6 @@ export function getParagraph(player) {
                 {
                     id: 1,
                     content: `Try to adjust your eyes`,
-                    nextid: 10,
                     nextName: "start",
                     precondition: {
                         item: [{
@@ -213,7 +204,6 @@ export function getParagraph(player) {
                 {
                     id: 2,
                     content: `Turn back to the cave entrance`,
-                    nextid: 7,
                     nextName: "cave ahead"
                 },
             ],
