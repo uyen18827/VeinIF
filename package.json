@@ -34,7 +34,7 @@
   "electronBuilder": {
     "build": {
       "productName": "chosen",
-      "appId": "nhmu.TestApp",
+      "appId": "chosen.TestApp",
       "asar": "true",
       "win": {
         "target": [
