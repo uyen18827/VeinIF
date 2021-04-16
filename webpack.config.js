@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -6,18 +7,37 @@ module.exports = {
     module: {
         rules: [
             {
-                // test: /\.ts$/,
-                // use: 'ts-loader',
+                test: /\.html$/i,
+                loader: "html-loader",
+                options: { minimize: true },
                 exclude: /node_modules/,
+                type: 'javascript/auto'
                 // include: [path.resolve(__dirname, 'src')]
+            },
+            // {
+            //     test: /\.html/,
+            //     type: 'asset',
+            //     generator: {
+            //         filename: '[hash][ext][query]'
+            //     }
+            // },
+            {
+                test: /\.(png|jpe?g|svg|gif)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: 'assets/images/[hash][ext][query]'
+                }
             },
         ],
     },
-    // resolve: {
-    //     extensions: ['.tsx', '.ts', '.js'],
-    // },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "index.html",
+            filename: "./index.html"
+        })
+    ],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist/web'),
     },
 };
