@@ -1,8 +1,9 @@
-import webbrowser
 import os
 import subprocess
 import tkinter as tk
+import webbrowser
 from threading import *
+
 app = tk.Tk()
 
 app.title('Chosen Launcher')
@@ -19,8 +20,9 @@ def startBuildThread():
     t2=Thread(target = buildProduction)
     t2.start()
 
-# def startDesktopBuild():
-#     t3=Thread(target = )
+def startDesktopBuild():
+    t3=Thread(target = buildElectron)
+    t3.start()
 
 #function: run dev batch file
 def startDevEnvironment():
@@ -32,9 +34,10 @@ def buildProduction():
     buildBatch = os.path.join(dirname, 'npm run build.bat')
     subprocess.call([buildBatch])
 
-#function: electron pack
-# def buildElectron():
-#     buildBatch = os.path.join(dir)
+# function: electron build
+def buildElectron():
+    buildBatch = os.path.join(dirname, 'npm run electron-build.bat')
+    subprocess.call([buildBatch])
 
 #function: open Github Repo
 def openGitHub():
@@ -45,12 +48,16 @@ def openDoc():
     print("to be continue")
 
 #Run Development Environment button
-runDevButton = tk.Button(app, text='Run Dev Environment', command = startDevThread)
+runDevButton = tk.Button(app, text='Run Dev Environment (Browser)', command = startDevThread)
 runDevButton.pack()
 
 #Run Build Button
-runBuildButton = tk.Button(app, text='Build Production', command = startBuildThread)
+runBuildButton = tk.Button(app, text='Build Production (Web)', command = startBuildThread)
 runBuildButton.pack()
+
+#Build Windows Distribution
+runElectronBuild = tk.Button(app, text='Build Distribution (Windows | Portable)', command = startDesktopBuild)
+runElectronBuild.pack()
 
 #Open GitHub Repo Button
 gitRepoButton = tk.Button(app, text='Visit GitHub Page (Online)', command = openGitHub )
