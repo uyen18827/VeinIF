@@ -7,7 +7,7 @@ from threading import *
 app = tk.Tk()
 
 app.title('Chosen Launcher')
-app.geometry('800x600')
+# app.geometry('800x600')
 canvas = tk.Canvas(app, width=350, height=250)
 dirname = os.path.dirname(os.path.realpath(__file__))
 
@@ -49,23 +49,23 @@ def openDoc():
 
 #Run Development Environment button
 runDevButton = tk.Button(app, text='Run Dev Environment (Browser)', command = startDevThread)
-runDevButton.pack()
+runDevButton.grid(column=0, row=0, padx=5, pady=2)
 
 #Run Build Button
 runBuildButton = tk.Button(app, text='Build Production (Web)', command = startBuildThread)
-runBuildButton.pack()
+runBuildButton.grid(column=1, row=0, padx=5, pady=2)
 
 #Build Windows Distribution
 runElectronBuild = tk.Button(app, text='Build Distribution (Windows | Portable)', command = startDesktopBuild)
-runElectronBuild.pack()
+runElectronBuild.grid(column=0,columnspan=2, row=1, padx=5, pady=2)
 
 #Open GitHub Repo Button
 gitRepoButton = tk.Button(app, text='Visit GitHub Page (Online)', command = openGitHub )
-gitRepoButton.pack()
+gitRepoButton.grid(column=0, columnspan=2, row=2, padx=5, pady=2)
 
 #Open Documentation
 docButton = tk.Button(app, text='Open Documentation (Online)', command = openDoc)
-docButton.pack()
+docButton.grid(column=0, columnspan=2, row=3, padx=5, pady=2)
 
 #start program
 app.mainloop()

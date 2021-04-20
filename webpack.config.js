@@ -2,8 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    // entry: './src/core/script/index.ts',
-    entry: './build/core/script/index.js',
+    entry: './dist/web-js-unpacked/core/script/index.js',
     module: {
         rules: [
             {
@@ -12,7 +11,6 @@ module.exports = {
                 options: { minimize: true },
                 exclude: /node_modules/,
                 type: 'javascript/auto'
-                // include: [path.resolve(__dirname, 'src')]
             },
             // {
             //     test: /\.html/,
