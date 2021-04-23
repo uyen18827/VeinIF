@@ -26,7 +26,7 @@ A clear and concise description of the current behaviour.
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**To Reproduce**
+**To Reproduce**<!-- If applicable/possible, please provide the steps to reproduce the problem you're having -->
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
