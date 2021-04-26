@@ -1,6 +1,6 @@
 {
-  "name": "chosen",
-  "version": "0.0.1",
+  "name": "veinif",
+  "version": "0.0.1-alpha",
   "description": "Choice-based interactive fiction framework",
   "main": "electron-src/index.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "@types/webpack": "^5.28.0",
     "electron": "^12.0.4",
     "electron-builder": "^22.10.5",
+    "filemanager-webpack-plugin": "^4.0.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "lite-server": "^2.6.1",

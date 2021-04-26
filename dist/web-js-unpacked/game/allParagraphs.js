@@ -10,7 +10,6 @@ export function getParagraph(player) {
             ],
         },
         {
-            // id: 1,
             name: "wood",
             content: `You are walking into the woods and there's no one around.
         Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise.
@@ -51,7 +50,6 @@ export function getParagraph(player) {
             preId: 0,
         },
         {
-            // id: 2,
             name: "greeting",
             content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.subjectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"`,
             choices: [
@@ -81,7 +79,6 @@ export function getParagraph(player) {
             preId: 2
         },
         {
-            // id: 4,
             name: "surprise",
             content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA<br>
         You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door. You must carry 6 flowers to get through the door.`,
@@ -124,7 +121,6 @@ export function getParagraph(player) {
             preId: 3
         },
         {
-            // id: 5,
             name: "oh? you're still here?",
             content: ``,
             choices: [
@@ -151,7 +147,6 @@ export function getParagraph(player) {
             ],
         },
         {
-            // id: 6,
             name: "edge",
             content: `You leaped across the ledge! And landed successfully. You are safe, for now.`,
             choices: [
@@ -161,7 +156,6 @@ export function getParagraph(player) {
             ],
         },
         {
-            // id: 7,
             name: "cave ahead",
             content: `You walked south from where you started. You saw a cave`,
             choices: [
@@ -183,7 +177,6 @@ export function getParagraph(player) {
             ],
         },
         {
-            // id: 8,
             name: "enter cave",
             content: `You enter the cave. It's dark, pitch-black in here`,
             choices: [

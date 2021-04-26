@@ -13,8 +13,8 @@
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/
-!.vscode/settings.json
+# .vscode/
+.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -27,3 +27,14 @@ Thumbs.db
 # Misc
 /src/save for later
 /dist/save for later
+# /dist/
+/build/BuildGUI
+*.exe
+!buildGUI.exe
+/dist/web
+/dist/BuildGUI
+/dist/win-unpacked
+/dist/builder-debug.yml
+/dist/builder-effective-config.yaml
+/__pycache__
+BuildGUI.spec

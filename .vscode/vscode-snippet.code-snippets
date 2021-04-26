@@ -41,7 +41,7 @@
 			"{",
 			"  id: , ",
 			"  content: ``, ",
-			"  nextName:  ",
+			"  nextName: ``",
 			"},"
 		],
 		"description": "Template for Choice"
@@ -102,7 +102,7 @@
 			"          },",
 			"      ]"
 		],
-		"description": "Template for Quest's Stage"
+		"description": "template for an array of items"
 	},
 	//An item
 	"A single item": {

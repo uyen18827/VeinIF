@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -12,13 +13,6 @@ module.exports = {
                 exclude: /node_modules/,
                 type: 'javascript/auto'
             },
-            // {
-            //     test: /\.html/,
-            //     type: 'asset',
-            //     generator: {
-            //         filename: '[hash][ext][query]'
-            //     }
-            // },
             {
                 test: /\.(png|jpe?g|svg|gif)$/i,
                 type: "asset/resource",
@@ -32,6 +26,15 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "index.html",
             filename: "./index.html"
+        }),
+        new FileManagerPlugin({
+            events: {
+                onEnd: {
+                    copy: [
+                        { source: path.resolve(__dirname, 'dist/web'), destination: path.resolve(__dirname, 'electron-src') },
+                    ],
+                }
+            }
         })
     ],
     output: {
