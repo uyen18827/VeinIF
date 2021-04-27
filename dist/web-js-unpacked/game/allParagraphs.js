@@ -50,7 +50,7 @@ export function getParagraph(player) {
         },
         {
             name: "greeting",
-            content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.subjectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"<br>`,
+            content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.objectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"<br>`,
             choices: [
                 { id: 1, content: "And you continue walking", nextName: "key on ground" },
             ],
