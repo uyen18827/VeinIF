@@ -112,7 +112,7 @@ export function loadSaveCode() {
             <button type = "button" class="btn-close" data - bs - dismiss="alert" aria - label="Close"> </button>
                 </div>`;
     //TODO: verify if save is valid. 
-    //fallback: If load is invalid, start new game.
+    //TODO: fallback: If load is invalid, start new game.
 }
 export function getSaveDesc(saveSlot) {
     let retrievedSave = JSON.parse(localStorage.getItem(saveSlot));

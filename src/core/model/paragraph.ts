@@ -8,18 +8,25 @@ export interface Paragraphs {
     content: string;
     /**Array of choices that will lead player to another paragraph. */
     choices?: Array<Choices>
-    preId?: number;
+    // preId?: number;
     /**Array contains items that can be picked up during this scene. Optional.*/
     item?: Array<Items>;
 }
 
 export interface Choices {
     id: number;
+    /**Describe the choice. */
     content: string;
     // nextid: number;
+    /**Conditions that must be satisfied or the choice will be disabled */
     precondition?: Precondition;
+    /**Style dictate how the next paragraph will appear. If = "append"
+     * the previous paragraph won't be cleared, and the new one appears after it.
+     */
     style?: string; //next paragraph's appearance's style
+    /**The consequence of your action. Gain/loose items or stat. */
     consequence?: Consequence;
+    /**Next Paragraph's name. */
     nextName: string;
 }
 

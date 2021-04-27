@@ -51,25 +51,23 @@ export function getParagraph(player?: Player) {
             }
           },
         ],
-        preId: 0,
       },
 
       {
         name: "greeting",
-        content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.subjectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"`,
+        content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.subjectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"<br>`,
         choices: [
-          { id: 1, content: "Last one!", nextName: "key on ground" },
+          { id: 1, content: "And you continue walking", nextName: "key on ground" },
         ],
-        item: [
-          { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
-        ],
-        preId: 1,
+        // item: [
+        //   { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
+        // ],
       },
 
       {
         // id: 3,
         name: "key on ground",
-        content: `You found a key lying on the ground. Along with some flowers<br> Just a heads-up. The next paragraph uses update style "append".<br>`,
+        content: `<p>You found a box on the ground. There's a key inside of the box. Along with some flowers on the ground.</p><p>Just a heads-up. The next paragraph uses update style "append".</p>`,
         choices: [
           {
             id: 1, content: "Move along", style: "append", nextName: "surprise"
@@ -80,18 +78,20 @@ export function getParagraph(player?: Player) {
         ],
         item: [
           { itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", },
-          { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }],
-        preId: 2
+          { itemName: 'flowers', itemQty: 6, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }],
       },
 
       {
         name: "surprise",
-        content: `There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA<br>
-        You run to the space-time door, which will lead you back to the beginning of the game. There's a key hole on the door. You must carry 6 flowers to get through the door.`,
+        content: `<p style="color: purple">There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA!</p>
+        <p>
+        You run to the magic space-time door, which is something that you know will lead you back to the beginning of the game.
+        </p>
+        <p>There's a key hole on the door. The door has an image of a goddess holding 6 flowers. Maybe if you use the key and hold 6 flowers, you might get past this door.</p>`,
         choices: [
           {
             id: 1,
-            content: "[Use Key] [Hold the flowers] Let's go back from the beginning", 
+            content: "[Use Key] [Hold the flowers] Let's go back from the beginning",
             nextName: "start",
             precondition:
             {
@@ -110,7 +110,7 @@ export function getParagraph(player?: Player) {
           },
           {
             id: 2,
-            content: "Or go on? Have this little treat if you plan to go on. (1x key, 1x candied nut)",
+            content: "Or should you just run? Here, take these if you want to go on (1x key, 1x candied nut)",
             nextName: "oh? you're still here?",
             consequence: {
               item: [
@@ -119,18 +119,19 @@ export function getParagraph(player?: Player) {
               ],
             },
           },
-          {
-            id: 3, 
-            content: `Hmmm`, 
-            nextName: "cave ahead"
-          },
+          // {
+          //   id: 3, 
+          //   content: `Hmmm`, 
+          //   nextName: "cave ahead"
+          // },
         ],
-        preId: 3
       },
 
       {
         name: "oh? you're still here?",
-        content: ``,
+        content: `<img src="../../assets/images/cat.jpg">
+        <p>Nice attempt, but there's no more content past this point.</p>
+        <p>Enjoyed the game? Didn't enjoy it? Well, there's a reason why I am not a literature major :)</p>`,
         choices: [
           {
             id: 1, content: "This is truly the end. There's nothing else. Let's just go back",
@@ -141,7 +142,7 @@ export function getParagraph(player?: Player) {
           },
           { id: 2, content: "Trust me on this one my friend.", nextName: "start" },
           {
-            id: 3, content: "Jump over the ledge?",
+            id: 3, content: "This choice is just here to show what it's like if your Stats check had failed.",
             nextName: "edge",
             precondition: {
               item: [
@@ -173,7 +174,7 @@ export function getParagraph(player?: Player) {
             nextName: "enter cave",
           },
           {
-            id:  2,
+            id: 2,
             content: `Turn back to where you started`,
             nextName: "edge"
           },
@@ -201,7 +202,7 @@ export function getParagraph(player?: Player) {
               ],
               stat: [],
             },
-            
+
           },
           {
             id: 2,
