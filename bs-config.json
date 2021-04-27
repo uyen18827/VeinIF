@@ -1,0 +1,8 @@
+{
+    "files": [
+        "./dist/web",
+        "./dist/web-js-unpacked",
+        ".index.html",
+        "./src"
+    ]
+}

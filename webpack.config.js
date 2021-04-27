@@ -17,7 +17,7 @@ module.exports = {
                 test: /\.(png|jpe?g|svg|gif)$/i,
                 type: "asset/resource",
                 generator: {
-                    filename: 'assets/images/[hash][ext][query]'
+                    filename: 'assets/images/[name].[ext]',
                 }
             },
         ],
@@ -31,6 +31,9 @@ module.exports = {
             events: {
                 onEnd: {
                     copy: [
+                        {
+                            source: path.resolve(__dirname, 'assets'), destination: path.resolve(__dirname, 'dist/web/assets')
+                        },
                         { source: path.resolve(__dirname, 'dist/web'), destination: path.resolve(__dirname, 'electron-src') },
                     ],
                 }
