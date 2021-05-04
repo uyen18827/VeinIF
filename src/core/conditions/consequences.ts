@@ -1,7 +1,7 @@
-import { getItem } from "../inventory/inventory.js";
-import { Consequence } from "../model/paragraph.js";
-import { getCurrentParagraphName } from "../paragraphs/paragraphFunctions.js";
-import { handleStats } from "../player/statInfos.js";
+import { getItem } from "../inventory/inventory";
+import { Consequence } from "../model/paragraph";
+import { getCurrentParagraphName } from "../paragraphs/paragraphFunctions";
+import { handleStats } from "../player/statInfos";
 
 //Consequence: After a choice, player gain/loose item or stat point, or both.
 export function applyConsequence(consequence: Consequence) {

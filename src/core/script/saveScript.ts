@@ -1,10 +1,10 @@
-import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory.js";
-import { inventoryItem } from "../model/item.js";
-import { clearAllStat, clearStatHTML, getStat, loadStat, showAllStatHTML } from "../player/statInfos.js";
-import { Save } from "../model/save.js";
-import { getCurrentParagraphName, updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo.js";
-import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns.js";
+import { appendItemHTML, clearInventory, clearInventoryHTML, getInventory, loadBulkInventory } from "../inventory/inventory";
+import { inventoryItem } from "../model/item";
+import { clearAllStat, clearStatHTML, getStat, loadStat, showAllStatHTML } from "../player/statInfos";
+import { Save } from "../model/save";
+import { getCurrentParagraphName, updateParagraph } from "../paragraphs/paragraphFunctions";
+import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo";
+import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns";
 
 /**
  * Create a new save and stringify it.

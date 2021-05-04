@@ -1,4 +1,4 @@
-import { Paragraphs, Precondition } from "./paragraph.js";
+import { Paragraphs, Precondition } from "./paragraph";
 /**Interface for items that's displayed in a paragraph */
 export interface Items {
     itemName: string,

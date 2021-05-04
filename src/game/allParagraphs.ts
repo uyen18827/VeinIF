@@ -1,7 +1,8 @@
-import { Paragraphs } from "../core/model/paragraph.js";
-import { capitalise, verbForm } from "../tools/formatting.js";
-import { Player } from "../core/model/player.js";
-import { statStyle } from "../core/model/Stat.js";
+import { Paragraphs } from "../core/model/paragraph";
+import { capitalise, verbForm } from "../tools/formatting";
+import { Player } from "../core/model/player";
+import { statStyle } from "../core/model/Stat";
+import catImg from "../../assets/images/cat.jpg"
 
 export function getParagraph(player?: Player) {
   let paragraphs: Paragraphs[] =
@@ -129,7 +130,7 @@ export function getParagraph(player?: Player) {
 
       {
         name: "oh? you're still here?",
-        content: `<img src="../../assets/images/cat.jpg">
+        content: `<img src="${catImg}">
         <p>Nice attempt, but there's no more content past this point.</p>
         <p>Enjoyed the game? Didn't enjoy it? Well, there's a reason why I am not a literature major :)</p>`,
         choices: [

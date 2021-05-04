@@ -1,9 +1,9 @@
 //Check if player's stat meet the need to proceed.
 //For example, the choice "Climb the tree [Athletic 10]" needs Athletic = 10
 
-import { Choices, conStyle, Precondition } from "../model/paragraph.js";
-import { greyOut } from "../../tools/formatting.js";
-import { checkInInventory, checkStat } from "./checkConditions.js";
+import { Choices, conStyle, Precondition } from "../model/paragraph";
+import { greyOut } from "../../tools/formatting";
+import { checkInInventory, checkStat } from "./checkConditions";
 
 //before this, check if choice has precondition.
 //if there's no condition on a choice, skip this function entirely.

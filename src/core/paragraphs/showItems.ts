@@ -1,8 +1,8 @@
-import { getInventory, getItem } from "../inventory/inventory.js";
-import { Items } from "../model/item.js";
-import { autoSave } from "../script/saveScript.js";
-import { checkItemCondition } from "../conditions/itemCondition.js";
-import { getCurrentParagraphName } from "./paragraphFunctions.js";
+import { getInventory, getItem } from "../inventory/inventory";
+import { Items } from "../model/item";
+import { autoSave } from "../script/saveScript";
+import { checkItemCondition } from "../conditions/itemCondition";
+import { getCurrentParagraphName } from "./paragraphFunctions";
 
 export function showItems(items: Items[], itemContainer: any, pname: string) {
     //these are kinda ugly but oh my god did it run :( Probably should refactor some other time

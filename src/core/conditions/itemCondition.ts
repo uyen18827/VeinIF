@@ -1,8 +1,8 @@
-import { Items } from "../model/item.js";
-import { Precondition } from "../model/paragraph.js";
-import { greyOut } from "../../tools/formatting.js";
-import { checkInInventory, checkStat } from "./checkConditions.js";
-import { checkResult } from "./choiceCondition.js";
+import { Items } from "../model/item";
+import { Precondition } from "../model/paragraph";
+import { greyOut } from "../../tools/formatting";
+import { checkInInventory, checkStat } from "./checkConditions";
+import { checkResult } from "./choiceCondition";
 
 export function checkItemCondition(item: Items, condition: Precondition) {
     let preItem = condition.item;

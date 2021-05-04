@@ -1,4 +1,4 @@
-import { Stat, statStyle, statWithStyle } from "../model/Stat.js";
+import { Stat, statStyle, statWithStyle } from "../model/Stat";
 
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat: Array<statWithStyle> = [

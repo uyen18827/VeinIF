@@ -1,6 +1,6 @@
-import { getInventory } from "../inventory/inventory.js";
-import { getStat } from "../player/statInfos.js";
-import { checkResult } from "./choiceCondition.js";
+import { getInventory } from "../inventory/inventory";
+import { getStat } from "../player/statInfos";
+import { checkResult } from "./choiceCondition";
 
 /**
  * Check if player's stat satisfy precondition

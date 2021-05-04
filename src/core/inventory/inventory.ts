@@ -1,6 +1,6 @@
-import { inventoryItem, Items } from "../model/item.js";
-import { Paragraphs } from "../model/paragraph.js";
-import { capitalise } from "../../tools/formatting.js";
+import { inventoryItem, Items } from "../model/item";
+import { Paragraphs } from "../model/paragraph";
+import { capitalise } from "../../tools/formatting";
 
 export let inventory: Array<inventoryItem> = [];
 
@@ -11,7 +11,7 @@ function addToInventory(item: inventoryItem) {
 /**
  * Transfer items form an array of items to the inventory one by one.
  * Use case: load inventory from save file && add a bulk of item from treasure chest to inventory
- * @param items Array of items
+ * @param items Array of itemss
  */
 export function loadBulkInventory(items: inventoryItem[]) {
     items.forEach(element => addToInventory(element));

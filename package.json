@@ -4,10 +4,9 @@
   "description": "Choice-based interactive fiction framework",
   "main": "electron-src/index.js",
   "scripts": {
+    "start": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "lite-server",
     "tsc:w": "tsc -w",
-    "dev": "concurrently \"npm:tsc:w\" \"npm:server\"",
     "build": "webpack --mode=production",
     "electron-build": "electron-builder --win=portable"
   },
@@ -20,22 +19,21 @@
     "concurrently": "^5.3.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.37",
-    "@types/webpack": "^5.28.0",
     "electron": "^12.0.4",
     "electron-builder": "^22.10.5",
     "filemanager-webpack-plugin": "^4.0.0",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
-    "lite-server": "^2.6.1",
+    "ts-loader": "^8.0.12",
     "typescript": "^4.2.3",
     "webpack": "^5.30.0",
-    "webpack-cli": "^4.6.0"
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "electronBuilder": {
     "build": {
-      "productName": "chosen",
-      "appId": "chosen.TestApp",
+      "productName": "veinIFgame",
+      "appId": "veinIFgame.test",
       "asar": "true",
       "win": {
         "target": [

@@ -1,4 +1,4 @@
-import { getPlayerPronouns } from "../core/player/playerInfo.js";
+import { getPlayerPronouns } from "../core/player/playerInfo";
 /////////////////////////////Formatting tools////////////////////////////////////////
 /**
  *Capitalise the first letter in a string.

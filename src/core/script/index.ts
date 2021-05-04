@@ -1,9 +1,9 @@
-import { getName } from "../player/playerInfo.js"
-import { showPronounDialogue } from "../player/pronouns.js"
-import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { autoLoad, exportSave, exportStorageSave, getSaveDesc, loadSave, loadSaveCode, newSave } from "./saveScript.js";
-import { restartGame } from "./settings.js";
-import { getStat, showAllStatHTML } from "../player/statInfos.js";
+import { getName } from "../player/playerInfo"
+import { showPronounDialogue } from "../player/pronouns"
+import { updateParagraph } from "../paragraphs/paragraphFunctions";
+import { autoLoad, exportSave, exportStorageSave, getSaveDesc, loadSave, loadSaveCode, newSave } from "./saveScript";
+import { restartGame } from "./settings";
+import { getStat, showAllStatHTML } from "../player/statInfos";
 
 ///////////////////Initialize game///////////////////
 window.onload = function () {

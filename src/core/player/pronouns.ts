@@ -1,5 +1,5 @@
-import { Pronouns } from "../model/player.js"
-import { player } from "./playerInfo.js";
+import { Pronouns } from "../model/player"
+import { player } from "./playerInfo";
 /** List of pronouns. Add, edit or remove accordingly to author's needs.
  * To change structure i.e adding more field like title: "Mr"... refer to src/model/player.ts
  */

@@ -1,9 +1,9 @@
-import { clearInventory, clearInventoryHTML } from "../inventory/inventory.js";
-import { conStyle } from "../model/paragraph.js";
-import { updateParagraph } from "../paragraphs/paragraphFunctions.js";
-import { resetPlayer } from "../player/playerInfo.js";
-import { clearAllStat, clearStatHTML, getStat, restoreDefaultStat, showAllStatHTML } from "../player/statInfos.js";
-import { autoSave } from "./saveScript.js";
+import { clearInventory, clearInventoryHTML } from "../inventory/inventory";
+import { conStyle } from "../model/paragraph";
+import { updateParagraph } from "../paragraphs/paragraphFunctions";
+import { resetPlayer } from "../player/playerInfo";
+import { clearAllStat, clearStatHTML, getStat, restoreDefaultStat, showAllStatHTML } from "../player/statInfos";
+import { autoSave } from "./saveScript";
 
 export function restartGame() {
     updateParagraph("start");

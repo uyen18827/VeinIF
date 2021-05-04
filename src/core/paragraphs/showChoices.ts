@@ -1,7 +1,7 @@
-import { applyConsequence } from "../conditions/consequences.js";
-import { checkChoiceCondition } from "../conditions/choiceCondition.js";
-import { autoSave } from "../script/saveScript.js";
-import { updateParagraph } from "./paragraphFunctions.js";
+import { applyConsequence } from "../conditions/consequences";
+import { checkChoiceCondition } from "../conditions/choiceCondition";
+import { autoSave } from "../script/saveScript";
+import { updateParagraph } from "./paragraphFunctions";
 
 /**
  * Show available choices in a paragraph

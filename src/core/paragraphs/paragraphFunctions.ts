@@ -1,9 +1,9 @@
-import { Paragraphs, singleParagraph } from "../model/paragraph.js";
-import { getName, getPlayer } from "../player/playerInfo.js";
-import { showPronounDialogue } from "../player/pronouns.js";
-import { getParagraph } from "../../game/allParagraphs.js";
-import { showChoices } from "./showChoices.js";
-import { showItems } from "./showItems.js";
+import { Paragraphs, singleParagraph } from "../model/paragraph";
+import { getName, getPlayer } from "../player/playerInfo";
+import { showPronounDialogue } from "../player/pronouns";
+import { getParagraph } from "../../game/allParagraphs";
+import { showChoices } from "./showChoices";
+import { showItems } from "./showItems";
 let currentParagraph: string | undefined;
 /**Get nextName, then show the paragraph with that name.
   * @param {number} nextName next paragraph's name.
@@ -11,7 +11,6 @@ let currentParagraph: string | undefined;
 */
 export function updateParagraph(nextName: string, style?: string) {
     let player = getPlayer();
-    // console.log(getParagraph(player));
     let pName = getParagraph(player).findIndex(element => element.name == nextName);
     // console.log(pName, nextName);
     // console.log(getParagraph(player)[pName])
@@ -23,14 +22,6 @@ export function updateParagraph(nextName: string, style?: string) {
     let choices = nextParagraph.choices;
     let items = null;
     itemContainer.innerHTML = null;
-    if (document.querySelector("input#playerName")) {
-        document.addEventListener("keyup", function (e: any) {
-            // e.target was the clicked element
-            if (e.target && e.target.matches("input#playerName")) {
-                getName();
-            }
-        });
-    }
     setCurrentParagraphName(nextName);
     switch (style) {
         case "append":
@@ -44,12 +35,26 @@ export function updateParagraph(nextName: string, style?: string) {
             break;
     }
     choiceContainer.textContent = null;
-    items = nextParagraph.item;
     showChoices(choices, choiceContainer);
+    items = nextParagraph.item;
     if (items) {
         showItems(items, itemContainer, nextName);
     }
-    showPronounDialogue();
+    if (document.getElementById("pronouns")) {
+        showPronounDialogue();
+        if (player.pronouns.Category != "") {
+            let selectedPronoun = document.getElementById(player.pronouns.subjectPro);
+            (<HTMLInputElement>selectedPronoun).checked = true;
+        }
+    }
+    if (document.querySelector("input#playerName")) {
+        document.addEventListener("keyup", function (e: any) {
+            // e.target was the clicked element
+            if (e.target && e.target.matches("input#playerName")) {
+                getName();
+            }
+        });
+    }
 }
 /**
  * Set the content of HTML element id = 'paragraph'

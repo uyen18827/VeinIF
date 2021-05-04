@@ -1,6 +1,6 @@
-import { defaultPlayer } from "../../game/playerInfo.js";
-import { Player } from "../model/player.js";
-import { showPronouns } from "./pronouns.js";
+import { defaultPlayer } from "../../game/playerInfo";
+import { Player } from "../model/player";
+import { showPronouns } from "./pronouns";
 
 export const player: Player = {
     id: 0,
