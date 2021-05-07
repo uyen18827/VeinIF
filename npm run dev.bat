@@ -1,3 +1,3 @@
 @REM echo %CD%
-npm run start
+npm run dev
 pause

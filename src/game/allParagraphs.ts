@@ -47,7 +47,7 @@ export function getParagraph(player?: Player) {
             description: "A small small sword",
             itemCode: "smol_sword",
             precondition: {
-              stat: [{ statName: 'Meow', value: 1 }],
+              stat: [{ statName: 'Mystic', value: 1 }],
               item: [{ itemName: "candied nut", itemQty: 1, itemCode: "nut1", }]
             }
           },
@@ -73,7 +73,7 @@ export function getParagraph(player?: Player) {
           {
             id: 1, content: "Move along", style: "append", nextName: "surprise"
             // precondition: {
-            //   stat: [{ statName: 'Meow', value: 2 }],
+            //   stat: [{ statName: 'Mystic', value: 2 }],
             // }
           }
         ],
@@ -104,7 +104,7 @@ export function getParagraph(player?: Player) {
             consequence: {
               item: [{ itemName: "key", description: "A small key. You wonder what it's for.", itemQty: -1, itemCode: "key1", }],
               stat: [
-                { statName: 'Meow', value: 1, style: statStyle.show },
+                { statName: `Mystic`, value: 1, style: statStyle.show },
                 { statName: `hiddenValue`, value: 1, style: statStyle.hide }
               ],
             },

@@ -10,11 +10,11 @@ import { checkResult } from "./choiceCondition";
  * @returns enum checkResult passed or failed.
  */
 export function checkStat(elementId: string, statName: string, value: number) {
-    var found = getStat().find(element => element.statName == statName);
+    let found = getStat().find(element => element.statName == statName);
     let elementHTML = document.querySelector(`#${elementId}`);
     if (found) {
         if (found.value < value) {
-            console.log(`Condition not met! ${found.value} < ${value}`);
+            // console.log(`Condition not met: ${found.value} < ${value}`);
             //show reason why it's failed
             elementHTML!.innerHTML += ` [Condition not met: ${statName} value ${found.value}/${value}]`;
             return checkResult.failed;
@@ -27,7 +27,7 @@ export function checkStat(elementId: string, statName: string, value: number) {
     }
     else {
         console.log("Condition not met!");
-        elementHTML!.innerHTML += ` [Condition not met: player does not have ${statName}]`;
+        elementHTML!.innerHTML += ` [Condition not met: player doesn't have stat "${statName}"]`;
         return checkResult.failed;
     }
 };

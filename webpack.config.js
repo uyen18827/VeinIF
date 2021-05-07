@@ -39,9 +39,6 @@ module.exports = {
             events: {
                 onEnd: {
                     copy: [
-                        // {
-                        //     source: path.resolve(__dirname, 'assets'), destination: path.resolve(__dirname, 'dist/web/assets')
-                        // },
                         { source: path.resolve(__dirname, 'dist/web'), destination: path.resolve(__dirname, 'electron-src') },
                     ],
                 }
@@ -57,6 +54,7 @@ module.exports = {
         contentBase: [
             path.join(__dirname, 'dist'),
         ],
+        open: true,
     },
 
     output: {

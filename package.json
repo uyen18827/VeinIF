@@ -1,10 +1,10 @@
 {
   "name": "veinif",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1-alpha.2",
   "description": "Choice-based interactive fiction framework",
   "main": "electron-src/index.js",
   "scripts": {
-    "start": "webpack serve",
+    "dev": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:w": "tsc -w",
     "build": "webpack --mode=production",
@@ -14,7 +14,7 @@
     "interactive fiction"
   ],
   "author": "Uyen Nguyen",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "concurrently": "^5.3.0"
   },
