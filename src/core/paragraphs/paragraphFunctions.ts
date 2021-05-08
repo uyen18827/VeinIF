@@ -5,6 +5,9 @@ import { getParagraph } from "../../game/allParagraphs";
 import { showChoices } from "./showChoices";
 import { showItems } from "./showItems";
 let currentParagraph: string | undefined;
+const itemContainer: HTMLElement | any = document.getElementById("items");
+const choiceContainer: HTMLElement | any = document.getElementById("choices");
+
 /**Get nextName, then show the paragraph with that name.
   * @param {number} nextName next paragraph's name.
   * @param {string} style optional. Update paragraph style. Leave blank for default: clear previous paragraph then show the next one.
@@ -12,17 +15,13 @@ let currentParagraph: string | undefined;
 export function updateParagraph(nextName: string, style?: string) {
     let player = getPlayer();
     let pName = getParagraph(player).findIndex(element => element.name == nextName);
-    // console.log(pName, nextName);
-    // console.log(getParagraph(player)[pName])
     let p = new singleParagraph(getParagraph(player)[pName]);
     let nextParagraph = p.paragraph;
     // let nextParagraph = getParagraph(player)[nextid];
-    const choiceContainer: HTMLElement | any = document.getElementById("choices");
-    const itemContainer: HTMLElement | any = document.getElementById("items");
-    let choices = nextParagraph.choices;
     let items = null;
     itemContainer.innerHTML = null;
     setCurrentParagraphName(nextName);
+    // append paragraph content according to its style property.
     switch (style) {
         case "append":
             currentParagraph = currentParagraph + " " + nextParagraph.content;
@@ -34,12 +33,15 @@ export function updateParagraph(nextName: string, style?: string) {
             paragraphContainerContent(currentParagraph);
             break;
     }
+    // get choices, clear choice container div & append new content.
+    let choices = nextParagraph.choices;
     choiceContainer.textContent = null;
     showChoices(choices, choiceContainer);
     items = nextParagraph.item;
     if (items) {
         showItems(items, itemContainer, nextName);
     }
+    // if paragraph content has element id = "pronouns"
     if (document.getElementById("pronouns")) {
         showPronounDialogue();
         if (player.pronouns.Category != "") {
@@ -47,6 +49,7 @@ export function updateParagraph(nextName: string, style?: string) {
             (<HTMLInputElement>selectedPronoun).checked = true;
         }
     }
+    // if paragraph content has playerName input field: 
     if (document.querySelector("input#playerName")) {
         document.addEventListener("keyup", function (e: any) {
             // e.target was the clicked element
