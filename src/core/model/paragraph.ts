@@ -1,6 +1,9 @@
 import { Items, requiredItem } from "./item";
 import { Stat, statWithStyle } from "./Stat";
 
+/**
+ * Contains description of the scene, its name, available choices and items.
+ */
 export interface Paragraphs {
     /**A paragraph's unique identifier. There shouldn't be two paragraph with the same name. */
     name: string;
@@ -8,7 +11,6 @@ export interface Paragraphs {
     content: string;
     /**Array of choices that will lead player to another paragraph. */
     choices?: Array<Choices>
-    // preId?: number;
     /**Array contains items that can be picked up during this scene. Optional.*/
     item?: Array<Items>;
 }
@@ -53,7 +55,7 @@ export enum conStyle {
     hideReason = 2, //hide the reason
 };
 //TODO: implement show/hide/hideReason on Precondition. 
-//Currently, precondition shows reason why a choice cannot be clicked by default 
+//Currently, precondition checks on default will always show reason why a choice cannot be clicked by default 
 
 // const precondition: Precondition = {
 //     stat: [{

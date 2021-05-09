@@ -29,6 +29,7 @@ export function verbForm(form: string, original: string) {
         return form;
 }
 
+//TODO: showOnCondition shows the string if the condition check has passed.
 export function showOnCondition(type: any, requiredElement: string, value: number, message: string, failedMessage: string) {
     switch (type) {
         case (type = 'stat'):
