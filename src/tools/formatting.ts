@@ -15,7 +15,7 @@ export function greyOut(thing: HTMLElement) {
 ////////////////////////Grammar tools//////////////////////////////////////////
 /**
  * Specify the verb form that goes with a set of pronouns.
- * Ex: (have) She has a pen / They have a pen
+ * Ex: (have) => She [has] a pen / They [have] a pen
  * @param form verb form that goes with 'she/he'
  * @param original base verb, usually goes with 'they/you/we'
  * @returns form or original, depends on the player's selected pronouns.

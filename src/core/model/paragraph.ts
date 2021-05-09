@@ -5,9 +5,11 @@ import { Stat, statWithStyle } from "./Stat";
  * Contains description of the scene, its name, available choices and items.
  */
 export interface Paragraphs {
-    /**A paragraph's unique identifier. There shouldn't be two paragraph with the same name. */
+    /**A paragraph's unique identifier. There shouldn't be two paragraph with the same name.
+     * The first paragraph should be named "start"
+     */
     name: string;
-    /**The main body of the paragraph. This element should contain your story/writing. */
+    /**The main body of the paragraph. This element should contain your story/writing. HTML tags can be used for formatting, except for the "script" tag. */
     content: string;
     /**Array of choices that will lead player to another paragraph. */
     choices?: Array<Choices>

@@ -52,24 +52,15 @@
 		"prefix": "consequence",
 		"body": [
 			"consequence: {",
-			"",
+			"  item: [],",
+			"  stat: [],",
 			"}"
 		],
 		"description": "Template for Consequence"
 	},
-	//stat for consequence
-	"Template for Stat Consequence": {
-		"prefix": "conStat",
-		"body": [
-			"stat: [",
-			" { statName: ``, value: 10, style: },",
-			"],"
-		],
-		"description": "Template for Stat Consequence"
-	},
 	//single stat for consequence
 	"Template for consequence's Stat": {
-		"prefix": "conStatEntry",
+		"prefix": "conStat",
 		"body": [
 			"{ statName: ``, value: , style: statStyle.show },"
 		],

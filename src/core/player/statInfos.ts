@@ -2,16 +2,16 @@ import { Stat, statStyle, statWithStyle } from "../model/Stat";
 
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat: Array<statWithStyle> = [
-    { statName: "Intellect", value: 10, style: statStyle.show },
-    { statName: "Endurance", value: 4, style: statStyle.show },
-    { statName: 'Athletic', value: 0, style: statStyle.show }
+    { statName: "Village Relationship", value: 10, style: statStyle.show },
+    { statName: "Strength", value: 0, style: statStyle.show },
+    { statName: 'Intelligence', value: 0, style: statStyle.show }
 ]
 
 export function restoreDefaultStat() {
     let defaultPlayerStat: Array<statWithStyle> = [
-        { statName: "Intellect", value: 10, style: statStyle.show },
-        { statName: "Endurance", value: 4, style: statStyle.show },
-        { statName: 'Athletic', value: 0, style: statStyle.show }
+        { statName: "Village", value: 10, style: statStyle.show },
+        { statName: "Strength", value: 0, style: statStyle.show },
+        { statName: 'Intelligence', value: 0, style: statStyle.show }
     ];
     loadStat(defaultPlayerStat);
 }

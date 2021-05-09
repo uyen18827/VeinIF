@@ -6,7 +6,6 @@ import { clearAllStat, clearStatHTML, getStat, restoreDefaultStat, showAllStatHT
 import { autoSave } from "./saveScript";
 
 export function restartGame() {
-    updateParagraph("start");
     clearInventory();
     resetPlayer();
     clearInventoryHTML();
@@ -14,6 +13,7 @@ export function restartGame() {
     clearStatHTML();
     restoreDefaultStat();
     showAllStatHTML(getStat());
+    updateParagraph("start");
     autoSave();
 };
 
@@ -54,12 +54,13 @@ export interface gameDetails{
     engine: string;    
 }
 
-let gameInfo: gameDetails = {
-    gameVersion: `0.0.1`,
-    IFID: ``,
-    name: `Demo`,
-    description: ``,
-    author: `Author Name`, //your name
-    engineVersion: `0.0.0.1`,
-    engine: ``
-}
+//TODO: use this some later time
+// let gameInfo: gameDetails = {
+//     gameVersion: `0.0.1`,
+//     IFID: ``,
+//     name: `Demo`,
+//     description: ``,
+//     author: `Author Name`, //your name
+//     engineVersion: `0.0.1`,
+//     engine: ``
+// }

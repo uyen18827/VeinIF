@@ -4,213 +4,380 @@ import { Player } from "../core/model/player";
 import { statStyle } from "../core/model/Stat";
 import catImg from "../../assets/images/cat.jpg"
 
+interface ParagraphPlus extends Paragraphs {
+  special?: string;
+}
+/**
+ * Entry point. Contains all game content.
+ * @param player 
+ * @returns paragraphs
+ */
 export function getParagraph(player?: Player) {
   let paragraphs: Paragraphs[] =
     [
+      // {
+      //   name: "start",
+      //   content: `This is the content of the first paragraph`,
+      //   item: [
+      //     {
+      //       itemName: `flower`,
+      //       itemQty: 1,
+      //       description: `A single purple flower.`,
+      //       itemCode: `purple-flower`,
+      //     },
+          
+      //   ],
+      //   choices: [
+      //     {
+      //      id: 1, 
+      //      content: `Nice. Let's go to the next one.`, 
+      //      nextName: `next-p` 
+      //     },
+      //   ],
+      // },
+      // {
+      //   name: "next-p",
+      //   content: `This is the next paragraph!`,
+      //   choices: [
+      //     {
+      //      id: 1, 
+      //      content: `Content Content!`, 
+      //      nextName: `start-1` 
+      //     },
+      //   ],
+      // },
       {
         name: "start",
-        content: `This is the first paragraph. <u><b>Welcome to a game!<\/b><\/u> This game is a multi choice Interactive fiction. Different choices will lead to different outcomes. Rejoice! Enjoy your time playing here!`,
-        choices: [
-          { id: 1, content: "Alright then, lead me to the next paragraph", nextName: "wood" },
-        ],
-      },
-
-      {
-        name: "wood",
-        content: `You are walking into the woods and there's no one around.
-        Or so you thought. Your senses tells you that there's something out there, but your conscious mind tries to convince otherwise.
-        After all, there's no reason for anyone to be out at this hour.
-        <br>Or is it?<br>
-        No time for pleasantries, but at the very least, could you tell us a bit about yourself?<br>
+        content: `<p> You are but a <b>simple knight</b>, stationed at a remote village.
+        Life was peaceful, until a day. </p>
+        <p>The crops just won't grow.</p>
+        <p>The villagers looked for someone to blame. And so they found.
+        The witches <i>must</i> be the one who befall this ill fate on them. Even though they've lived in peace due to a pact with the villagers elders 100 years ago, villagers still hold a certain degree of distrust towards the witches.</p>
+        <p> Even though the witches' medicine has saved some children and elders from time to time. </p>
+        <p>
+        And so, they tasked you to go, and confront the village's witches.</p>
+        <p>Every knight may look the same with that armour, but everyone has a name. And yours is...<br>
         <input id="playerName" type="text" placeholder="Enter your name here!" aria-label="playerName" value="${player?.playerName}">
-        <div id="pronouns">And your pronouns? <br></div>
+        </p>
+        <p>
+        <div id="pronouns">And your preferred pronouns are...<br></div></p>
+        <p>Now that you've got that settled, ...</p>
         `,
         choices: [
-          { id: 1, content: "Ooooh! Next!!!!!", nextName: `greeting` },
-          { id: 2, content: `I'm scared. Let's go back to the first one!`, nextName: `start` }],
-        item: [
           {
-            itemName: 'sword',
-            itemQty: 1,
-            description: "An old, rusty sword you found on the ground.",
-            itemCode: "sword",
-          },
-          {
-            itemName: 'great sword',
-            itemQty: 1,
-            description: "An old, rusty great sword you found on the ground.",
-            itemCode: "great_sword",
-          },
-          {
-            itemName: 'very small sword',
-            itemQty: 1,
-            description: "A small small sword",
-            itemCode: "smol_sword",
-            precondition: {
-              stat: [{ statName: 'Mystic', value: 1 }],
-              item: [{ itemName: "candied nut", itemQty: 1, itemCode: "nut1", }]
+            id: 1,
+            content: `With your trusty old sword in hand and armour oiled, you set out to find the witches' lair`,
+            nextName: `walking`,
+            consequence: {
+              item: [
+                {
+                  itemName: `Old sword`,
+                  itemQty: 1,
+                  description: `Your old and trusty sword.`,
+                  itemCode: `old-sword`,
+                },
+              ]
             }
           },
         ],
       },
-
       {
-        name: "greeting",
-        content: `This is the third paragraph. A guy and his friend, Snail Guy waved at you and said: "This is ${player?.playerName}! ${capitalise(player?.pronouns.is)} finally here! ${capitalise(player?.pronouns.subjectPro) + " " + verbForm('was', 'were')} busy last time you were here, so I couldn't introduce ${player?.pronouns.objectPro} to you. Oh well, this is the end. Bye ${player?.playerName}!"<br>`,
-        choices: [
-          { id: 1, content: "And you continue walking", nextName: "key on ground" },
-        ],
-        // item: [
-        //   { itemName: 'flowers', itemQty: 3, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }
-        // ],
-      },
-
-      {
-        // id: 3,
-        name: "key on ground",
-        content: `<p>You found a box on the ground. There's a key inside of the box. Along with some flowers on the ground.</p><p>Just a heads-up. The next paragraph uses update style "append".</p>`,
-        choices: [
-          {
-            id: 1, content: "Move along", style: "append", nextName: "surprise"
-            // precondition: {
-            //   stat: [{ statName: 'Mystic', value: 2 }],
-            // }
-          }
-        ],
-        item: [
-          { itemName: 'key', itemQty: 1, description: "A small key. You wonder what it's for.", itemCode: "key1", },
-          { itemName: 'flowers', itemQty: 6, description: `Some nice, wild flowers`, itemCode: `wild_flowers` }],
-      },
-
-      {
-        name: "surprise",
-        content: `<p style="color: purple">There's a bear behind you! AAAAAAAAAAAAAAAAAAAAA!</p>
-        <p>
-        You run to the magic space-time door, which is something that you know will lead you back to the beginning of the game.
-        </p>
-        <p>There's a key hole on the door. The door has an image of a goddess holding 6 flowers. Maybe if you use the key and hold 6 flowers, you might get past this door.</p>`,
+        name: "walking",
+        content: `<p>And you go, into the forest.</p>
+        <p>You start to think about yourself. Say, what's your best quality?</p>`,
         choices: [
           {
             id: 1,
-            content: "[Use Key] [Hold the flowers] Let's go back from the beginning",
-            nextName: "start",
-            precondition:
-            {
-              item: [
-                { itemName: "key", itemQty: 1, itemCode: "key1", },
-                { itemName: 'flowers', itemQty: 6, itemCode: `wild_flowers` }
-              ],
-            },
+            content: `Your intelligence, of course. You've learned a lot.`,
+            nextName: `out`,
             consequence: {
-              item: [{ itemName: "key", description: "A small key. You wonder what it's for.", itemQty: -1, itemCode: "key1", }],
               stat: [
-                { statName: `Mystic`, value: 1, style: statStyle.show },
-                { statName: `hiddenValue`, value: 1, style: statStyle.hide }
-              ],
-            },
-          },
-          {
-            id: 2,
-            content: "Or should you just run? Here, take these if you want to go on (1x key, 1x candied nut)",
-            nextName: "oh? you're still here?",
-            consequence: {
-              item: [
-                { itemName: "key", description: "A small key. You wonder what it's for.", itemQty: 1, itemCode: "key1", },
-                { itemName: "candied nut", description: "A sweet, sweet treat", itemQty: 1, itemCode: "nut1", },
-              ],
-            },
-          },
-          // {
-          //   id: 3, 
-          //   content: `Hmmm`, 
-          //   nextName: "cave ahead"
-          // },
-        ],
-      },
+                { statName: `Intelligence`, value: 10, style: statStyle.show },
 
-      {
-        name: "oh? you're still here?",
-        content: `<img src="${catImg}">
-        <p>Nice attempt, but there's no more content past this point.</p>
-        <p>Enjoyed the game? Didn't enjoy it? Well, there's a reason why I am not a literature major :)</p>`,
-        choices: [
-          {
-            id: 1, content: "This is truly the end. There's nothing else. Let's just go back",
-            nextName: "start",
-            consequence: {
-              stat: [{ statName: 'Growl', value: 1, style: statStyle.show }],
+              ]
             }
           },
-          { id: 2, content: "Trust me on this one my friend.", nextName: "start" },
-          {
-            id: 3, content: "This choice is just here to show what it's like if your Stats check had failed.",
-            nextName: "edge",
-            precondition: {
-              item: [
-                { itemName: "key", itemQty: 1, itemCode: "key1", },
-              ],
-              stat: [
-                { statName: `Athletic`, value: 10 },
-              ],
-            },
-          },
-        ],
-      },
-      {
-        name: "edge",
-        content: `You leaped across the ledge! And landed successfully. You are safe, for now.`,
-        choices: [
-          {
-            id: 1, content: `Weeee!`, nextName: "start"
-          },
-        ],
-      },
-      {
-        name: "cave ahead",
-        content: `You walked south from where you started. You saw a cave`,
-        choices: [
-          {
-            id: 1,
-            content: `Enter Cave`,
-            nextName: "enter cave",
-          },
           {
             id: 2,
-            content: `Turn back to where you started`,
-            nextName: "edge"
+            content: `Your strength, of course. You're a skilled, strong knight.`,
+            nextName: `out`,
+            consequence: {
+              stat: [
+                { statName: `Strength`, value: 10, style: statStyle.show },
+              ]
+            }
           },
           {
             id: 3,
-            content: `Stop and think for a moment`,
-            nextName: "start"
+            content: `Jack of all trades, but master of none. You're equally good at both thinking and punching, but excel in neither.`,
+            nextName: `out`,
+            consequence: {
+              stat: [
+                { statName: `Intelligence`, value: 5, style: statStyle.show },
+                { statName: `Strength`, value: 5, style: statStyle.show },
+              ]
+            }
           },
         ],
       },
       {
-        name: "enter cave",
-        content: `You enter the cave. It's dark, pitch-black in here`,
+        name: "out",
+        content: `<p>You kept walking. Far into the forest near the village, you found a small hut.
+        Outside, meat are hung up to be sun-dried.</p>
+        <p>
+        This must be the witches' lair. There should be three of them.</p>
+        <p>You knock on the door.</p>
+        `,
         choices: [
           {
             id: 1,
-            content: `Try to adjust your eyes`,
-            nextName: "start",
+            content: `<b>Knock</b> knock`,
+            nextName: `witches-lair`
+          },
+        ],
+      },
+      {
+        name: "witches-lair",
+        content: `<p>The door opens by itself.</p>
+        <p>In front of you, three witches stand.</p>
+        <p>"<b>${player?.playerName}</b>. If you could spare a minute to hear what we have to say" - the tallest of the three said.</p>
+        <p>"There's a wicked dragon up this mountain. It's the one that cursed our village. For each who dies of starvation, the dragons gains in strength." - the cloaked one said.</p>
+        <p>"We know that the villagers have sent you out to deal with us, and we beg of you, we're telling the truth. </p>
+        <p>
+        They will be heading our way soon. We must escape." - the shortest one looks at you pleadingly.</p>
+
+        <p>What will you do?</p>
+        `,
+        choices: [
+          {
+            id: 1,
+            content: `They're lying for sure. Never should've trusted the witches.`,
+            nextName: `deliver-justice`
+          },
+          {
+            id: 2,
+            content: `You believe them. They'll have to get out of here fast.`,
+            nextName: `hiding`
+          },
+        ],
+      },
+      {
+        name: "hiding",
+        content: `<p>Before you can do anything to help the witches escape, loud noises are at the door.</p>
+        <p><i>"Wretched witches! Heal! Our! Land!"</i></p>
+        <p> No doubt this is an angry mob. The sound is getting closer and closer.</p>
+        `,
+        choices: [
+          {
+            id: 1,
+            content: `[Intelligence] Think of a clever way to convince them that the witches are long gone.`,
+            nextName: `lie-success`,
             precondition: {
-              item: [{
-                itemName: `sword`,
-                itemQty: 1,
-                itemCode: `sword`,
-              },
+              stat: [
+                { statName: `Intelligence`, value: 1, },
+              ]
+            }
+          },
+          {
+            id: 2,
+            content: `Scramble and try to convince them that the witches have just escaped.`,
+            nextName: `lie-failed`,
+            consequence: {
+              stat: [
+                { statName: `Village`, value: -9, style: statStyle.show },
               ],
-              stat: [],
+            }
+          },
+        ],
+      },
+      {
+        name: "lie-failed",
+        content: `
+        <p>The witches shrink themselves. You pick them up and hide them inside a soup pot. Just in time, the door burst open. It's the village's youths who's decided to confront the witches themselves.</p>
+        <p>You tried your best to made up a convincing story. However not all of them seems to be convinced by it. Some thinks you're covering the witches, others think that you are just an incapable knight who had failed to capture the witches.
+        </p>
+        <p>For your failure, the villagers had decided to exile you. Only when the curse is lifted are you able to return.</p>
+        <p>And so you stayed behind in the witches' hut.</p>
+        `,
+        choices: [
+          {
+            id: 1,
+            content: `You make sure that the villagers are gone, and talk to the witches about the dragon.`,
+            nextName: `witches-talk`
+          },
+        ],
+      },
+      {
+        name: "lie-success",
+        content: `
+        <p>The witches shrink themselves. You pick them up and hide them inside a soup pot. Just in time, the door burst open. It's the village's youths who's decided to confront the witches themselves.</p>
+        <p>You make up a rather convincing story of how no one's home when you arrived. And so you stayed in the hut to see if they would come back. You lit the fireplace because it was getting cold. And it really was. </p>
+        <p>The villagers believed you. After all, there's no reason for them not to. You're their trusted knight after all.</p>
+        <p>And you continue to stay behind <i>"to see if the witches would return"</i>.
+        </p>`,
+        choices: [
+          {
+            id: 1,
+            content: `You wait for them to leave, and talk to the witches about the dragon.`,
+            nextName: `witches-talk`
+          },
+        ],
+      },
+      {
+        name: "witches-talk",
+        content: `<p>You open the lid and the witches quickly enlarge back to their original size.</p>
+        <p>"The dragon should be up  that mountain, in case you've forgotten. Here, this is for you." the cloaked witch reaches into her cloak and pull out a sword. She puts it on the table.</p>
+        <p>A magical sword. It teems with power. No doubt you could take down the dragon with it.</p>
+        <p>You were so engrossed in admiring the sword that you didn't realise the witches are gone.</p>`,
+        item: [
+          {
+            itemName: `Magic Sword`,
+            itemQty: 1,
+            description: `A magical sword that has strong powers within.`,
+            itemCode: `magic-sword`,
+          },
+        ],
+        choices: [
+          {
+            id: 1,
+            content: `Time to find the dragon.`,
+            nextName: `dragon-tower`
+          },
+        ],
+      },
+      {
+        name: "deliver-justice",
+        content: `<p>They are no match for a seasoned knight like you. One by one, they fell.</p>
+        <p>Shortly after, you heard noises that could only be of an angry mob.</p> "Wretched witches! Heal our land!" they said.`,
+        choices: [
+          {
+            id: 1,
+            content: `You open the door.`,
+            nextName: `justice-open-door`
+          },
+        ],
+      },
+      {
+        name: "justice-open-door",
+        content: `<p>The villagers couldn't believe their eyes.</p>
+        <p>"The witches are dead! The curse is lifted!"</p>
+        <p>The villagers cheers and celebrated with all of the little food they have left. The curse has ended! The crops shall grow again. Soon.</p>
+        <p>But reality is often disappointing.</p>
+        <p>Nothing blooms, nothing grew. Once again, despair covers the whole village. </p>
+        <p>Maybe the witches were right.</p>
+        <p>You set out quietly to the forrest and up the mountain.</p>
+        `,
+        choices: [
+          {
+            id: 1,
+            content: `The dragon shall pay`,
+            nextName: `dragon-tower`
+          },
+        ],
+      },
+      {
+        name: "dragon-tower",
+        content: `<p>You climb up the foggy mountains for what feels like hours. At the top, the fog clears.</p>
+        <p>A huge tower that seems to stretch impossibly up even high. It's hard to miss, but you've never seen it from the village. Foul magic might be at play, concealing the tower.</p>
+        
+        <p>A dragon swoop down. It regards you with toothy smile and a sinister look in its eye.</p>
+        <p>There's only one thing to do</p>
+        `,
+        choices: [
+          {
+            id: 1,
+            content: `Use your trusty old sword and slay the beast`,
+            nextName: `failure`
+          },
+          {
+            id: 2,
+            content: `Use the Magic Sword and slay the beast.`,
+            nextName: `success`,
+            precondition: {
+              item: [
+                {
+                  itemName: `Magic Sword`,
+                  itemQty: 1,
+                  itemCode: `magic-sword`,
+                },
+              ]
+            }
+          },
+          {
+            id: 3,
+            content: `Use your great strength to land a strong attack on the dragon.`,
+            nextName: `success`,
+            precondition: {
+              stat: [
+                { statName: `Strength`, value: 10 },
+              ],
+            }
+          },
+        ],
+      },
+      {
+        name: "success",
+        content: `<img src="${catImg}">
+        <p>You did it! You killed the dragon.</p>
+        <p>
+        You are excited to go back home. The curse should be lifted!
+        </p>`,
+        choices: [
+          {
+            id: 1,
+            content: `Climb down and go home`,
+            nextName: `go-home`
+          },
+        ],
+      },
+      {
+        name: "go-home",
+        content: `<p>It takes several days to descend the mountain and walk back to the village.</p>
+        <p>You wonder what's waiting for you back home.</p>
+        <p></p>`,
+        choices: [
+          {
+            id: 1,
+            content: `You confidently walk into the village square.`,
+            nextName: `home`,
+            precondition: {
+              stat: [{ statName: `Village`, value: 10, },],
             },
 
           },
           {
             id: 2,
-            content: `Turn back to the cave entrance`,
-            nextName: "cave ahead"
+            content: `You anxiously walk into the village square.`,
+            nextName: `home-redeemed`,
+            precondition: {
+              stat: [{ statName: `Village`, value: 1, },],
+            },
           },
         ],
+      },
+      {
+        name: "home",
+        content: `<p>Alas, you are home. </p>
+        <p>"<b>${player?.playerName}</b>! There <b>${player?.pronouns.is}</b>! <b>${capitalise(player?.pronouns.is)}</b> our hero! ${capitalise(player?.pronouns.subjectPro)} ${verbForm('was', 'were')} the one who lifted the curse!"</p>
+        <p>You are relieved. It seems that you have succeeded after all.</p>
+        <p><b>The End</b></p>
+        <p>Ending 1 of 3</p>`,
+      },
+      {
+        name: "failure",
+        content: `<p>But unfortunately, your efforts against the dragon was in vain. It's too powerful for you and your good ol' sword.</p>
+        <p>Your vision fade to darkness.</p>
+        <p><b>The End</b></p>
+        <p>Ending 2 of 3</p>`,
+      },
+      {
+        name: "home-redeemed",
+        content: `<p>Alas, you are home. </p>
+        <p>"<b>${player?.playerName}</b>! There <b>${player?.pronouns.is}</b>! <b>${capitalise(player?.pronouns.is)}</b> our hero! ${capitalise(player?.pronouns.subjectPro)} ${verbForm('was', 'were')} the one who lifted the curse!"</p>
+        <p>You are relieved. It seems that you have succeeded after all.</p>
+        <p>You are welcomed back into the village with open arms.</p>
+        <p><b>The End</b></p>
+        <p>Ending 3 of 3</p>`,
       },
     ];
   return paragraphs;

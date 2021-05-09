@@ -4,7 +4,7 @@
   "description": "Choice-based interactive fiction framework",
   "main": "electron-src/index.js",
   "scripts": {
-    "dev": "webpack serve",
+    "dev": "webpack serve --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:w": "tsc -w",
     "build": "webpack --mode=production",
