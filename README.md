@@ -1,6 +1,8 @@
 # VeinIF
 VeinIF is a framework for creating choice-based Interactive Fiction game.\
-This project uses TypeScript, HTML (& CSS)! 
+This project uses TypeScript, HTML (& CSS)!  \
+\
+[See a sample game made using VeinIF.](https://uyen18827.github.io/VeinIF-Demo/)
 ## Setting up
 Please make sure that Node.js is installed in your machine and a copy of VeinIF is present.\
 Navigate to the folder and run the following command:
