@@ -3,49 +3,22 @@ import { capitalise, verbForm } from "../tools/formatting";
 import { Player } from "../core/model/player";
 import { statStyle } from "../core/model/Stat";
 import catImg from "../../assets/images/cat.jpg"
-
-interface ParagraphPlus extends Paragraphs {
-  special?: string;
+/**
+ * Override properties from interface Paragraphs
+ * Add custom properties here.
+ */
+interface customParagraphs extends Paragraphs {
+  // special?: string;
 }
 /**
- * Entry point. Contains all game content.
- * @param player 
+ * Entry point. Contains all game content. 
+ * Please refrain from changing paragraphs' name. Doing so will affect other paragraphs that depends on the said paragraph.
+ * @param player takes in and update the player's information. Optional.
  * @returns paragraphs
  */
 export function getParagraph(player?: Player) {
-  let paragraphs: Paragraphs[] =
+  let paragraphs: customParagraphs[] =
     [
-      // {
-      //   name: "start",
-      //   content: `This is the content of the first paragraph`,
-      //   item: [
-      //     {
-      //       itemName: `flower`,
-      //       itemQty: 1,
-      //       description: `A single purple flower.`,
-      //       itemCode: `purple-flower`,
-      //     },
-          
-      //   ],
-      //   choices: [
-      //     {
-      //      id: 1, 
-      //      content: `Nice. Let's go to the next one.`, 
-      //      nextName: `next-p` 
-      //     },
-      //   ],
-      // },
-      // {
-      //   name: "next-p",
-      //   content: `This is the next paragraph!`,
-      //   choices: [
-      //     {
-      //      id: 1, 
-      //      content: `Content Content!`, 
-      //      nextName: `start-1` 
-      //     },
-      //   ],
-      // },
       {
         name: "start",
         content: `<p> You are but a <b>simple knight</b>, stationed at a remote village.

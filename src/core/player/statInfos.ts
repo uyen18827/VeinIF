@@ -2,7 +2,7 @@ import { Stat, statStyle, statWithStyle } from "../model/Stat";
 
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat: Array<statWithStyle> = [
-    { statName: "Village Relationship", value: 10, style: statStyle.show },
+    { statName: "Village", value: 10, style: statStyle.show },
     { statName: "Strength", value: 0, style: statStyle.show },
     { statName: 'Intelligence', value: 0, style: statStyle.show }
 ]

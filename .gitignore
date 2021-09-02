@@ -28,6 +28,7 @@ Thumbs.db
 /src/save for later
 /dist/save for later
 # /dist/
+dist/
 /build/BuildGUI
 *.exe
 !buildGUI.exe

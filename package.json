@@ -4,10 +4,11 @@
   "description": "Choice-based interactive fiction framework",
   "main": "electron-src/index.js",
   "scripts": {
-    "dev": "webpack serve --mode=production",
+    "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:w": "tsc -w",
-    "build": "webpack --mode=production",
+    "build": "vite build",
+    "preview": "vite preview --port 8080",
     "electron-build": "electron-builder --win=portable"
   },
   "keywords": [
@@ -15,20 +16,11 @@
   ],
   "author": "Uyen Nguyen",
   "license": "MIT",
-  "dependencies": {
-    "concurrently": "^5.3.0"
-  },
   "devDependencies": {
     "electron": "^12.0.4",
     "electron-builder": "^22.10.5",
-    "filemanager-webpack-plugin": "^4.0.0",
-    "html-loader": "^2.1.2",
-    "html-webpack-plugin": "^5.3.1",
-    "ts-loader": "^8.0.12",
     "typescript": "^4.2.3",
-    "webpack": "^5.30.0",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "vite": "^2.4.2"
   },
   "electronBuilder": {
     "build": {
