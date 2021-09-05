@@ -60,7 +60,7 @@ export function showNameDiv(playerName: string){
     const container = document.querySelectorAll(".yourName");
     if (container) {
         container.forEach(element => {
-            element.innerHTML = `${playerName} `;
+            element.textContent = `${playerName} `;
         });
     }
 }

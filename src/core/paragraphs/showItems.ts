@@ -63,7 +63,7 @@ export function showItems(items: Items[], itemContainer: any, pname: string) {
                 getItem(currentItem, getCurrentParagraphName());
                 console.log(currentItem.itemName);
                 let message = `[Added to Inventory] You picked up ${currentItem.itemName}`;
-                itemHTML.innerHTML = message;
+                itemHTML.textContent = message;
                 itemHTML.style.color = "#6A6C6E";
                 autoSave();
             }, { once: true });

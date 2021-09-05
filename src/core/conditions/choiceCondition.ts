@@ -45,12 +45,12 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
 //         case (0): //show    
 //             let choiceHTML = document.querySelector(`#cid${choiceId}`);
 //             // greyOut((<HTMLElement>choiceHTML));
-//             choiceHTML!.innerHTML += message;
+//             choiceHTML!.textContent += message;
 //             // choiceHTML!.classList.add("choice-blocked");
 //             break;
 //         case (1): //hidden - hide the entire choice
 //             choiceHTML = document.querySelector(`#cid${choiceId}`);
-//             choiceHTML!.innerHTML = ``
+//             choiceHTML!.textContent = ``
 //             break;
 //         case (2): //hide reason
 //             // choiceHTML = document.querySelector(`#cid${choiceId}`);

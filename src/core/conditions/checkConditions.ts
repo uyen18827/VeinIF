@@ -16,7 +16,7 @@ export function checkStat(elementId: string, statName: string, value: number) {
         if (found.value < value) {
             // console.log(`Condition not met: ${found.value} < ${value}`);
             //show reason why it's failed
-            elementHTML!.innerHTML += ` [Condition not met: ${statName} value ${found.value}/${value}]`;
+            elementHTML!.textContent += ` [Condition not met: ${statName} value ${found.value}/${value}]`;
             return checkResult.failed;
         }
         if (found.value >= value) {
@@ -27,7 +27,7 @@ export function checkStat(elementId: string, statName: string, value: number) {
     }
     else {
         console.log("Condition not met!");
-        elementHTML!.innerHTML += ` [Condition not met: player doesn't have stat "${statName}"]`;
+        elementHTML!.textContent += ` [Condition not met: player doesn't have stat "${statName}"]`;
         return checkResult.failed;
     }
 };
@@ -43,11 +43,11 @@ export function checkInInventory(elementId: string, itemCode: string, itemQty: n
     const inInventory = getInventory().find(element => element.item.itemCode == itemCode);
     let elementHTML = document.querySelector(elementId);
     if (!inInventory) {
-        elementHTML!.innerHTML += ` [Condition not met: ${itemName} cannot be found in inventory]`;
+        elementHTML!.textContent += ` [Condition not met: ${itemName} cannot be found in inventory]`;
         return checkResult.failed;
     }
     else if (inInventory && inInventory.item.itemQty < itemQty) {
-        elementHTML!.innerHTML += ` [Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
+        elementHTML!.textContent += ` [Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
         return checkResult.failed;
     }
     else {
