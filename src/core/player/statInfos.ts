@@ -1,4 +1,5 @@
 import { Stat, statStyle, statWithStyle } from "../model/Stat";
+import DOMPurify from "DOMPurify";
 
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat: Array<statWithStyle> = [
@@ -85,7 +86,7 @@ export function handleStats(stat: statWithStyle) {
 export function appendStatHTML(stat: Stat) {
     let statContainer = document.querySelectorAll(`.stat`);
     statContainer!.forEach(element => {
-        element.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
+        element.innerHTML += DOMPurify.sanitize(`<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`);
     });
     // statContainer!.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
 }
@@ -112,6 +113,6 @@ export function showAllStatHTML(stat: statWithStyle[]) {
 
 export function updateStatHTML(stat: Stat) {
     let statHTML = document.querySelector(`#stat-${stat.statName}`);
-    statHTML!.innerHTML = `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
+    statHTML!.innerHTML = DOMPurify.sanitize(`<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`);
 }
 //TODO: updateStatHTML: separate statName, stat value into two different HTML elements, preferably a table

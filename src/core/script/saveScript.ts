@@ -5,7 +5,7 @@ import { Save } from "../model/save";
 import { getCurrentParagraphName, updateParagraph } from "../paragraphs/paragraphFunctions";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo";
 import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns";
-import * as DOMPurify from 'DOMPurify';
+import DOMPurify from 'DOMPurify';
 
 /**
  * Create a new save and stringify it.

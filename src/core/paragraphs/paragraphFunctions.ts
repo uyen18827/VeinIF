@@ -4,6 +4,8 @@ import { showPronounDialogue } from "../player/pronouns";
 import { getParagraph } from "../../game/allParagraphs";
 import { showChoices } from "./showChoices";
 import { showItems } from "./showItems";
+import DOMPurify from "DOMPurify";
+
 let currentParagraph: string | undefined;
 const itemContainer: HTMLElement | any = document.getElementById("items");
 const choiceContainer: HTMLElement | any = document.getElementById("choices");
@@ -70,11 +72,11 @@ function paragraphContainerContent(content: string | null) {
 
 export function choiceContainerContent(content: string | null) {
     const choiceContainer: HTMLElement | any = document.getElementById("choices");
-    choiceContainer.innerHTML += content;
+    choiceContainer.innerHTML += DOMPurify.sanitize(content!);
 }
 
 let currentName: string = "start";
-function setCurrentParagraphName(name: Paragraphs['name']){
+function setCurrentParagraphName(name: Paragraphs['name']) {
     currentName = name;
 }
 export function getCurrentParagraphName() {

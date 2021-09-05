@@ -1,5 +1,7 @@
 import { Pronouns } from "../model/player"
 import { player } from "./playerInfo";
+import DOMPurify from "DOMPurify";
+
 /** List of pronouns. Add, edit or remove accordingly to author's needs.
  * To change structure i.e adding more field like title: "Mr"... refer to src/model/player.ts
  */
@@ -43,8 +45,8 @@ export function showPronounDialogue() {
         for (var i = 0; i < pronounsLength; i++) {
             let pronounEntry: string = `
             <input type="radio" id="${pronouns[i].subjectPro}" name="pronouns" value="${pronouns[i].Category}">
-            <label for="${pronouns[i].subjectPro}">${pronouns[i].Category}</label><br>`
-            pronounsContainer.innerHTML += pronounEntry;
+            <label for="${pronouns[i].subjectPro}">${pronouns[i].Category}</label><br>`;
+            pronounsContainer.innerHTML += DOMPurify.sanitize(pronounEntry);
         }
         pronounsContainer.addEventListener('click', getPronouns);
     }
@@ -80,7 +82,7 @@ export function loadPronounsRadioBtn(pronouns: Pronouns){
 export function showPronouns(pronouns: Pronouns) {
     let pronounsClassed = document.querySelectorAll(".playerPronouns");
     if (pronounsClassed) {
-        pronounsClassed.forEach(element => element.innerHTML = `${pronouns.Category}`);
+        pronounsClassed.forEach(element => element.innerHTML = DOMPurify.sanitize(`${pronouns.Category}`));
     }
     
 }
