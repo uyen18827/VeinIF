@@ -5,6 +5,7 @@ import { Save } from "../model/save";
 import { getCurrentParagraphName, updateParagraph } from "../paragraphs/paragraphFunctions";
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo";
 import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns";
+import * as DOMPurify from 'DOMPurify';
 
 /**
  * Create a new save and stringify it.
@@ -81,8 +82,8 @@ export function exportStorageSave(saveSlot: string) {
     let retrievedSave = localStorage.getItem(saveSlot);
     let saveMessage = document.querySelector('#exportMessage');
     saveMessage!.textContent = null; //clear old message
-    saveMessage!.innerHTML += `Save exported from ${saveSlot}.<br> 
-    Copy and keep the code bellow to load later`;
+    saveMessage!.innerHTML += DOMPurify.sanitize(`Save exported from ${saveSlot}.<br>
+    Copy and keep the code bellow to load later`);
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
     (<HTMLInputElement>saveOutput).value = `${btoa(retrievedSave!)}`; //encode to Base64
@@ -96,8 +97,8 @@ export function exportStorageSave(saveSlot: string) {
 export function exportSave() {
     let saveMessage = document.querySelector('#exportMessage');
     saveMessage!.textContent = null; //clear old message
-    saveMessage!.innerHTML += `Save created at ${new Date().toLocaleString()}.<br> 
-    Copy and keep the code bellow to load later`
+    saveMessage!.innerHTML += DOMPurify.sanitize(`Save created at ${new Date().toLocaleString()}.<br>
+    Copy and keep the code bellow to load later`);
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
     (<HTMLInputElement>saveOutput).value += `${btoa(save())}`; //encode to Base64
@@ -116,10 +117,10 @@ export function loadSaveCode() {
     console.log(retrievedSave)
     load(retrievedSave);
     let loadMessage = document.querySelector(`#exportMessage`);
-    loadMessage!.innerHTML += `<div class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
+    loadMessage!.innerHTML += DOMPurify.sanitize(`<div class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
         <strong> Load Success! </strong> Loaded save from ${retrievedSave.date}.
             <button type = "button" class="btn-close" data - bs - dismiss="alert" aria - label="Close"> </button>
-                </div>`;
+                </div>`);
     //TODO: verify if save is valid. 
     //TODO: fallback: If load is invalid, start new game.
 }
@@ -128,5 +129,5 @@ export function getSaveDesc(saveSlot: string) {
     let retrievedSave = JSON.parse(localStorage.getItem(saveSlot)!);
     let description = retrievedSave.date;
     let descContainer = document.querySelector(`#saveDesc-${saveSlot}`);
-    descContainer!.innerHTML = description;
+    descContainer!.innerHTML = DOMPurify.sanitize(description);
 }

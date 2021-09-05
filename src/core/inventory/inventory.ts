@@ -1,6 +1,7 @@
 import { inventoryItem, Items } from "../model/item";
 import { Paragraphs } from "../model/paragraph";
 import { capitalise } from "../../tools/formatting";
+import DOMPurify from 'DOMPurify';
 
 export let inventory: Array<inventoryItem> = [];
 
@@ -47,16 +48,16 @@ export function getItem(item: Items, pName: Paragraphs["name"]) {
         if (inInventory.item.itemQty == 0) {
             removeItemHTML(inInventory.item.itemCode)
         }
-        else{
-        console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
-        console.log(inventory);
-        //update item quantity on view
-        let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
-        quantityDiv!.textContent = `Quantity: ${inInventory.item.itemQty}`;
-        let pNameCheck = inInventory.pickedUpLocation.find(location => location == pName);
-        console.log(pNameCheck, pName)
-        if (!pNameCheck) {
-            inInventory.pickedUpLocation.push(pName);
+        else {
+            console.log(`${item.itemName} is already in the inventory. Adding 1 to quantity.`);
+            console.log(inventory);
+            //update item quantity on view
+            let quantityDiv = document.querySelector(`#${item.itemCode}-quantity`);
+            quantityDiv!.textContent = `Quantity: ${inInventory.item.itemQty}`;
+            let pNameCheck = inInventory.pickedUpLocation.find(location => location == pName);
+            console.log(pNameCheck, pName)
+            if (!pNameCheck) {
+                inInventory.pickedUpLocation.push(pName);
             }
         }
     }
@@ -98,7 +99,7 @@ export function appendItemHTML(item: Items) {
         role="tab" 
         aria-controls="pills-${item.itemCode}" aria-selected="false">${capitalise(item.itemName)}</a>
         </li>`;
-    inventoryTab.innerHTML += tab;
+    inventoryTab.innerHTML += DOMPurify.sanitize(tab);
 
     let tabContent: string = `<div class="tab-pane fade" 
     id="pills-${item.itemCode}" 
@@ -107,7 +108,7 @@ export function appendItemHTML(item: Items) {
     ${item.description}
     <div id="${item.itemCode}-quantity">Quantity: ${item.itemQty}</div>
     </div>`
-    inventoryTabContent.innerHTML += tabContent;
+    inventoryTabContent.innerHTML += DOMPurify.sanitize(tabContent);
 }
 /**
  * Clear all item from Inventory interface
