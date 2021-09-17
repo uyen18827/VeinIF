@@ -6,6 +6,7 @@ import { getCurrentParagraphName, updateParagraph } from "../paragraphs/paragrap
 import { getPlayer, setPlayer, showNameDiv } from "../player/playerInfo";
 import { loadPronounsRadioBtn, showPronouns } from "../player/pronouns";
 import DOMPurify from 'DOMPurify';
+import { b64DecodeUnicode, b64EncodeUnicode } from "../../tools/system";
 
 /**
  * Create a new save and stringify it.
@@ -86,7 +87,7 @@ export function exportStorageSave(saveSlot: string) {
     Copy and keep the code bellow to load later`);
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
-    (<HTMLInputElement>saveOutput).value = `${btoa(retrievedSave!)}`; //encode to Base64
+    (<HTMLInputElement>saveOutput).value = `${b64EncodeUnicode(retrievedSave!)}`; //encode to Base64
     (<HTMLInputElement>saveOutput).select();
 }
 
@@ -101,7 +102,7 @@ export function exportSave() {
     Copy and keep the code bellow to load later`);
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
-    (<HTMLInputElement>saveOutput).value += `${btoa(save())}`; //encode to Base64
+    (<HTMLInputElement>saveOutput).value += `${b64EncodeUnicode(save())}`; //encode to Base64
     (<HTMLInputElement>saveOutput).select();
 }
 
@@ -111,7 +112,7 @@ export function exportSave() {
  */
 export function loadSaveCode() {
     let loadCode = (<HTMLInputElement>document.querySelector("#saveOutput")).value;
-    loadCode = atob(loadCode);
+    loadCode = b64DecodeUnicode(loadCode);
     console.log(loadCode);
     let retrievedSave = JSON.parse(loadCode);
     console.log(retrievedSave)
