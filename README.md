@@ -37,3 +37,7 @@ Build a Window, stand-alone executable copy of your game:
 ```
 npm run electron-build
 ```
+## Support
+For bug report, additional support, other inquiries and feature request, please [create an issue](https://github.com/uyen18827/VeinIF/issues/new/choose) using the provided template.
+
+Check out planned features and fixes in the [Project tab](https://github.com/uyen18827/VeinIF/projects).
