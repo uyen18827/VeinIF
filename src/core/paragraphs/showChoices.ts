@@ -2,6 +2,7 @@ import { applyConsequence } from "../conditions/consequences";
 import { checkChoiceCondition } from "../conditions/choiceCondition";
 import { autoSave } from "../script/saveScript";
 import { updateParagraph } from "./paragraphFunctions";
+import { htmlElements } from "../model/variables";
 
 /**
  * Show available choices in a paragraph
@@ -49,7 +50,7 @@ export function showChoices(choices: any, choiceContainer: any) {
 }
 
 function removeChoices() {
-    let choiceContainer = document.querySelector('#choices');
+    let choiceContainer = document.querySelector(`#${htmlElements.choiceContainer}`);
     removeAllChildNodes(choiceContainer);
 }
 function removeAllChildNodes(parent: any) {

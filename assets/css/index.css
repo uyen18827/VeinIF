@@ -1,0 +1,22 @@
+.choices::before {
+    content: "»";
+}
+
+.choices {
+    color: darkblue;
+    text-decoration: none;
+    line-height: 2rem;
+}
+
+.choice:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.choice:active {
+    text-decoration: underline;
+}
+
+/* .choice:hover::before{
+    content: "x";
+} */

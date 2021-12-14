@@ -65,7 +65,11 @@ export function getParagraph(player?: Player) {
             nextName: `out`,
             consequence: {
               stat: [
-                { statName: `Intelligence`, value: 10, style: statStyle.show },
+                {
+                  statName: `Intelligence`, value: 10,
+                  style: statStyle.show,
+                  statID: `int`
+                },
 
               ]
             }
@@ -76,7 +80,7 @@ export function getParagraph(player?: Player) {
             nextName: `out`,
             consequence: {
               stat: [
-                { statName: `Strength`, value: 10, style: statStyle.show },
+                { statID: "str", statName: `Strength`, value: 10, style: statStyle.show },
               ]
             }
           },
@@ -86,8 +90,8 @@ export function getParagraph(player?: Player) {
             nextName: `out`,
             consequence: {
               stat: [
-                { statName: `Intelligence`, value: 5, style: statStyle.show },
-                { statName: `Strength`, value: 5, style: statStyle.show },
+                { statID: "int", statName: `Intelligence`, value: 5, style: statStyle.show },
+                { statID: "str", statName: `Strength`, value: 5, style: statStyle.show },
               ]
             }
           },
@@ -147,7 +151,7 @@ export function getParagraph(player?: Player) {
             nextName: `lie-success`,
             precondition: {
               stat: [
-                { statName: `Intelligence`, value: 1, },
+                { statID: "int", statName: `Intelligence`, value: 1, },
               ]
             }
           },
@@ -157,7 +161,7 @@ export function getParagraph(player?: Player) {
             nextName: `lie-failed`,
             consequence: {
               stat: [
-                { statName: `Village`, value: -9, style: statStyle.show },
+                { statID: "relation_village", statName: `Village`, value: -9, style: statStyle.show },
               ],
             }
           },
@@ -282,7 +286,7 @@ export function getParagraph(player?: Player) {
             nextName: `success`,
             precondition: {
               stat: [
-                { statName: `Strength`, value: 10 },
+                { statID: "str", statName: `Strength`, value: 10 },
               ],
             }
           },
@@ -314,7 +318,7 @@ export function getParagraph(player?: Player) {
             content: `You confidently walk into the village square.`,
             nextName: `home`,
             precondition: {
-              stat: [{ statName: `Village`, value: 10, },],
+              stat: [{ statID: "relation_village", statName: `Village`, value: 10, },],
             },
 
           },
@@ -323,7 +327,7 @@ export function getParagraph(player?: Player) {
             content: `You anxiously walk into the village square.`,
             nextName: `home-redeemed`,
             precondition: {
-              stat: [{ statName: `Village`, value: 1, },],
+              stat: [{ statID: "relation_village", statName: `Village`, value: 1, },],
             },
           },
         ],

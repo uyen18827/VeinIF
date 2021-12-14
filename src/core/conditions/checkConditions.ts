@@ -10,7 +10,7 @@ import { checkResult } from "./choiceCondition";
  * @returns enum checkResult passed or failed.
  */
 export function checkStat(elementId: string, statName: string, value: number) {
-    let found = getStat().find(element => element.statName == statName);
+    let found = getStat().find(element => element.statName === statName);
     let elementHTML = document.querySelector(`#${elementId}`);
     if (found) {
         if (found.value < value) {

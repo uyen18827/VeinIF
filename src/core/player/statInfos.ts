@@ -3,16 +3,19 @@ import DOMPurify from "DOMPurify";
 
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat: Array<statWithStyle> = [
-    { statName: "Village", value: 10, style: statStyle.show },
-    { statName: "Strength", value: 0, style: statStyle.show },
-    { statName: 'Intelligence', value: 0, style: statStyle.show }
+    { statID: "relation_village", statName: "Village", value: 10, style: statStyle.show },
+    { statID: "str", statName: "Strength", value: 0, style: statStyle.show },
+    { statID: "int", statName: 'Intelligence', value: 0, style: statStyle.show }
 ]
+
+//TODO: statName currently cannot have a space in it as it will break. Change reference key from statName to statID
+//Current behaviour requires that statName matches with HTML element class and thus cannot contain space.
 
 export function restoreDefaultStat() {
     let defaultPlayerStat: Array<statWithStyle> = [
-        { statName: "Village", value: 10, style: statStyle.show },
-        { statName: "Strength", value: 0, style: statStyle.show },
-        { statName: 'Intelligence', value: 0, style: statStyle.show }
+        { statID: "relation_village", statName: "Village", value: 10, style: statStyle.show },
+        { statID: "str", statName: "Strength", value: 0, style: statStyle.show },
+        { statID: "int", statName: 'Intelligence', value: 0, style: statStyle.show }
     ];
     loadStat(defaultPlayerStat);
 }

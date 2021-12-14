@@ -5,10 +5,11 @@ import { getParagraph } from "../../game/allParagraphs";
 import { showChoices } from "./showChoices";
 import { showItems } from "./showItems";
 import DOMPurify from "DOMPurify";
+import { htmlElements } from "../model/variables";
 
 let currentParagraph: string | undefined;
-const itemContainer: HTMLElement | any = document.getElementById("items");
-const choiceContainer: HTMLElement | any = document.getElementById("choices");
+const itemContainer: HTMLElement | any = document.getElementById(htmlElements.itemContainer);
+const choiceContainer: HTMLElement | any = document.getElementById(htmlElements.choiceContainer);
 
 /**Get nextName, then show the paragraph with that name.
   * @param {number} nextName next paragraph's name.
@@ -44,7 +45,7 @@ export function updateParagraph(nextName: string, style?: string) {
         showItems(items, itemContainer, nextName);
     }
     // if paragraph content has element id = "pronouns"
-    if (document.getElementById("pronouns")) {
+    if (document.getElementById(htmlElements.pronounsContainer)) {
         showPronounDialogue();
         if (player.pronouns.Category != "") {
             let selectedPronoun = document.getElementById(player.pronouns.subjectPro);
@@ -71,11 +72,15 @@ function paragraphContainerContent(content: string | null) {
 }
 
 export function choiceContainerContent(content: string | null) {
-    const choiceContainer: HTMLElement | any = document.getElementById("choices");
+    const choiceContainer: HTMLElement | any = document.getElementById(htmlElements.choiceContainer);
     choiceContainer.innerHTML += DOMPurify.sanitize(content!);
 }
 
 let currentName: string = "start";
+/**
+ * Set current paragraph's name
+ * @param name Paragraphs['name']
+ */
 function setCurrentParagraphName(name: Paragraphs['name']) {
     currentName = name;
 }
