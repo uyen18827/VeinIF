@@ -26,7 +26,7 @@ export function checkChoiceCondition(choice: Choices, condition: Precondition) {
     }
     if (stat) {
         stat.forEach(stat => {
-            let temp = checkStat(`cid${choice.id}`, stat.statName, stat.value);
+            let temp = checkStat(`cid${choice.id}`, stat.statID, stat.statName, stat.value);
             if (temp == checkResult.failed) {
                 b = temp;
             }

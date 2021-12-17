@@ -18,7 +18,7 @@ export function checkItemCondition(item: Items, condition: Precondition) {
     }
     if (stat) {
         stat.forEach(stat => {
-            let temp = checkStat(item.itemCode, stat.statName, stat.value);
+            let temp = checkStat(item.itemCode, stat.statID, stat.statName, stat.value);
             if (temp == checkResult.failed) {
                 b = temp;
             }

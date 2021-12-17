@@ -3,20 +3,23 @@ import { getStat } from "../player/statInfos";
 import { checkResult } from "./choiceCondition";
 
 /**
- * Check if player's stat satisfy precondition
+ * Check if player's stat satisfy precondition. 
+ * Return enum checkResult.failed or checkResult.passed.
  * @param elementId HTML element's id
- * @param statName required stat's name
- * @param value required value
+ * @param statID required stat.statID
+ * @param statName required stat.statName
+ * @param value required - value that will be used to compare with player's data.
  * @returns enum checkResult passed or failed.
  */
-export function checkStat(elementId: string, statName: string, value: number) {
-    let found = getStat().find(element => element.statName === statName);
+export function checkStat(elementId: string, statID: string, statName: string, value: number) {
+    //check if player has the required stat
+    let found = getStat().find(element => element.statID === statID);
     let elementHTML = document.querySelector(`#${elementId}`);
     if (found) {
         if (found.value < value) {
             // console.log(`Condition not met: ${found.value} < ${value}`);
             //show reason why it's failed
-            elementHTML!.textContent += ` [Condition not met: ${statName} value ${found.value}/${value}]`;
+            elementHTML!.textContent += ` [Condition not met: ${found.statName} value ${found.value}/${value}]`;
             return checkResult.failed;
         }
         if (found.value >= value) {

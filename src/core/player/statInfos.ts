@@ -3,9 +3,10 @@ import DOMPurify from "DOMPurify";
 
 //Place the initial value of your player's Stat here, if you want to.
 export let playerStat: Array<statWithStyle> = [
-    { statID: "relation_village", statName: "Village", value: 10, style: statStyle.show },
+    { statID: "relation_village", statName: "Relationship: Village", value: 10, style: statStyle.show },
     { statID: "str", statName: "Strength", value: 0, style: statStyle.show },
-    { statID: "int", statName: 'Intelligence', value: 0, style: statStyle.show }
+    { statID: "int", statName: 'Intelligence', value: 0, style: statStyle.show },
+    // { statID: "hiddenStat", statName: "Hidden stat", value: 0, style: statStyle.hide }
 ]
 
 //TODO: statName currently cannot have a space in it as it will break. Change reference key from statName to statID
@@ -13,7 +14,7 @@ export let playerStat: Array<statWithStyle> = [
 
 export function restoreDefaultStat() {
     let defaultPlayerStat: Array<statWithStyle> = [
-        { statID: "relation_village", statName: "Village", value: 10, style: statStyle.show },
+        { statID: "relation_village", statName: "Relationship: Village", value: 10, style: statStyle.show },
         { statID: "str", statName: "Strength", value: 0, style: statStyle.show },
         { statID: "int", statName: 'Intelligence', value: 0, style: statStyle.show }
     ];
@@ -29,8 +30,8 @@ export function getStat() {
  * @param statName 
  * @param value 
  */
-export function addNewStat(statName: string, value: number, style: statStyle) {
-    let newStat = new statWithStyle(statName, value, style);
+export function addNewStat(statName: string, statID: string, value: number, style: statStyle) {
+    let newStat = new statWithStyle(statName, value, style, statID);
     getStat().push(newStat);
 }
 
@@ -44,7 +45,7 @@ export function modifyStatValue(stat: Stat, value: number) {
 
 /** Load Stats from an Array */
 export function loadStat(stat: statWithStyle[]) {
-    stat.forEach(element => addNewStat(element.statName, element.value, element.style));
+    stat.forEach(element => addNewStat(element.statName, element.statID, element.value, element.style));
 }
 
 export function clearAllStat() {
@@ -73,7 +74,7 @@ export function handleStats(stat: statWithStyle) {
         console.log(`Handled! modified ${found.value}`);
     }
     if (!found) {
-        addNewStat(stat.statName, stat.value, stat.style);
+        addNewStat(stat.statName, stat.statID, stat.value, stat.style);
         switch (stat.style) {
             case (stat.style = statStyle.hide):
                 // do nothing :)
@@ -89,7 +90,7 @@ export function handleStats(stat: statWithStyle) {
 export function appendStatHTML(stat: Stat) {
     let statContainer = document.querySelectorAll(`.stat`);
     statContainer!.forEach(element => {
-        element.innerHTML += DOMPurify.sanitize(`<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`);
+        element.innerHTML += DOMPurify.sanitize(`<div id='${stat.statID}'>${stat.statName}: ${stat.value}</div>`);
     });
     // statContainer!.innerHTML += `<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`;
 }

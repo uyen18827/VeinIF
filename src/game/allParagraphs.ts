@@ -318,7 +318,7 @@ export function getParagraph(player?: Player) {
             content: `You confidently walk into the village square.`,
             nextName: `home`,
             precondition: {
-              stat: [{ statID: "relation_village", statName: `Village`, value: 10, },],
+              stat: [{ statID: "relation_village", statName: `Relationship: Village`, value: 10, },],
             },
 
           },
@@ -327,7 +327,7 @@ export function getParagraph(player?: Player) {
             content: `You anxiously walk into the village square.`,
             nextName: `home-redeemed`,
             precondition: {
-              stat: [{ statID: "relation_village", statName: `Village`, value: 1, },],
+              stat: [{ statID: "relation_village", statName: `Relationship: Village`, value: 1, },],
             },
           },
         ],

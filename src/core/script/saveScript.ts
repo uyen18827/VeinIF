@@ -17,6 +17,12 @@ function save() {
     return stringSave;
 }
 
+/**
+ * Handle the load process: 
+ * Clear current data
+ * Apply data retrieved from save
+ * @param retrievedSave: save string from client's localStorage.
+ */
 function load(retrievedSave: any) {
     clearInventory();
     clearInventoryHTML();
@@ -79,11 +85,16 @@ export function loadSave(saveSlot: string) {
     }
 }
 
-export function exportStorageSave(saveSlot: string) {
-    let retrievedSave = localStorage.getItem(saveSlot);
+/**
+ * Export a pre-existing save into a string that players can copy.
+ * Show save on UI.
+ * @param saveSlotCode : string - saveSlot unique identifier.
+ */
+export function exportStorageSave(saveSlotCode: string) {
+    let retrievedSave = localStorage.getItem(saveSlotCode);
     let saveMessage = document.querySelector('#exportMessage');
     saveMessage!.textContent = null; //clear old message
-    saveMessage!.innerHTML += DOMPurify.sanitize(`Save exported from ${saveSlot}.<br>
+    saveMessage!.innerHTML += DOMPurify.sanitize(`Save exported from ${saveSlotCode}.<br>
     Copy and keep the code bellow to load later`);
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
@@ -92,14 +103,14 @@ export function exportStorageSave(saveSlot: string) {
 }
 
 /**
- * Generate a random-looking string that save the game's progress.
+ * Generate a string that holds the game's progress.
  * The string is encoded to Base64 to prevent players (to an extent) from altering their save.
  */
 export function exportSave() {
     let saveMessage = document.querySelector('#exportMessage');
     saveMessage!.textContent = null; //clear old message
     saveMessage!.innerHTML += DOMPurify.sanitize(`Save created at ${new Date().toLocaleString()}.<br>
-    Copy and keep the code bellow to load later`);
+    Copy and keep the code bellow to load later.`);
     let saveOutput = document.querySelector(`#saveOutput`);
     (<HTMLInputElement>saveOutput).value = ``; //clear old save
     (<HTMLInputElement>saveOutput).value += `${b64EncodeUnicode(save())}`; //encode to Base64

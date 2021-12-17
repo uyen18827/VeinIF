@@ -2,9 +2,9 @@
 //stat can be used in precondition
 export class Stat {
     statName: string;
-    statID?: string;
+    statID: string;
     value: number;
-    constructor(s: string, v: number, sid?: string,  ) {
+    constructor(s: string, v: number, sid: string,  ) {
         this.statName = s;
         this.statID = sid;
         this.value = v;
@@ -23,7 +23,7 @@ export enum statStyle {
  */
 export class statWithStyle extends Stat {
     style: statStyle;
-    constructor(s: string, v: number, style: statStyle, sid?: string) {
+    constructor(s: string, v: number, style: statStyle, sid: string) {
         super(s, v, sid);
         this.style = style;
     }

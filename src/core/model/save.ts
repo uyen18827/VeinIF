@@ -27,5 +27,13 @@ export class Save {
  * Settings example: Night/Day mode, show condition check, etc...
  */
 export class savePreferences {
-    
+    uiMode?: Enumerator;
+    conditionCheck?: boolean;
+    autoSaveToggle?: boolean;
+
+    constructor(u?: Enumerator, cond?: boolean, autoSave?: boolean) {
+        this.uiMode = u;
+        this.conditionCheck = cond;
+        this.autoSaveToggle = autoSave;
+    }
 }
