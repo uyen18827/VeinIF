@@ -28,7 +28,7 @@ export interface Choices {
      * the previous paragraph won't be cleared, and the new one appears after it.
      */
     style?: string; //next paragraph's appearance's style
-    /**The consequence of your action. Gain/loose items or stat. */
+    /**The consequence of the player's action. Gain/loose items or stat. */
     consequence?: Consequence;
     /**Next Paragraph's name. */
     nextName: string;
@@ -57,19 +57,7 @@ export enum conStyle {
     hideReason = 2, //hide the reason
 };
 //TODO: implement show/hide/hideReason on Precondition. 
-//Currently, precondition checks on default will always show reason why a choice cannot be clicked by default 
-
-// const precondition: Precondition = {
-//     stat: [{
-//         statName: "intellect",
-//         value: 1
-//     }],
-//     item: [{
-//         itemName: "key",
-//         itemQty: 1,
-//         itemCode: "key"
-//     }]
-// }
+//Currently, precondition checks on default will always show reason why a choice cannot be clicked by default
 
 export class singleParagraph {
     paragraph: Paragraphs;

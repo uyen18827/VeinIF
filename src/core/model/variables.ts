@@ -9,7 +9,7 @@ export const htmlElements = {
 }
 
 export let settings = {
-    showConditionCheck: true,
+    showConditionCheck: false,
     // unused;
     darkMode: false,
     animation: false

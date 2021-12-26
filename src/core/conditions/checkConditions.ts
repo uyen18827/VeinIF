@@ -1,4 +1,5 @@
 import { getInventory } from "../inventory/inventory";
+import { settings } from "../model/variables";
 import { getStat } from "../player/statInfos";
 import { checkResult } from "./choiceCondition";
 
@@ -19,7 +20,7 @@ export function checkStat(elementId: string, statID: string, statName: string, v
         if (found.value < value) {
             // console.log(`Condition not met: ${found.value} < ${value}`);
             //show reason why it's failed
-            elementHTML!.textContent += ` [Condition not met: ${found.statName} value ${found.value}/${value}]`;
+            showConditionMessage(settings.showConditionCheck, elementHTML, ` [Condition not met: ${found.statName} value ${found.value}/${value}]`);
             return checkResult.failed;
         }
         if (found.value >= value) {
@@ -30,7 +31,7 @@ export function checkStat(elementId: string, statID: string, statName: string, v
     }
     else {
         console.log("Condition not met!");
-        elementHTML!.textContent += ` [Condition not met: player doesn't have stat "${statName}"]`;
+        showConditionMessage(settings.showConditionCheck, elementHTML, ` [Condition not met: player doesn't have stat "${statName}"]`);
         return checkResult.failed;
     }
 };
@@ -40,17 +41,17 @@ export function checkStat(elementId: string, statID: string, statName: string, v
  * @param itemCode 
  * @param itemName 
  * @param itemQty 
- * @returns checkResult passed or failed
+ * @returns checkResult.passed or failed
  */
 export function checkInInventory(elementId: string, itemCode: string, itemQty: number, itemName: string) {
     const inInventory = getInventory().find(element => element.item.itemCode == itemCode);
     let elementHTML = document.querySelector(elementId);
     if (!inInventory) {
-        elementHTML!.textContent += ` [Condition not met: ${itemName} cannot be found in inventory]`;
+        showConditionMessage(settings.showConditionCheck, elementHTML, ` [Condition not met: ${itemName} cannot be found in inventory]`);
         return checkResult.failed;
     }
     else if (inInventory && inInventory.item.itemQty < itemQty) {
-        elementHTML!.textContent += ` [Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]`;
+        showConditionMessage(settings.showConditionCheck, elementHTML, ` [Condition not met: ${itemName} quantity ${inInventory.item.itemQty}/${itemQty}]` )
         return checkResult.failed;
     }
     else {
@@ -58,4 +59,18 @@ export function checkInInventory(elementId: string, itemCode: string, itemQty: n
         //let the player click on the choice
         return checkResult.passed;
     }
+}
+
+/**
+ * Check if show checks are enable or not,
+ * then show or hide the checks.
+ */
+function showConditionMessage(showConditionCheck: boolean, element: Element | null, message: string) {
+    switch (showConditionCheck) {
+        case true:
+            element!.textContent += message;
+            break;
+        default:
+            break;
+    }    
 }

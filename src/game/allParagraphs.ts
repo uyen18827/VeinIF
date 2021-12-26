@@ -161,7 +161,7 @@ export function getParagraph(player?: Player) {
             nextName: `lie-failed`,
             consequence: {
               stat: [
-                { statID: "relation_village", statName: `Village`, value: -9, style: statStyle.show },
+                { statID: "relation_village", statName: "Relationship: Village", value: -9, style: statStyle.show },
               ],
             }
           },

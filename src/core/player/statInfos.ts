@@ -35,11 +35,11 @@ export function addNewStat(statName: string, statID: string, value: number, styl
     getStat().push(newStat);
 }
 
-/** Add or subtract point from a stat 
+/** Add or subtract point from player's statistic 
  * Note that the stat must exist before trying to modify it.
 */
 export function modifyStatValue(stat: Stat, value: number) {
-    let _stat = getStat().find(element => element.statName == stat.statName);
+    let _stat = getStat().find(element => element.statID == stat.statID);
     _stat!.value += value;
 }
 
@@ -53,15 +53,23 @@ export function clearAllStat() {
     return playerStat;
 }
 
-export function deleteStat(statName: Stat["statName"]) {
-    getStat().find(element => element.statName == statName);
+/**
+ * TODO: finish this.
+ * @param statID 
+ */
+export function deleteStat(statID: Stat["statID"]) {
+    getStat().find(element => element.statID == statID);
 }
 
-//if stat already exist, add modify value, if not in playerStat, add to it.
+/**
+ * Receive stat, evaluate:
+ * if stat already exist, modify value; if not in playerStat, add to it.
+ * @param stat 
+ */
 export function handleStats(stat: statWithStyle) {
-    let found = playerStat.find(element => element.statName == stat.statName);
+    let found = playerStat.find(element => element.statID == stat.statID);
     if (found) {
-        console.log(`it is found`)
+        console.log(`Found existing stat ${found.statName}. Proceed to modify`)
         modifyStatValue(found, stat.value);
         switch (stat.style) {
             case (stat.style = statStyle.hide):
@@ -83,7 +91,7 @@ export function handleStats(stat: statWithStyle) {
                 appendStatHTML(stat);
                 break;
         }
-        console.log(`not found, so added new stat`)
+        console.log(`${stat.statName} not found, so added as new stat`)
     }
 }
 
@@ -116,7 +124,7 @@ export function showAllStatHTML(stat: statWithStyle[]) {
 }
 
 export function updateStatHTML(stat: Stat) {
-    let statHTML = document.querySelector(`#stat-${stat.statName}`);
-    statHTML!.innerHTML = DOMPurify.sanitize(`<div id='stat-${stat.statName}'>${stat.statName}: ${stat.value}</div>`);
+    let statHTML = document.querySelector(`#${stat.statID}`);
+    statHTML!.innerHTML = DOMPurify.sanitize(`<div id='${stat.statID}'>${stat.statName}: ${stat.value}</div>`);
 }
 //TODO: updateStatHTML: separate statName, stat value into two different HTML elements, preferably a table

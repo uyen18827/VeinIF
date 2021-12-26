@@ -31,15 +31,3 @@ export function checkItemCondition(item: Items, condition: Precondition) {
         console.log(`${item.itemCode} is blocked`);
     }
 }
-
-// function appendInventoryReason(elementId: string, itemName: string, reqQty: number, actualQty: number, result: checkResult) {
-//     let elementHTML = document.querySelector(`#${elementId}`);
-//     switch (result) {
-//         case (result = checkResult.notFound):
-//             elementHTML!.innerHTML += ` [Condition not met: ${itemName} cannot be found in inventory]`;
-//             break;
-//         case (result = checkResult.insufficientQuantity):
-//             elementHTML!.innerHTML += ` [Condition not met: ${itemName} quantity ${actualQty}/${reqQty}]`;
-//             break;
-//     }
-// }
