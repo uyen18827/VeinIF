@@ -7,7 +7,7 @@
     "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc:w": "tsc -w",
-    "build": "vite build && npm run copy",
+    "build": "vite build --config vite.config.js && npm run copy",
     "copy": "copyfiles -u 1 './dist/*.html' ./electron-src/ && copyfiles -u 1 './dist/assets/*' ./electron-src",
     "preview": "vite preview --port 8080",
     "electron-build": "electron-builder --win=portable"
@@ -18,6 +18,7 @@
   "author": "Uyen Nguyen",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-strip": "^2.1.0",
     "copyfiles": "^2.4.1",
     "electron": "^12.0.4",
     "electron-builder": "^22.10.5",
