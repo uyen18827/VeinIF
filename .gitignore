@@ -39,3 +39,4 @@ dist/
 /dist/builder-effective-config.yaml
 /__pycache__
 BuildGUI.spec
+electron-src/
